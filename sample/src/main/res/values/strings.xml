@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Validator</string>
+    <string name="error_field_required">Filed is required</string>
+    <string name="error_password_too_short">Password is too short</string>
+</resources>
