@@ -1,3 +1,10 @@
+## Download
+
+```groovy
+//dependencies
+compile 'io.github.anderscheow.validator:1.0.0'
+```
+
 Usage
 -----
 ### Create your own Rule class (as many as you can)
