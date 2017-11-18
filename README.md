@@ -2,7 +2,7 @@
 
 ```groovy
 //dependencies
-compile 'io.github.anderscheow.validator:1.0.0'
+compile 'io.github.anderscheow:validator:1.0.0'
 ```
 
 Usage
