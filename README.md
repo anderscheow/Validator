@@ -2,39 +2,48 @@
 
 ```groovy
 //dependencies
-compile 'io.github.anderscheow:validator:1.0.0'
+compile 'io.github.anderscheow:validator:1.0.1'
 ```
+
+## Version
+
+**1.0.1** 
+
+* Added some common rules (LengthRule, MinRule, MaxRule, RegexRule etc.)
+
+* Able to use String as error message
+
+**1.0.0**
+
+* Introduce Validator library
 
 Usage
 -----
-### Create your own Rule class (as many as you can)
+### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
 ```java
-public class NotEmptyRule implements BaseRule {
+public class CustomRule extends BaseRule {
 
     @Override
-    public boolean validate(String s) {
-        return !s.isEmpty();
+    public boolean validate(String value) {
+        if (value == null) {
+            throw new NullPointerException();
+        }
+        return value.equals("ABC");
     }
 
-    @StringRes
+    // You can use this to return error message
+    @NonNull
     @Override
-    public int errorMessage() {
-        return R.string.input_error_field_required;
-    }
-}
-
-public class PasswordLengthRule implements BaseRule {
-
-    @Override
-    public boolean validate(String s) {
-        return s.length() >= 8;
+    public String errorMessage() {
+        return "Value doesn't match 'ABC'";
     }
 
-    @StringRes
+    // or use this to return error message as StringRes
+
     @Override
-    public int errorMessage() {
-        return R.string.error_invalid_field_login;
+    public int errorRes() {
+        return R.string.error_not_match;
     }
 }
 ```
@@ -45,7 +54,23 @@ public class PasswordLengthRule implements BaseRule {
 // Username
 TextInputLayout usernameInput = findViewById(R.id.layout_username);
 final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new NotEmptyRule());
+                .addRule(new NotEmptyRule() {   
+                    // You can also override the default error message
+                    @Override
+                    public int errorRes() {
+                        return R.string.error_not_empty;
+                    }
+
+                    // Use either errorRes() or errorMessage()
+                    // Note: errorRes() has higher priority
+
+                    @NonNull
+                    @Override
+                    public String errorMessage() {
+                        return "Value is empty";
+                    }
+                })
+                .addRule(new CustomRule());
 
 // Password
 TextInputLayout passwordInput = findViewById(R.id.layout_password);
