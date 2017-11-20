@@ -2,6 +2,7 @@ package io.github.anderscheow.validator;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
 
 import io.github.anderscheow.validator.rules.BaseRule;
@@ -40,9 +41,17 @@ public class Validator {
 
                 for (BaseRule baseRule : validation.getBaseRules()) {
                     if (!baseRule.validate(s)) {
-                        validation.getTextInputLayout().setError(context.getString(baseRule.errorMessage()));
+                        if (baseRule.errorRes() != -1) {
+                            validation.getTextInputLayout().setError(context.getString(baseRule.errorRes()));
+                        } else if (!baseRule.errorMessage().isEmpty()) {
+                            validation.getTextInputLayout().setError(baseRule.errorMessage());
+                        } else {
+                            throw new RuntimeException("Please either use errorRes or errorMessage as your error output");
+                        }
                         isValid = false;
                         break;
+                    } else {
+                        validation.getTextInputLayout().setError(null);
                     }
                 }
             } else {

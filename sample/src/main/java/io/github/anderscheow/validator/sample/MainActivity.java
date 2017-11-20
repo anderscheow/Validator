@@ -1,13 +1,18 @@
-package io.github.anderscheow.validator;
+package io.github.anderscheow.validator.sample;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import io.github.anderscheow.validator.Validation;
+import io.github.anderscheow.validator.Validator;
 import io.github.anderscheow.validator.rules.BaseRule;
+import io.github.anderscheow.validator.rules.regex.AlphanumericRule;
+import io.github.anderscheow.validator.rules.regex.EmailRule;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,28 +26,13 @@ public class MainActivity extends AppCompatActivity {
         Button submitButton = findViewById(R.id.button_submit);
 
         final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new BaseRule() {
-                    @Override
-                    public boolean validate(String s) {
-                        return !s.isEmpty();
-                    }
-
-                    @Override
-                    public int errorMessage() {
-                        return R.string.error_field_required;
-                    }
-                });
+                .addRule(new EmailRule());
 
         final Validation passwordValidation = new Validation(passwordInput)
                 .addRule(new BaseRule() {
                     @Override
                     public boolean validate(String s) {
                         return !s.isEmpty();
-                    }
-
-                    @Override
-                    public int errorMessage() {
-                        return R.string.error_field_required;
                     }
                 })
                 .addRule(new BaseRule() {
@@ -52,8 +42,14 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public int errorMessage() {
+                    public int errorRes() {
                         return R.string.error_password_too_short;
+                    }
+
+                    @NonNull
+                    @Override
+                    public String errorMessage() {
+                        return "Invalid input, please try again";
                     }
                 });
 
