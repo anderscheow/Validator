@@ -29,16 +29,16 @@ public class MainActivity extends AppCompatActivity {
         Button submitButton = findViewById(R.id.button_submit);
 
         final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new EmailRule());
+                .add(new EmailRule());
 
         final Validation passwordValidation = new Validation(passwordInput)
-                .addRule(new BaseRule() {
+                .add(new BaseRule() {
                     @Override
                     public boolean validate(String s) {
                         return !s.isEmpty();
                     }
                 })
-                .addRule(new BaseRule() {
+                .add(new BaseRule() {
                     @Override
                     public boolean validate(String s) {
                         return s.length() >= 8;

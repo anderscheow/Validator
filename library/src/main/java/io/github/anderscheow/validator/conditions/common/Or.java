@@ -1,7 +1,8 @@
-package io.github.anderscheow.validator.conditions;
+package io.github.anderscheow.validator.conditions.common;
 
 import android.support.annotation.NonNull;
 
+import io.github.anderscheow.validator.conditions.Condition;
 import io.github.anderscheow.validator.rules.BaseRule;
 
 public class Or extends Condition {

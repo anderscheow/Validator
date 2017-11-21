@@ -48,7 +48,7 @@ public class Validation {
         return baseRules;
     }
 
-    public List<Condition> getConditions() {
+    List<Condition> getConditions() {
         return conditions;
     }
 }

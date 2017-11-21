@@ -13,7 +13,7 @@ public abstract class Condition extends ErrorMessage implements Validate {
 
     private List<BaseRule> baseRules;
 
-    Condition() {
+    public Condition() {
         this.baseRules = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public abstract class Condition extends ErrorMessage implements Validate {
         return this;
     }
 
-    List<BaseRule> getBaseRules() {
+    protected List<BaseRule> getBaseRules() {
         return baseRules;
     }
 }
