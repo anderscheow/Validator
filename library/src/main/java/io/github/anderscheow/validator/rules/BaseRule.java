@@ -1,19 +1,8 @@
 package io.github.anderscheow.validator.rules;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import io.github.anderscheow.validator.util.ErrorMessage;
+import io.github.anderscheow.validator.util.Validate;
 
-public abstract class BaseRule {
+public abstract class BaseRule extends ErrorMessage implements Validate {
 
-    public abstract boolean validate(String value);
-
-    @StringRes
-    public int errorRes() {
-        return -1;
-    }
-
-    @NonNull
-    public  String errorMessage() {
-        return "Invalid input";
-    }
 }

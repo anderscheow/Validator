@@ -26,9 +26,6 @@ public class PasswordRule extends RegexRule {
         }
     }
 
-    private static final String PASSWORD_ANY_REGEX = ".+";
-    private static final String PASSWORD_ALPHA_REGEX = "\\w+";
-
     public PasswordRule(PasswordRegex regex) {
         super(regex.name);
     }

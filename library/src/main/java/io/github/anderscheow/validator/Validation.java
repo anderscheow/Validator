@@ -1,10 +1,12 @@
 package io.github.anderscheow.validator;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.anderscheow.validator.conditions.Condition;
 import io.github.anderscheow.validator.rules.BaseRule;
 
 public class Validation {
@@ -13,22 +15,40 @@ public class Validation {
 
     private List<BaseRule> baseRules;
 
-    public Validation(TextInputLayout textInputLayout) {
+    private List<Condition> conditions;
+
+    public Validation(@NonNull TextInputLayout textInputLayout) {
         this.textInputLayout = textInputLayout;
 
         this.baseRules = new ArrayList<>();
+        this.conditions = new ArrayList<>();
     }
 
-    public TextInputLayout getTextInputLayout() {
-        return textInputLayout;
-    }
-
-    public Validation addRule(BaseRule baseRule) {
+    @Deprecated
+    public Validation addRule(@NonNull BaseRule baseRule) {
         baseRules.add(baseRule);
         return this;
     }
 
-    public List<BaseRule> getBaseRules() {
+    public Validation add(@NonNull BaseRule baseRule) {
+        baseRules.add(baseRule);
+        return this;
+    }
+
+    public Validation add(@NonNull Condition condition) {
+        conditions.add(condition);
+        return this;
+    }
+
+    TextInputLayout getTextInputLayout() {
+        return textInputLayout;
+    }
+
+    List<BaseRule> getBaseRules() {
         return baseRules;
+    }
+
+    public List<Condition> getConditions() {
+        return conditions;
     }
 }
