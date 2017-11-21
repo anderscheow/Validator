@@ -1,10 +1,25 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478) [![](https://jitpack.io/v/anderscheow/validator.svg)](https://jitpack.io/#anderscheow/validator)
+[![Build Status](https://travis-ci.org/anderscheow/Validator.svg?branch=master)](https://travis-ci.org/anderscheow/Validator)
+
 
 ## Download
 
+Step 1. Add it in your root build.gradle at the end of repositories:
 ```groovy
-//dependencies
-compile 'io.github.anderscheow:validator:1.0.2'
+allprojects {
+  repositories {
+    ... 
+    
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+Step 2. Add the dependency
+```groovy
+dependencies {
+  compile 'io.github.anderscheow:validator:1.0.2'
+}
 ```
 
 ## Version
