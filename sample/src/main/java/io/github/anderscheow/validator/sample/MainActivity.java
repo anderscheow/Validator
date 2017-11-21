@@ -4,14 +4,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.List;
+
 import io.github.anderscheow.validator.Validation;
 import io.github.anderscheow.validator.Validator;
 import io.github.anderscheow.validator.rules.BaseRule;
-import io.github.anderscheow.validator.rules.regex.AlphanumericRule;
 import io.github.anderscheow.validator.rules.regex.EmailRule;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,10 +61,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Validator.getInstance(getApplicationContext())
                         .validate(new Validator.OnValidateListener() {
-                            @Override
-                            public void onValidate() {
-                                Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
-                            }
+
+                                      @Override
+                                      public void onValidateSuccess(List<String> values) {
+                                          Log.d("MainActivity", Arrays.toString(values.toArray()));
+                                          Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
+                                      }
+
+                                      @Override
+                                      public void onValidateFailed() {
+
+                                      }
                         },
                         usernameValidation, passwordValidation);
             }
