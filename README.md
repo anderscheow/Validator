@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478)
+
 ## Download
 
 ```groovy
@@ -52,7 +54,8 @@ public class CustomRule extends BaseRule {
 
 ```java
 // Username
-TextInputLayout usernameInput = findViewById(R.id.layout_username);
+// Input: hello@test.com
+TextInputLayout usernameInput = findViewById(R.id.layout_username); 
 final Validation usernameValidation = new Validation(usernameInput)
                 .addRule(new NotEmptyRule() {   
                     // You can also override the default error message
@@ -73,21 +76,31 @@ final Validation usernameValidation = new Validation(usernameInput)
                 .addRule(new CustomRule());
 
 // Password
-TextInputLayout passwordInput = findViewById(R.id.layout_password);
+// Input: 12345678
+TextInputLayout passwordInput = findViewById(R.id.layout_password); 
 final Validation passwordValidation = new Validation(passwordInput)
                 .addRule(new NotEmptyRule())
-                .addRule(new PasswordLengthRule());
+                .addRule(new PasswordRule(PasswordRegex.ALPHA_NUMERIC))
+                .addRule(new MinRule(8));
 ```
 
 ### Validate the input field
 
 ```java
+// Order of the values on the success callback follow the sequence of your Validation object
 Validator.getInstance(getApplicationContext())
                         .validate(new Validator.OnValidateListener() {
-                            @Override
-                            public void onValidate() {
-                                Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
-                            }
+
+                                      @Override
+                                      public void onValidateSuccess(List<String> values) {
+                                          Log.d("MainActivity", Arrays.toString(values.toArray())); // Output: [hello@test.com, 12345678]
+                                          Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
+                                      }
+
+                                      @Override
+                                      public void onValidateFailed() {
+
+                                      }
                         },
                         usernameValidation, passwordValidation);
 ```
