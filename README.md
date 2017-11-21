@@ -4,10 +4,16 @@
 
 ```groovy
 //dependencies
-compile 'io.github.anderscheow:validator:1.0.1'
+compile 'io.github.anderscheow:validator:1.0.2'
 ```
 
 ## Version
+
+**1.0.2**
+
+* Added success and failed callback instead of just success callback
+
+* Success callback return list of EditText values (Order by sequence of Validation object(s))
 
 **1.0.1** 
 
