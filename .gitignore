@@ -1,9 +1,11 @@
-# [Android] ========================
+# Created by https://www.gitignore.io/api/android,mac
+
+### Android ###
 # Built application files
 *.apk
 *.ap_
 
-# Files for the Dalvik VM
+# Files for the ART/Dalvik VM
 *.dex
 
 # Java class files
@@ -12,6 +14,7 @@
 # Generated files
 bin/
 gen/
+out/
 
 # Gradle files
 .gradle/
@@ -26,61 +29,31 @@ proguard/
 # Log Files
 *.log
 
+# Android Studio Navigation editor temp files
+.navigation/
 
-## Directory-based project format:
-.idea/
+# Android Studio captures folder
+captures/
 
-## File-based project format:
-*.ipr
-*.iws
+# Intellij
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/dictionaries
+.idea/libraries
 
-## Plugin-specific files:
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
 
-# IntelliJ
-out/
+# Freeline
+freeline.py
+freeline/
+freeline_project_description.json
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+### Android Patch ###
+gen-external-apklibs
 
-# JIRA plugin
-atlassian-ide-plugin.xml
+#!! ERROR: mac is undefined. Use list command to see defined gitignore types !!#
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-
-
-# [Maven] ========================
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-
-
-# [Gradle-Android] ========================
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Gradle Signing
-signing.properties
-trestle.keystore
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
-# Misc
-/.idea/workspace.xml
-.DS_Store
-/captures
-**/*.iml
-*.class
+# End of https://www.gitignore.io/api/android,mac
