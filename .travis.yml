@@ -9,7 +9,6 @@ android:
   - android-26
 
 script:
-- "./gradlew clean connectedAndroidTest --stacktrace"
 - "./gradlew assembleRelease"
 
 notifications:
