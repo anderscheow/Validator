@@ -42,6 +42,19 @@ dependencies {
 
 Usage
 -----
+### Available Rules
+
+* LengthRule
+* MaxRule
+* MinRule
+* NotEmptyRule
+* NotNullRule
+* RegexRule
+* AlphanumericRule
+* DigitsRule
+* EmailRule
+* PasswordRule
+
 ### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
 ```java
