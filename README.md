@@ -18,11 +18,15 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.0.2'
+  compile 'io.github.anderscheow:validator:1.0.3'
 }
 ```
 
 ## Version
+
+**1.0.3**
+
+* Fixed LengthRule wrong validation on maxValue
 
 **1.0.2**
 
