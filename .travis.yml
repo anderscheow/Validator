@@ -1,0 +1,13 @@
+language: android
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-26.0.2
+  - android-26
+script:
+- "./gradlew assembleRelease"
+notifications:
+  email: true
+  slack:
+    secure: DSzBzPPVcFDHPKma4BYK4CnZG/Ptgn+uixpi2pnHCBtJYlWi1FIn6Sj0QQEJolzQr+fjsBaujzb1mZi7GkHjLUdwsFpJR011srVce7iQD6i+T473QKWDUY1xWZv+EdE0z13SYsIFC+mI0Ist/3bfvh0WWoH4qt0TrqjxTUBNk8dtls9uKvKW9lwImH28mjqTp/wwtgIbGTTx/xwBdJwpKCMc0sg0rTFeFc1+/0btILDgxa9CXoHafZKAFn9Je58xa372LmZ5BDP74Hrp5v3fsxcYbhfeax7yTYyNXtZ3H+S6u88SHAfcaDn87VAr58sttG6vr8VH6xWVOVeixgydwpE1qhF/fHQnnnTClHffdi1KUeM3a84Teb8nB0z92kW6kPjmCYetCD/Zqh5TNXLFsb65u4nI9JtD4KYIjlb16v+HhRXs+dBH6iNACwiAAQgKLqbkvf0qqQn3UdffD8CGbOR+TEGYBLb+0YbmYCv8mm2GdkBPK3RyjSY0cXL0SMcv4tLAfvGL3RXN3kTLVB713yGfos0eUt52dya0iVUUZUhAwBDAwP6oh6nfpJ559GV0GKzRh73Kb0xfC6U6wKCLFTOs7V85C9cszsUdP1U4HDM4/pnmv/hdq95EayXbc+vMc1zJsjuhK3BjviRzxp+tlN+In6cS1CGdn+UnZVugOiw=
