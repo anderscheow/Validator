@@ -33,7 +33,7 @@ public class LengthRule extends BaseRule {
 
         boolean isMaxValid = true;
         if (maxValue != Integer.MAX_VALUE) {
-            isMaxValid = length >= maxValue;
+            isMaxValid = length <= maxValue;
         }
 
         return isMinValid && isMaxValid;
