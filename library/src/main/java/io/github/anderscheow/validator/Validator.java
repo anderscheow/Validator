@@ -20,7 +20,15 @@ public class Validator {
 
     private Context context;
 
+    /**
+     * @deprecated Use {@link #with(Context)} )} instead.
+     */
+    @Deprecated
     public static Validator getInstance(Context context) {
+        return new Validator(context);
+    }
+
+    public static Validator with(Context context) {
         return new Validator(context);
     }
 
@@ -29,29 +37,24 @@ public class Validator {
     }
 
     public void validate(OnValidateListener listener, Validation... validations) {
-        boolean isValid = true;
+        boolean isValid = false;
         List<String> values = new ArrayList<>();
 
         // Iterate each validation
         for (Validation validation : validations) {
             EditText editText = validation.getTextInputLayout().getEditText();
 
-            if (editText != null) {
-                String value = editText.getText().toString();
+            if (editText == null) {
+                throw new NullPointerException("TextInputLayout must include one EditText");
+            }
 
-                boolean isCurrentValueValid = validateBaseRules(value, validation);
-                if (isCurrentValueValid) {
-                    isCurrentValueValid = validateConditions(value, validation);
-                }
+            String value = editText.getText().toString();
+            boolean isCurrentValueValid = validate(value, validation);
 
-                if (isCurrentValueValid) {
-                    values.add(value);
-                    validation.getTextInputLayout().setError(null);
-                } else {
-                    isValid = false;
-                }
-            } else {
-                isValid = false;
+            if (isCurrentValueValid) {
+                isValid = true;
+                values.add(value);
+                validation.getTextInputLayout().setError(null);
             }
         }
 
@@ -60,6 +63,21 @@ public class Validator {
         } else {
             listener.onValidateFailed();
         }
+    }
+
+    private boolean validate(String value, Validation validation) {
+        boolean isCurrentValueValid = validateBaseRules(value, validation);
+        if (isCurrentValueValid) {
+            isCurrentValueValid = validateAndRules(value, validation);
+        }
+        if (isCurrentValueValid) {
+            isCurrentValueValid = validateOrRules(value, validation);
+        }
+        if (isCurrentValueValid) {
+            isCurrentValueValid = validateConditions(value, validation);
+        }
+
+        return isCurrentValueValid;
     }
 
     private boolean validateBaseRules(String value, Validation validation) {
@@ -72,6 +90,36 @@ public class Validator {
         }
 
         return true;
+    }
+
+    private boolean validateAndRules(String value, Validation validation) {
+        for (BaseRule baseRule : validation.getAndRules()) {
+            if (!baseRule.validate(value)) {
+                showErrorMessage(validation, baseRule);
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean validateOrRules(String value, Validation validation) {
+        BaseRule firstFalseBaseRule = null;
+
+        for (BaseRule baseRule : validation.getOrRules()) {
+            if (baseRule.validate(value)) {
+                return true;
+            }
+
+            if (firstFalseBaseRule == null) {
+                firstFalseBaseRule = baseRule;
+            }
+        }
+
+        showErrorMessage(validation, firstFalseBaseRule);
+
+        return false;
     }
 
     private boolean validateConditions(String value, Validation validation) {

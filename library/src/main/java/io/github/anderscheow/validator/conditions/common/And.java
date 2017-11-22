@@ -9,14 +9,12 @@ public class And extends Condition {
 
     @Override
     public boolean validate(String value) {
-        boolean isValid = false;
-
         for (BaseRule baseRule : getBaseRules()) {
-            if (baseRule.validate(value)) {
-                isValid = true;
+            if (!baseRule.validate(value)) {
+                return false;
             }
         }
-        return isValid;
+        return true;
     }
 
     @NonNull

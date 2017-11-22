@@ -14,6 +14,8 @@ public class Validation {
     private TextInputLayout textInputLayout;
 
     private List<BaseRule> baseRules;
+    private List<BaseRule> andRules;
+    private List<BaseRule> orRules;
 
     private List<Condition> conditions;
 
@@ -21,17 +23,29 @@ public class Validation {
         this.textInputLayout = textInputLayout;
 
         this.baseRules = new ArrayList<>();
+        this.andRules = new ArrayList<>();
+        this.orRules = new ArrayList<>();
         this.conditions = new ArrayList<>();
     }
 
+    /**
+     * @deprecated Use {@link #and(BaseRule),
+     *                  {@link #or(BaseRule) or
+     *                  {@link #add(Condition)}}} )} instead.
+     */
     @Deprecated
     public Validation addRule(@NonNull BaseRule baseRule) {
         baseRules.add(baseRule);
         return this;
     }
 
-    public Validation add(@NonNull BaseRule baseRule) {
-        baseRules.add(baseRule);
+    public Validation and(@NonNull BaseRule baseRule) {
+        andRules.add(baseRule);
+        return this;
+    }
+
+    public Validation or(@NonNull BaseRule baseRule) {
+        orRules.add(baseRule);
         return this;
     }
 
@@ -46,6 +60,14 @@ public class Validation {
 
     List<BaseRule> getBaseRules() {
         return baseRules;
+    }
+
+    List<BaseRule> getAndRules() {
+        return andRules;
+    }
+
+    List<BaseRule> getOrRules() {
+        return orRules;
     }
 
     List<Condition> getConditions() {
