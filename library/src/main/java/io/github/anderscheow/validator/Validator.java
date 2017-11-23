@@ -2,7 +2,6 @@ package io.github.anderscheow.validator;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.widget.EditText;
 
 import java.util.ArrayList;

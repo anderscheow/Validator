@@ -18,11 +18,15 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.0.3'
+  compile 'io.github.anderscheow:validator:1.0.4'
 }
 ```
 
 ## Version
+
+**1.0.4**
+
+* Added more rules, please check at 'Available Rules'
 
 **1.0.3**
 
@@ -58,6 +62,13 @@ Usage
 * DigitsRule
 * EmailRule
 * PasswordRule
+* FutureRule
+* PastRule
+* CreditCardRule
+* ContainRule
+* NotContainRule
+* EqualRule
+* NotEqualRule
 
 ### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
