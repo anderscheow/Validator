@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478) [![](https://jitpack.io/v/anderscheow/validator.svg)](https://jitpack.io/#anderscheow/validator)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478) [![](https://jitpack.io/v/anderscheow/Validator.svg)](https://jitpack.io/#anderscheow/Validator)
 [![Build Status](https://travis-ci.org/anderscheow/Validator.svg?branch=master)](https://travis-ci.org/anderscheow/Validator)
 
 
@@ -125,7 +125,7 @@ final Validation usernameValidation = new Validation(usernameInput)
                 .addRule(new CustomRule());
 
 // Password
-// Input: 12345678
+// Input: 12345abc
 TextInputLayout passwordInput = findViewById(R.id.layout_password); 
 final Validation passwordValidation = new Validation(passwordInput)
                 .addRule(new NotEmptyRule())
@@ -142,7 +142,7 @@ Validator.getInstance(getApplicationContext())
 
                                       @Override
                                       public void onValidateSuccess(List<String> values) {
-                                          Log.d("MainActivity", Arrays.toString(values.toArray())); // Output: [hello@test.com, 12345678]
+                                          Log.d("MainActivity", Arrays.toString(values.toArray())); // Output: [hello@test.com, 12345abc]
                                           Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
                                       }
 
