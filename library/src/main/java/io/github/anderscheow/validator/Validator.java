@@ -133,20 +133,14 @@ public class Validator {
 
     private boolean validateOrRules(String value, Validation validation) {
         if (validation.getOrRules().size() > 0) {
-            BaseRule firstFalseBaseRule = null;
+            BaseRule baseRule = validation.getBaseRules().get(0);
 
-            for (BaseRule baseRule : validation.getOrRules()) {
-                if (baseRule.validate(value)) {
-                    return true;
-                }
-
-                if (firstFalseBaseRule == null) {
-                    firstFalseBaseRule = baseRule;
-                }
+            if (baseRule.validate(value)) {
+                return true;
+            } else {
+                showErrorMessage(validation, baseRule);
+                return false;
             }
-            showErrorMessage(validation, firstFalseBaseRule);
-
-            return false;
         }
 
         return true;
