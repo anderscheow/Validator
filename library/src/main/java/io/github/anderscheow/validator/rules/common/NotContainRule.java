@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import java.util.Locale;
 
@@ -11,6 +12,16 @@ public class NotContainRule extends BaseRule {
     private String keyword;
 
     public NotContainRule(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public NotContainRule(String keyword, @StringRes int errorRes) {
+        super(errorRes);
+        this.keyword = keyword;
+    }
+
+    public NotContainRule(String keyword, @NonNull String errorMessage) {
+        super(errorMessage);
         this.keyword = keyword;
     }
 

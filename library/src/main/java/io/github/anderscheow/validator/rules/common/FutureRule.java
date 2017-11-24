@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,6 +14,16 @@ public class FutureRule extends BaseRule {
     private DateFormat dateFormat;
 
     public FutureRule(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public FutureRule(DateFormat dateFormat, @StringRes int errorRes) {
+        super(errorRes);
+        this.dateFormat = dateFormat;
+    }
+
+    public FutureRule(DateFormat dateFormat, @NonNull String errorMessage) {
+        super(errorMessage);
         this.dateFormat = dateFormat;
     }
 
