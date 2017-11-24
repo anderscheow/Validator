@@ -70,6 +70,8 @@ public class Validator {
                 isValid = true;
                 values.add(value);
             } else {
+                isValid = false;
+
                 if (mode.equals(Mode.SINGLE)) {
                     return;
                 }
@@ -130,21 +132,24 @@ public class Validator {
     }
 
     private boolean validateOrRules(String value, Validation validation) {
-        BaseRule firstFalseBaseRule = null;
+        if (validation.getOrRules().size() > 0) {
+            BaseRule firstFalseBaseRule = null;
 
-        for (BaseRule baseRule : validation.getOrRules()) {
-            if (baseRule.validate(value)) {
-                return true;
-            }
+            for (BaseRule baseRule : validation.getOrRules()) {
+                if (baseRule.validate(value)) {
+                    return true;
+                }
 
-            if (firstFalseBaseRule == null) {
-                firstFalseBaseRule = baseRule;
+                if (firstFalseBaseRule == null) {
+                    firstFalseBaseRule = baseRule;
+                }
             }
+            showErrorMessage(validation, firstFalseBaseRule);
+
+            return false;
         }
 
-        showErrorMessage(validation, firstFalseBaseRule);
-
-        return false;
+        return true;
     }
 
     private boolean validateConditions(String value, Validation validation) {
