@@ -1,12 +1,14 @@
 package io.github.anderscheow.validator;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.github.anderscheow.validator.conditions.Condition;
+import io.github.anderscheow.validator.constant.Mode;
 import io.github.anderscheow.validator.rules.BaseRule;
 import io.github.anderscheow.validator.util.ErrorMessage;
 
@@ -20,25 +22,38 @@ public class Validator {
 
     private Context context;
 
+    private Mode mode = Mode.CONTINUOUS;
+
     /**
      * @deprecated Use {@link #with(Context)} )} instead.
      */
     @Deprecated
-    public static Validator getInstance(Context context) {
+    public static Validator getInstance(@NonNull Context context) {
         return new Validator(context);
     }
 
-    public static Validator with(Context context) {
+    public static Validator with(@NonNull Context context) {
         return new Validator(context);
     }
 
-    private Validator(Context context) {
+    public static Validator with(@NonNull Context context, @NonNull Mode mode) {
+        return new Validator(context, mode);
+    }
+
+    private Validator(@NonNull Context context) {
         this.context = context;
+    }
+
+    private Validator(@NonNull Context context, @NonNull Mode mode) {
+        this.context = context;
+        this.mode = mode;
     }
 
     public void validate(OnValidateListener listener, Validation... validations) {
         boolean isValid = false;
         List<String> values = new ArrayList<>();
+
+        clearAllErrors(validations);
 
         // Iterate each validation
         for (Validation validation : validations) {
@@ -54,7 +69,10 @@ public class Validator {
             if (isCurrentValueValid) {
                 isValid = true;
                 values.add(value);
-                validation.getTextInputLayout().setError(null);
+            } else {
+                if (mode.equals(Mode.SINGLE)) {
+                    return;
+                }
             }
         }
 
@@ -65,6 +83,13 @@ public class Validator {
         }
     }
 
+    private void clearAllErrors(Validation... validations) {
+        for (Validation validation : validations) {
+            validation.getTextInputLayout().setError(null);
+        }
+    }
+
+    // Iterate each type of rules
     private boolean validate(String value, Validation validation) {
         boolean isCurrentValueValid = validateBaseRules(value, validation);
         if (isCurrentValueValid) {

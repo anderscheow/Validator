@@ -16,6 +16,7 @@ import io.github.anderscheow.validator.Validation;
 import io.github.anderscheow.validator.Validator;
 import io.github.anderscheow.validator.conditions.common.And;
 import io.github.anderscheow.validator.conditions.common.Or;
+import io.github.anderscheow.validator.constant.Mode;
 import io.github.anderscheow.validator.rules.BaseRule;
 import io.github.anderscheow.validator.rules.common.MaxRule;
 import io.github.anderscheow.validator.rules.common.MinRule;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Validator.with(getApplicationContext())
+                Validator.with(getApplicationContext(), Mode.CONTINUOUS)
                         .validate(new Validator.OnValidateListener() {
 
                                       @Override

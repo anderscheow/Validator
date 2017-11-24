@@ -5,14 +5,26 @@ import android.support.annotation.StringRes;
 
 public abstract class ErrorMessage {
 
+    private int errorRes = -1;
+
+    private String errorMessage = "Invalid input";
+
     @StringRes
     public int errorRes() {
-        return -1;
+        return errorRes;
     }
 
     @NonNull
-    public  String errorMessage() {
-        return "Invalid input";
+    public String errorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorRes(@StringRes int errorRes) {
+        this.errorRes = errorRes;
+    }
+
+    public void setErrorMessage(@NonNull String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public boolean isErrorAvailable() {
