@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import java.util.Locale;
 
@@ -11,6 +12,16 @@ public class MinRule extends BaseRule {
     private int minValue;
 
     public MinRule(int minValue) {
+        this.minValue = minValue;
+    }
+
+    public MinRule(int minValue, @StringRes int errorRes) {
+        super(errorRes);
+        this.minValue = minValue;
+    }
+
+    public MinRule(int minValue, @NonNull String errorMessage) {
+        super(errorMessage);
         this.minValue = minValue;
     }
 

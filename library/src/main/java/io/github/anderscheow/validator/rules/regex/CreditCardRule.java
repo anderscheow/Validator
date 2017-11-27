@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.regex;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import io.github.anderscheow.validator.rules.common.RegexRule;
 
@@ -29,6 +30,14 @@ public class CreditCardRule extends RegexRule {
 
     public CreditCardRule(CreditCardRegex regex) {
         super(regex.name);
+    }
+
+    public CreditCardRule(CreditCardRegex regex, @StringRes int errorRes) {
+        super(regex.name, errorRes);
+    }
+
+    public CreditCardRule(CreditCardRegex regex, @NonNull String errorMessage) {
+        super(regex.name, errorMessage);
     }
 
     @NonNull

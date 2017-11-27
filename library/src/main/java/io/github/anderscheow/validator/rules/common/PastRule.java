@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,6 +14,16 @@ public class PastRule extends BaseRule {
     private DateFormat dateFormat;
 
     public PastRule(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public PastRule(DateFormat dateFormat, @StringRes int errorRes) {
+        super(errorRes);
+        this.dateFormat = dateFormat;
+    }
+
+    public PastRule(DateFormat dateFormat, @NonNull String errorMessage) {
+        super(errorMessage);
         this.dateFormat = dateFormat;
     }
 

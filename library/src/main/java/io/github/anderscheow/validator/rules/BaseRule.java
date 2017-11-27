@@ -3,17 +3,18 @@ package io.github.anderscheow.validator.rules;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
-public abstract class BaseRule {
+import io.github.anderscheow.validator.util.ErrorMessage;
+import io.github.anderscheow.validator.util.Validate;
 
-    public abstract boolean validate(String value);
+public abstract class BaseRule extends ErrorMessage implements Validate {
 
-    @StringRes
-    public int errorRes() {
-        return -1;
+    public BaseRule() {}
+
+    public BaseRule(@StringRes int errorRes) {
+        setErrorRes(errorRes);
     }
 
-    @NonNull
-    public  String errorMessage() {
-        return "Invalid input";
+    public BaseRule(@NonNull String errorMessage) {
+        setErrorMessage(errorMessage);
     }
 }

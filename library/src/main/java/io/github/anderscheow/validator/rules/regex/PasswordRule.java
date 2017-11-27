@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.regex;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import io.github.anderscheow.validator.rules.common.RegexRule;
 
@@ -28,6 +29,14 @@ public class PasswordRule extends RegexRule {
 
     public PasswordRule(PasswordRegex regex) {
         super(regex.name);
+    }
+
+    public PasswordRule(PasswordRegex regex, @StringRes int errorRes) {
+        super(regex.name, errorRes);
+    }
+
+    public PasswordRule(PasswordRegex regex, @NonNull String errorMessage) {
+        super(regex.name, errorMessage);
     }
 
     @NonNull

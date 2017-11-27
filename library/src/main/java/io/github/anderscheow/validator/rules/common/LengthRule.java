@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import java.util.Locale;
 
@@ -12,6 +13,18 @@ public class LengthRule extends BaseRule {
     private int maxValue;
 
     public LengthRule(int minValue, int maxValue) {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
+
+    public LengthRule(int minValue, int maxValue, @StringRes int errorRes) {
+        super(errorRes);
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
+
+    public LengthRule(int minValue, int maxValue, @NonNull String errorMessage) {
+        super(errorMessage);
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
