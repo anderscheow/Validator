@@ -78,14 +78,6 @@ Usage
 * EqualRule
 * NotEqualRule
 
-### Mode
-
-| Single        | Continuous    |
-| ------------- |:-------------:|
-| ![](https://media.giphy.com/media/3ohs7YJIZfbrC7txyU/giphy.gif) | ![](https://media.giphy.com/media/3ohs84PogwMOkUg0Jq/giphy.gif) |
-
-### Conditions
-
 ### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
 ```java
@@ -156,7 +148,7 @@ final Validation passwordValidation = new Validation(passwordInput)
                 .addRule(new MinRule(8));
 ```
 
-### Additional feature (Using Condition)
+### Condition
 
 ```java
 // And Condition
@@ -173,12 +165,24 @@ final Validation usernameWithConditionValidation = new Validation(usernameInput)
                 .add(new Or().add(new MinRule(5)).add(new MaxRule(10)));
 ```
 
+### Mode
+
+```java
+Validator.getInstance(getApplicationContext())
+                        /* Set your mode here, by default is CONTINUOUS */
+                        .setMode(Mode.CONTINUOUS));
+```
+
+| Single                                                          | Continuous                                                      |
+| ---                                                             | ---                                                             |
+| ![](https://media.giphy.com/media/3ohs7YJIZfbrC7txyU/giphy.gif) | ![](https://media.giphy.com/media/3ohs84PogwMOkUg0Jq/giphy.gif) |
+
+
 ### Validate the input field
 
 ```java
 // Order of the values on the success callback follow the sequence of your Validation object
-Validator.getInstance(getApplicationContext(),
-                        /* Set your mode here, by default is CONTINUOUS */
+Validator.getInstance(getApplicationContext())
                         .setMode(Mode.CONTINUOUS))
                         .validate(new Validator.OnValidateListener() {
 
@@ -195,3 +199,9 @@ Validator.getInstance(getApplicationContext(),
                         },
                         usernameValidation, passwordValidation);
 ```
+
+## Contributions
+Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
+
+## License
+Validator is released under the [Apache License](https://github.com/anderscheow/Validator/blob/master/LICENSE)
