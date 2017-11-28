@@ -129,7 +129,7 @@ public class Validator {
 
     private boolean validateOrRules(String value, Validation validation) {
         if (validation.getOrRules().size() > 0) {
-            BaseRule baseRule = validation.getBaseRules().get(0);
+            BaseRule baseRule = validation.getOrRules().get(0);
 
             if (baseRule.validate(value)) {
                 return true;
