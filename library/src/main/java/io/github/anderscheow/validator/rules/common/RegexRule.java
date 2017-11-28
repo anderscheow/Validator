@@ -1,5 +1,8 @@
 package io.github.anderscheow.validator.rules.common;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+
 import io.github.anderscheow.validator.rules.BaseRule;
 
 public abstract class RegexRule extends BaseRule {
@@ -7,6 +10,16 @@ public abstract class RegexRule extends BaseRule {
     private String regex;
 
     public RegexRule(String regex) {
+        this.regex = regex;
+    }
+
+    public RegexRule(String regex, @StringRes int errorRes) {
+        super(errorRes);
+        this.regex = regex;
+    }
+
+    public RegexRule(String regex, @NonNull String errorMessage) {
+        super(errorMessage);
         this.regex = regex;
     }
 

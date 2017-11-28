@@ -14,7 +14,12 @@ import java.util.List;
 
 import io.github.anderscheow.validator.Validation;
 import io.github.anderscheow.validator.Validator;
+import io.github.anderscheow.validator.conditions.common.And;
+import io.github.anderscheow.validator.conditions.common.Or;
+import io.github.anderscheow.validator.constant.Mode;
 import io.github.anderscheow.validator.rules.BaseRule;
+import io.github.anderscheow.validator.rules.common.MaxRule;
+import io.github.anderscheow.validator.rules.common.MinRule;
 import io.github.anderscheow.validator.rules.regex.EmailRule;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,16 +34,22 @@ public class MainActivity extends AppCompatActivity {
         Button submitButton = findViewById(R.id.button_submit);
 
         final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new EmailRule());
+                .and(new EmailRule())
+                .or(new MinRule(5))
+                .or(new MaxRule(10));
+
+        final Validation usernameWithConditionValidation = new Validation(usernameInput)
+                .add(new And().add(new EmailRule()))
+                .add(new Or().add(new MinRule(5)).add(new MaxRule(10)));
 
         final Validation passwordValidation = new Validation(passwordInput)
-                .addRule(new BaseRule() {
+                .and(new BaseRule() {
                     @Override
                     public boolean validate(String s) {
                         return !s.isEmpty();
                     }
                 })
-                .addRule(new BaseRule() {
+                .and(new BaseRule() {
                     @Override
                     public boolean validate(String s) {
                         return s.length() >= 8;
@@ -59,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Validator.getInstance(getApplicationContext())
+                Validator.with(getApplicationContext())
+                        .setMode(Mode.CONTINUOUS)
                         .validate(new Validator.OnValidateListener() {
 
                                       @Override
