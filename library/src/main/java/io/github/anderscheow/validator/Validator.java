@@ -36,17 +36,13 @@ public class Validator {
         return new Validator(context);
     }
 
-    public static Validator with(@NonNull Context context, @NonNull Mode mode) {
-        return new Validator(context, mode);
-    }
-
     private Validator(@NonNull Context context) {
         this.context = context;
     }
 
-    private Validator(@NonNull Context context, @NonNull Mode mode) {
-        this.context = context;
+    public Validator setMode(@NonNull Mode mode) {
         this.mode = mode;
+        return this;
     }
 
     public void validate(OnValidateListener listener, Validation... validations) {

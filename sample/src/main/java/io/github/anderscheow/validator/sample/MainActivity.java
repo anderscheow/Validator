@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Validator.with(getApplicationContext(), Mode.CONTINUOUS)
+                Validator.with(getApplicationContext())
+                        .setMode(Mode.CONTINUOUS)
                         .validate(new Validator.OnValidateListener() {
 
                                       @Override
