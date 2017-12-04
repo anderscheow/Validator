@@ -10,6 +10,7 @@ public abstract class RegexRule extends BaseRule {
     private String regex;
 
     public RegexRule(String regex) {
+        super("Does not match regex rule");
         this.regex = regex;
     }
 

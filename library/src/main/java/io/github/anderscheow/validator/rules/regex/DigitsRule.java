@@ -10,7 +10,7 @@ public class DigitsRule extends RegexRule {
     private static final String DIGITS_REGEX = "\\d+";
 
     public DigitsRule() {
-        super(DIGITS_REGEX);
+        super(DIGITS_REGEX, "Value does not match digits regex");
     }
 
     public DigitsRule(@StringRes int errorRes) {
@@ -19,11 +19,5 @@ public class DigitsRule extends RegexRule {
 
     public DigitsRule(@NonNull String errorMessage) {
         super(DIGITS_REGEX, errorMessage);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value does not match digits regex";
     }
 }

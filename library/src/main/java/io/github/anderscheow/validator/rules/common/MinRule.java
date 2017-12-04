@@ -12,6 +12,7 @@ public class MinRule extends BaseRule {
     private int minValue;
 
     public MinRule(int minValue) {
+        super(String.format(Locale.getDefault(), "Length must exceed at least %d characters", minValue));
         this.minValue = minValue;
     }
 
@@ -31,11 +32,5 @@ public class MinRule extends BaseRule {
             throw new NullPointerException();
         }
         return value.length() >= minValue;
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return String.format(Locale.getDefault(), "Length must exceed at least %d characters", minValue);
     }
 }

@@ -10,7 +10,7 @@ public class AlphanumericRule extends RegexRule {
     private static final String ALPHANUMERIC_REGEX = "(?=.*[a-zA-Z])(?=.*[\\d]).+";
 
     public AlphanumericRule() {
-        super(ALPHANUMERIC_REGEX);
+        super(ALPHANUMERIC_REGEX, "Value does not match alphanumeric regex");
     }
 
     public AlphanumericRule(@StringRes int errorRes) {
@@ -19,11 +19,5 @@ public class AlphanumericRule extends RegexRule {
 
     public AlphanumericRule(@NonNull String errorMessage) {
         super(ALPHANUMERIC_REGEX, errorMessage);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value does not match alphanumeric regex";
     }
 }

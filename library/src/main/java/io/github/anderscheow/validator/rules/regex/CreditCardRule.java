@@ -29,7 +29,7 @@ public class CreditCardRule extends RegexRule {
     }
 
     public CreditCardRule(CreditCardRegex regex) {
-        super(regex.name);
+        super(regex.name, "Value does not match any credit card regex");
     }
 
     public CreditCardRule(CreditCardRegex regex, @StringRes int errorRes) {
@@ -38,11 +38,5 @@ public class CreditCardRule extends RegexRule {
 
     public CreditCardRule(CreditCardRegex regex, @NonNull String errorMessage) {
         super(regex.name, errorMessage);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value does not match any credit card regex";
     }
 }

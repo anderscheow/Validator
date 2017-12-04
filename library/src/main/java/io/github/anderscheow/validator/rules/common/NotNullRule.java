@@ -7,7 +7,9 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class NotNullRule extends BaseRule {
 
-    public NotNullRule() {}
+    public NotNullRule() {
+        super("Value must not be null");
+    }
 
     public NotNullRule(@StringRes int errorRes) {
         super(errorRes);
@@ -20,11 +22,5 @@ public class NotNullRule extends BaseRule {
     @Override
     public boolean validate(String value) {
         return value != null;
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value must not be null";
     }
 }

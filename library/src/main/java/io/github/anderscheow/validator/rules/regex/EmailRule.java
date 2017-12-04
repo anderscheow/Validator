@@ -10,7 +10,7 @@ public class EmailRule extends RegexRule {
     private static final String EMAIL_REGEX = "\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\\b";
 
     public EmailRule() {
-        super(EMAIL_REGEX);
+        super(EMAIL_REGEX, "Value does not match email regex");
     }
 
     public EmailRule(@StringRes int errorRes) {
@@ -19,11 +19,5 @@ public class EmailRule extends RegexRule {
 
     public EmailRule(@NonNull String errorMessage) {
         super(EMAIL_REGEX, errorMessage);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value does not match email regex";
     }
 }
