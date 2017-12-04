@@ -14,6 +14,7 @@ public class FutureRule extends BaseRule {
     private DateFormat dateFormat;
 
     public FutureRule(DateFormat dateFormat) {
+        super("Does not match future rule");
         this.dateFormat = dateFormat;
     }
 
@@ -39,11 +40,5 @@ public class FutureRule extends BaseRule {
         } catch (ParseException ignored) {}
 
         return parsedDate != null && parsedDate.after(new Date());
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Does not match future rule";
     }
 }

@@ -8,7 +8,9 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class Or extends Condition {
 
-    public Or() {}
+    public Or() {
+        super("Does not match 'Or' condition");
+    }
 
     public Or(@StringRes int errorRes) {
         super(errorRes);
@@ -26,11 +28,5 @@ public class Or extends Condition {
             }
         }
         return false;
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Does not match 'Or' condition";
     }
 }

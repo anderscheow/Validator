@@ -12,6 +12,7 @@ public class MaxRule extends BaseRule {
     private int maxValue;
 
     public MaxRule(int maxValue) {
+        super(String.format(Locale.getDefault(), "Length must not exceed %d characters", maxValue));
         this.maxValue = maxValue;
     }
 
@@ -31,11 +32,5 @@ public class MaxRule extends BaseRule {
             throw new NullPointerException();
         }
         return value.length() <= maxValue;
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return String.format(Locale.getDefault(), "Length must not exceed %d characters", maxValue);
     }
 }

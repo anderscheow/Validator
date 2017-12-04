@@ -7,7 +7,9 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class NotEmptyRule extends BaseRule {
 
-    public NotEmptyRule() {}
+    public NotEmptyRule() {
+        super("Value must not be empty");
+    }
 
     public NotEmptyRule(@StringRes int errorRes) {
         super(errorRes);
@@ -23,11 +25,5 @@ public class NotEmptyRule extends BaseRule {
             throw new NullPointerException();
         }
         return !value.isEmpty();
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value must not be empty";
     }
 }

@@ -13,6 +13,7 @@ public class LengthRule extends BaseRule {
     private int maxValue;
 
     public LengthRule(int minValue, int maxValue) {
+        super(String.format(Locale.getDefault(), "Length must be between %d and %d", minValue, maxValue));
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
@@ -58,11 +59,5 @@ public class LengthRule extends BaseRule {
                     "should be smaller than 'maxValue' (%d)", min, max);
             throw new IllegalStateException(message);
         }
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return String.format(Locale.getDefault(), "Length must be between %d and %d", minValue, maxValue);
     }
 }

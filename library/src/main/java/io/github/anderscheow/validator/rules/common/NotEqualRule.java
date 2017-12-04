@@ -12,6 +12,7 @@ public class NotEqualRule extends BaseRule {
     private String keyword;
 
     public NotEqualRule(String keyword) {
+        super(String.format(Locale.getDefault(), "Value equal to '%s'", keyword));
         this.keyword = keyword;
     }
 
@@ -28,11 +29,5 @@ public class NotEqualRule extends BaseRule {
     @Override
     public boolean validate(String value) {
         return !value.equals(keyword);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return String.format(Locale.getDefault(), "Value equal to '%s'", keyword);
     }
 }

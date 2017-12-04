@@ -28,7 +28,7 @@ public class PasswordRule extends RegexRule {
     }
 
     public PasswordRule(PasswordRegex regex) {
-        super(regex.name);
+        super(regex.name, "Value does not match any password regex");
     }
 
     public PasswordRule(PasswordRegex regex, @StringRes int errorRes) {
@@ -37,11 +37,5 @@ public class PasswordRule extends RegexRule {
 
     public PasswordRule(PasswordRegex regex, @NonNull String errorMessage) {
         super(regex.name, errorMessage);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Value does not match any password regex";
     }
 }

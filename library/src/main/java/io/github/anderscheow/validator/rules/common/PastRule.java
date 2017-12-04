@@ -14,6 +14,7 @@ public class PastRule extends BaseRule {
     private DateFormat dateFormat;
 
     public PastRule(DateFormat dateFormat) {
+        super("Does not match past rule");
         this.dateFormat = dateFormat;
     }
 
@@ -39,11 +40,5 @@ public class PastRule extends BaseRule {
         } catch (ParseException ignored) {}
 
         return parsedDate != null && parsedDate.before(new Date());
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Does not match past rule";
     }
 }

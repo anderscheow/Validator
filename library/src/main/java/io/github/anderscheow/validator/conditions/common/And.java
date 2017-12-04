@@ -8,7 +8,9 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class And extends Condition {
 
-    public And() {}
+    public And() {
+        super("Does not match 'And' condition");
+    }
 
     public And(@StringRes int errorRes) {
         super(errorRes);
@@ -26,11 +28,5 @@ public class And extends Condition {
             }
         }
         return true;
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return "Does not match 'And' condition";
     }
 }

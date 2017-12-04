@@ -12,6 +12,7 @@ public class ContainRule extends BaseRule {
     private String keyword;
 
     public ContainRule(String keyword) {
+        super(String.format(Locale.getDefault(), "Value does not contain '%s'", keyword));
         this.keyword = keyword;
     }
 
@@ -28,11 +29,5 @@ public class ContainRule extends BaseRule {
     @Override
     public boolean validate(String value) {
         return value.contains(keyword);
-    }
-
-    @NonNull
-    @Override
-    public String errorMessage() {
-        return String.format(Locale.getDefault(), "Value does not contain '%s'", keyword);
     }
 }
