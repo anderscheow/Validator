@@ -18,13 +18,17 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.1.0'
+  compile 'io.github.anderscheow:validator:1.1.1'
 }
 ```
 
 ## Version
 
-**1.1.0 (Newest)**
+**1.1.1 (Newest)**
+
+* Fixed bug where overloading the constructor with errorMessage or errorRes does not override the default value
+
+**1.1.0**
 
 * Added ability to add conditions (And or Or)
 
