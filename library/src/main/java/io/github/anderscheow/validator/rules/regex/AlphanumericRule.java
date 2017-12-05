@@ -7,7 +7,7 @@ import io.github.anderscheow.validator.rules.common.RegexRule;
 
 public class AlphanumericRule extends RegexRule {
 
-    private static final String ALPHANUMERIC_REGEX = "(?=.*[a-zA-Z])(?=.*[\\d]).+";
+    private static final String ALPHANUMERIC_REGEX = "^[a-zA-Z0-9]*$";
 
     public AlphanumericRule() {
         super(ALPHANUMERIC_REGEX, "Value does not match alphanumeric regex");
