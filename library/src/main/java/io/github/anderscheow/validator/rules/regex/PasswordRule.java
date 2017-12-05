@@ -13,7 +13,7 @@ public class PasswordRule extends RegexRule {
         ALPHA_MIXED_CASE("(?=.*[a-z])(?=.*[A-Z]).+"),
         NUMERIC("\\d+"),
         ALPHA_NUMERIC("(?=.*[a-zA-Z])(?=.*[\\d]).+"),
-        ALPHA_NUMERIC_SYMBOLS("(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*([^\\w])).+");
+        ALPHA_NUMERIC_SYMBOLS("(?=.*[a-zA-Z])(?=.*[\\d])(?=.*([^\\w])).+");
 
         private final String name;
 
