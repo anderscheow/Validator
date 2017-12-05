@@ -27,15 +27,15 @@ public class PasswordRule extends RegexRule {
         }
     }
 
-    public PasswordRule(PasswordRegex regex) {
+    public PasswordRule(@NonNull PasswordRegex regex) {
         super(regex.name, "Value does not match any password regex");
     }
 
-    public PasswordRule(PasswordRegex regex, @StringRes int errorRes) {
+    public PasswordRule(@NonNull PasswordRegex regex, @StringRes int errorRes) {
         super(regex.name, errorRes);
     }
 
-    public PasswordRule(PasswordRegex regex, @NonNull String errorMessage) {
+    public PasswordRule(@NonNull PasswordRegex regex, @NonNull String errorMessage) {
         super(regex.name, errorMessage);
     }
 }

@@ -28,15 +28,15 @@ public class CreditCardRule extends RegexRule {
         }
     }
 
-    public CreditCardRule(CreditCardRegex regex) {
+    public CreditCardRule(@NonNull CreditCardRegex regex) {
         super(regex.name, "Value does not match any credit card regex");
     }
 
-    public CreditCardRule(CreditCardRegex regex, @StringRes int errorRes) {
+    public CreditCardRule(@NonNull CreditCardRegex regex, @StringRes int errorRes) {
         super(regex.name, errorRes);
     }
 
-    public CreditCardRule(CreditCardRegex regex, @NonNull String errorMessage) {
+    public CreditCardRule(@NonNull CreditCardRegex regex, @NonNull String errorMessage) {
         super(regex.name, errorMessage);
     }
 }
