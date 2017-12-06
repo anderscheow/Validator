@@ -29,6 +29,107 @@ public class CreditCardRuleTest {
     }
 
     @Test
+    public void validate_VisaSamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.VISA);
+
+        String[] samples = new String[] {
+                "4111111111111111",
+                "4012888888881881",
+                "4222222222222",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
+    public void validate_MasterCardSamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.MASTERCARD);
+
+        String[] samples = new String[] {
+                "5555555555554444",
+                "5105105105105100",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
+    public void validate_AmericanExpressSamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.AMERICAN_EXPRESS);
+
+        String[] samples = new String[] {
+                "378282246310005",
+                "371449635398431",
+                "378734493671000",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
+    public void validate_DinersClubSamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.DINERS_CLUB);
+
+        String[] samples = new String[] {
+                "30569309025904",
+                "38520000023237",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
+    public void validate_DiscoverSamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.DISCOVER);
+
+        String[] samples = new String[] {
+                "6011111111111117",
+                "6011000990139424",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
+    public void validate_JcbSamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.JCB);
+
+        String[] samples = new String[] {
+                "3530111333300000",
+                "3566002020360505",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
+    public void validate_ChinaUnionPaySamples_ReturnTrue() throws Exception {
+        creditCardRule = new CreditCardRule(CreditCardRule.CreditCardRegex.CHINA_UNION_PAY);
+
+        String[] samples = new String[] {
+                "6276028610651858",
+                "6223263470710627",
+                "6270213860867471",
+        };
+
+        for (String sample : samples) {
+            assertTrue("This sample failed: " + sample, creditCardRule.validate(sample));
+        }
+    }
+
+    @Test
     public void errorMessage_DefaultErrorMessage() throws Exception {
         String errorMessage = "Value does not match any credit card regex";
 

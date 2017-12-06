@@ -204,6 +204,9 @@ Validator.getInstance(getApplicationContext())
                         usernameValidation, passwordValidation);
 ```
 
+## Testing
+I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under [Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
+
 ## Contributions
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
