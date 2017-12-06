@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478) [![](https://jitpack.io/v/anderscheow/Validator.svg)](https://jitpack.io/#anderscheow/Validator)
-[![Build Status](https://travis-ci.org/anderscheow/Validator.svg?branch=master)](https://travis-ci.org/anderscheow/Validator)
+[![Build Status](https://travis-ci.org/anderscheow/Validator.svg?branch=master)](https://travis-ci.org/anderscheow/Validator) [![Coverage Status](https://coveralls.io/repos/github/anderscheow/Validator/badge.svg?branch=master)](https://coveralls.io/github/anderscheow/Validator?branch=master)
 
 
 ## Download
