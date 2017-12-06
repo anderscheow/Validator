@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Validator-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6478) [![](https://jitpack.io/v/anderscheow/Validator.svg)](https://jitpack.io/#anderscheow/Validator)
-[![Build Status](https://travis-ci.org/anderscheow/Validator.svg?branch=master)](https://travis-ci.org/anderscheow/Validator)
+[![Build Status](https://travis-ci.org/anderscheow/Validator.svg?branch=master)](https://travis-ci.org/anderscheow/Validator) [![codecov](https://codecov.io/gh/anderscheow/Validator/branch/master/graph/badge.svg)](https://codecov.io/gh/anderscheow/Validator/branch/develop)
 
 
 ## Download
@@ -203,6 +203,9 @@ Validator.getInstance(getApplicationContext())
                         },
                         usernameValidation, passwordValidation);
 ```
+
+## Testing
+I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under [Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
 
 ## Contributions
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.

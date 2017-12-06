@@ -9,17 +9,17 @@ public abstract class RegexRule extends BaseRule {
 
     private String regex;
 
-    public RegexRule(String regex) {
+    public RegexRule(@NonNull String regex) {
         super("Does not match regex rule");
         this.regex = regex;
     }
 
-    public RegexRule(String regex, @StringRes int errorRes) {
+    public RegexRule(@NonNull String regex, @StringRes int errorRes) {
         super(errorRes);
         this.regex = regex;
     }
 
-    public RegexRule(String regex, @NonNull String errorMessage) {
+    public RegexRule(@NonNull String regex, @NonNull String errorMessage) {
         super(errorMessage);
         this.regex = regex;
     }
