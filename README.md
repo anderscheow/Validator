@@ -18,13 +18,17 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.1.1'
+  compile 'io.github.anderscheow:validator:1.1.2'
 }
 ```
 
 ## Version
 
-**1.1.1 (Newest)**
+**1.1.2 (Newest)**
+
+* Updated ALPHA_NUMERIC_SYMBOLS regex on PasswordRule
+
+**1.1.1**
 
 * Fixed bug where overloading the constructor with errorMessage or errorRes does not override the default value
 
