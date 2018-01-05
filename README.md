@@ -18,13 +18,19 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.1.2'
+  compile 'io.github.anderscheow:validator:1.1.3'
 }
 ```
 
 ## Version
 
-**1.1.2 (Newest)**
+**1.1.3 (Newest)**
+
+* Input can be any object, previously restrict to String (Along with proper validation with different object)
+
+* Added more test cases to validate input
+
+**1.1.2**
 
 * Updated ALPHA_NUMERIC_SYMBOLS regex on PasswordRule
 
@@ -92,7 +98,7 @@ Usage
 public class CustomRule extends BaseRule {
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
@@ -209,10 +215,10 @@ Validator.getInstance(getApplicationContext())
 ```
 
 ## Testing
-I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under [Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
+I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under[Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
 
 ## Contributions
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ## License
-Validator is released under the [Apache License](https://github.com/anderscheow/Validator/blob/master/LICENSE)
+Validator is released under the[Apache License](https://github.com/anderscheow/Validator/blob/master/LICENSE)
