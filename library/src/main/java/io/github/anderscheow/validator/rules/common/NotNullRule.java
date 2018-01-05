@@ -20,7 +20,7 @@ public class NotNullRule extends BaseRule {
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         return value != null;
     }
 }

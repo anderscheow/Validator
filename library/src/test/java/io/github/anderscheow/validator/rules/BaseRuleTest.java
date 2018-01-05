@@ -29,7 +29,7 @@ public class BaseRuleTest {
 
         baseRule = new BaseRule() {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         };
@@ -43,7 +43,7 @@ public class BaseRuleTest {
 
         baseRule = new BaseRule(errorMessage) {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         };
@@ -57,7 +57,7 @@ public class BaseRuleTest {
 
         baseRule = new BaseRule(errorRes) {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         };

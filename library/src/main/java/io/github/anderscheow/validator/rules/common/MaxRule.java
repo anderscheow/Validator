@@ -9,28 +9,33 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class MaxRule extends BaseRule {
 
-    private int maxValue;
+    private int maxLength;
 
-    public MaxRule(int maxValue) {
-        super(String.format(Locale.getDefault(), "Length must not exceed %d characters", maxValue));
-        this.maxValue = maxValue;
+    public MaxRule(int maxLength) {
+        super(String.format(Locale.getDefault(), "Length must not exceed %d characters", maxLength));
+        this.maxLength = maxLength;
     }
 
-    public MaxRule(int maxValue, @StringRes int errorRes) {
+    public MaxRule(int maxLength, @StringRes int errorRes) {
         super(errorRes);
-        this.maxValue = maxValue;
+        this.maxLength = maxLength;
     }
 
-    public MaxRule(int maxValue, @NonNull String errorMessage) {
+    public MaxRule(int maxLength, @NonNull String errorMessage) {
         super(errorMessage);
-        this.maxValue = maxValue;
+        this.maxLength = maxLength;
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
-        return value.length() <= maxValue;
+
+        if (value instanceof String) {
+            return ((String) value).length() <= maxLength;
+        }
+
+        throw new ClassCastException("Required String value");
     }
 }

@@ -32,6 +32,14 @@ public class NotContainRuleTest {
         notContainRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        notContainRule = new NotContainRule(KEYWORD);
+
+        // Any value other than String
+        notContainRule.validate(123);
+    }
+
     @Test
     public void validate_ValidSample_ReturnTrue() throws Exception {
         notContainRule = new NotContainRule(KEYWORD);

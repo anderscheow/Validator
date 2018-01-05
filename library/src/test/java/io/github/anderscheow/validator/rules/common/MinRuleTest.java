@@ -32,6 +32,14 @@ public class MinRuleTest {
         minRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        minRule = new MinRule(MIN_LENGTH);
+
+        // Any value other than String
+        minRule.validate(123);
+    }
+
     @Test
     public void validate_SampleEqualMin_ReturnTrue() throws Exception {
         minRule = new MinRule(MIN_LENGTH);

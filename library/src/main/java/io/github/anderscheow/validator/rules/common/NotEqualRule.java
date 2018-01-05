@@ -27,7 +27,11 @@ public class NotEqualRule extends BaseRule {
     }
 
     @Override
-    public boolean validate(String value) {
-        return !value.equals(keyword);
+    public boolean validate(Object value) {
+        if (value instanceof String) {
+            return !value.equals(keyword);
+        }
+
+        throw new ClassCastException("Required String value");
     }
 }

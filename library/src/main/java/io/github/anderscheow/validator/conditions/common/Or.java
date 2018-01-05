@@ -21,7 +21,7 @@ public class Or extends Condition {
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         for (BaseRule baseRule : getBaseRules()) {
             if (baseRule.validate(value)) {
                 return true;

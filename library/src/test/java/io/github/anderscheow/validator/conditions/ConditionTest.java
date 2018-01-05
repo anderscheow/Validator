@@ -28,7 +28,7 @@ public class ConditionTest {
     public void add_OneBaseRule() throws Exception {
         condition = new Condition() {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         }.add(new MinRule(5));
@@ -40,7 +40,7 @@ public class ConditionTest {
     public void add_TwoBaseRule() throws Exception {
         condition = new Condition() {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         }.add(new MinRule(5))
@@ -55,7 +55,7 @@ public class ConditionTest {
 
         condition = new Condition() {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         };
@@ -69,7 +69,7 @@ public class ConditionTest {
 
         condition = new Condition(errorMessage) {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         };
@@ -83,7 +83,7 @@ public class ConditionTest {
 
         condition = new Condition(errorRes) {
             @Override
-            public boolean validate(String value) {
+            public boolean validate(Object value) {
                 return false;
             }
         };

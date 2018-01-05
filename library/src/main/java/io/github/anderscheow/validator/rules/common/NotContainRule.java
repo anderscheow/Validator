@@ -11,23 +11,31 @@ public class NotContainRule extends BaseRule {
 
     private String keyword;
 
-    public NotContainRule(String keyword) {
+    public NotContainRule(@NonNull String keyword) {
         super(String.format(Locale.getDefault(), "Value does contain '%s'", keyword));
         this.keyword = keyword;
     }
 
-    public NotContainRule(String keyword, @StringRes int errorRes) {
+    public NotContainRule(@NonNull String keyword, @StringRes int errorRes) {
         super(errorRes);
         this.keyword = keyword;
     }
 
-    public NotContainRule(String keyword, @NonNull String errorMessage) {
+    public NotContainRule(@NonNull String keyword, @NonNull String errorMessage) {
         super(errorMessage);
         this.keyword = keyword;
     }
 
     @Override
-    public boolean validate(String value) {
-        return !value.contains(keyword);
+    public boolean validate(Object value) {
+        if (value == null) {
+            throw new NullPointerException();
+        }
+
+        if (value instanceof String) {
+            return !((String) value).contains(keyword);
+        }
+
+        throw new ClassCastException("Required String value");
     }
 }

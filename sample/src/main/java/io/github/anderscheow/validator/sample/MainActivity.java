@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
         final Validation passwordValidation = new Validation(passwordInput)
                 .and(new BaseRule() {
                     @Override
-                    public boolean validate(String s) {
-                        return !s.isEmpty();
+                    public boolean validate(Object s) {
+                        return !((String) s).isEmpty();
                     }
                 })
                 .and(new BaseRule() {
                     @Override
-                    public boolean validate(String s) {
-                        return s.length() >= 8;
+                    public boolean validate(Object s) {
+                        return ((String) s).length() >= 8;
                     }
 
                     @Override
