@@ -37,6 +37,25 @@ public class FutureRuleTest {
         futureRule.validate(null);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void validate_EmptyDateFormat_ThrowNullPointerException() throws Exception {
+        futureRule = new FutureRule(null);
+
+        Calendar calendar = Calendar.getInstance();
+
+        String sample = VALID_DATE_FORMAT.format(calendar.getTime());
+
+        futureRule.validate(sample);
+    }
+
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringOrDateSample_ThrowClassCastException() throws Exception {
+        futureRule = new FutureRule(VALID_DATE_FORMAT);
+
+        // Any value other than String or Date
+        futureRule.validate(123);
+    }
+
     @Test
     public void validate_ValidDateFormatAndValidValue_ReturnTrue() throws Exception {
         futureRule = new FutureRule(VALID_DATE_FORMAT);
@@ -51,6 +70,19 @@ public class FutureRuleTest {
     }
 
     @Test
+    public void validate_ValidDateValue_ReturnTrue() throws Exception {
+        futureRule = new FutureRule(VALID_DATE_FORMAT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+
+        Date sample = calendar.getTime();
+
+        assertTrue(futureRule.validate(sample));
+    }
+
+    @Test
     public void validate_ValidDateFormatAndInvalidValue_ReturnFalse() throws Exception {
         futureRule = new FutureRule(VALID_DATE_FORMAT);
 
@@ -59,6 +91,19 @@ public class FutureRuleTest {
         calendar.add(Calendar.DAY_OF_YEAR, -1);
 
         String sample = VALID_DATE_FORMAT.format(calendar.getTime());
+
+        assertFalse(futureRule.validate(sample));
+    }
+
+    @Test
+    public void validate_InvalidDateValue_ReturnFalse() throws Exception {
+        futureRule = new FutureRule(VALID_DATE_FORMAT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+
+        Date sample = calendar.getTime();
 
         assertFalse(futureRule.validate(sample));
     }

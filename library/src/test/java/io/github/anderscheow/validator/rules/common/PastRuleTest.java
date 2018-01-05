@@ -35,6 +35,25 @@ public class PastRuleTest {
         pastRule.validate(null);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void validate_EmptyDateFormat_ThrowNullPointerException() throws Exception {
+        pastRule = new PastRule(null);
+
+        Calendar calendar = Calendar.getInstance();
+
+        String sample = VALID_DATE_FORMAT.format(calendar.getTime());
+
+        pastRule.validate(sample);
+    }
+
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringOrDateSample_ThrowClassCastException() throws Exception {
+        pastRule = new PastRule(VALID_DATE_FORMAT);
+
+        // Any value other than String or Date
+        pastRule.validate(123);
+    }
+
     @Test
     public void validate_ValidDateFormatAndValidValue_ReturnTrue() throws Exception {
         pastRule = new PastRule(VALID_DATE_FORMAT);
@@ -49,6 +68,19 @@ public class PastRuleTest {
     }
 
     @Test
+    public void validate_ValidDateValue_ReturnTrue() throws Exception {
+        pastRule = new PastRule(VALID_DATE_FORMAT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+
+        Date sample = calendar.getTime();
+
+        assertTrue(pastRule.validate(sample));
+    }
+
+    @Test
     public void validate_ValidDateFormatAndInvalidValue_ReturnFalse() throws Exception {
         pastRule = new PastRule(VALID_DATE_FORMAT);
 
@@ -57,6 +89,19 @@ public class PastRuleTest {
         calendar.add(Calendar.DAY_OF_YEAR, 1);
 
         String sample = VALID_DATE_FORMAT.format(calendar.getTime());
+
+        assertFalse(pastRule.validate(sample));
+    }
+
+    @Test
+    public void validate_InvalidDateValue_ReturnFalse() throws Exception {
+        pastRule = new PastRule(VALID_DATE_FORMAT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+
+        Date sample = calendar.getTime();
 
         assertFalse(pastRule.validate(sample));
     }

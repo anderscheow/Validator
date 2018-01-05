@@ -9,54 +9,58 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class LengthRule extends BaseRule {
 
-    private int minValue;
-    private int maxValue;
+    private int minLength;
+    private int maxLength;
 
-    public LengthRule(int minValue, int maxValue) {
-        super(String.format(Locale.getDefault(), "Length must be between %d and %d", minValue, maxValue));
-        this.minValue = minValue;
-        this.maxValue = maxValue;
+    public LengthRule(int minLength, int maxLength) {
+        super(String.format(Locale.getDefault(), "Length must be between %d and %d", minLength, maxLength));
+        this.minLength = minLength;
+        this.maxLength = maxLength;
     }
 
-    public LengthRule(int minValue, int maxValue, @StringRes int errorRes) {
+    public LengthRule(int minLength, int maxLength, @StringRes int errorRes) {
         super(errorRes);
-        this.minValue = minValue;
-        this.maxValue = maxValue;
+        this.minLength = minLength;
+        this.maxLength = maxLength;
     }
 
-    public LengthRule(int minValue, int maxValue, @NonNull String errorMessage) {
+    public LengthRule(int minLength, int maxLength, @NonNull String errorMessage) {
         super(errorMessage);
-        this.minValue = minValue;
-        this.maxValue = maxValue;
+        this.minLength = minLength;
+        this.maxLength = maxLength;
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
 
-        assertMinMax(minValue, maxValue);
+        if (value instanceof String) {
+            assertMinMax(minLength, maxLength);
 
-        int length = value.length();
+            int length = ((String) value).length();
 
-        boolean isMinValid = true;
-        if (minValue != Integer.MIN_VALUE) {
-            isMinValid = length >= minValue;
+            boolean isMinValid = true;
+            if (minLength != Integer.MIN_VALUE) {
+                isMinValid = length >= minLength;
+            }
+
+            boolean isMaxValid = true;
+            if (maxLength != Integer.MAX_VALUE) {
+                isMaxValid = length <= maxLength;
+            }
+
+            return isMinValid && isMaxValid;
         }
 
-        boolean isMaxValid = true;
-        if (maxValue != Integer.MAX_VALUE) {
-            isMaxValid = length <= maxValue;
-        }
-
-        return isMinValid && isMaxValid;
+        throw new ClassCastException("Required String value");
     }
 
     private void assertMinMax(int min, int max) {
         if (min > max) {
-            String message = String.format(Locale.getDefault(), "'minValue' (%d) " +
-                    "should be smaller than 'maxValue' (%d)", min, max);
+            String message = String.format(Locale.getDefault(), "'minLength' (%d) " +
+                    "should be smaller than 'maxLength' (%d)", min, max);
             throw new IllegalStateException(message);
         }
     }

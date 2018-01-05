@@ -25,10 +25,15 @@ public abstract class RegexRule extends BaseRule {
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
-        return value.matches(regex);
+
+        if (value instanceof String) {
+            return ((String) value).matches(regex);
+        }
+
+        throw new ClassCastException("Required String value");
     }
 }

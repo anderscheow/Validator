@@ -25,11 +25,12 @@ public class NotEqualRuleTest {
         notEqualRule = null;
     }
 
-    @Test(expected = NullPointerException.class)
-    public void validate_EmptySample_ThrowNullPointerException() throws Exception {
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
         notEqualRule = new NotEqualRule(KEYWORD);
 
-        notEqualRule.validate(null);
+        // Any value other than String
+        notEqualRule.validate(123);
     }
 
     @Test

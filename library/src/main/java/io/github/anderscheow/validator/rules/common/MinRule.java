@@ -9,28 +9,33 @@ import io.github.anderscheow.validator.rules.BaseRule;
 
 public class MinRule extends BaseRule {
 
-    private int minValue;
+    private int minLength;
 
-    public MinRule(int minValue) {
-        super(String.format(Locale.getDefault(), "Length must exceed at least %d characters", minValue));
-        this.minValue = minValue;
+    public MinRule(int minLength) {
+        super(String.format(Locale.getDefault(), "Length must exceed at least %d characters", minLength));
+        this.minLength = minLength;
     }
 
-    public MinRule(int minValue, @StringRes int errorRes) {
+    public MinRule(int minLength, @StringRes int errorRes) {
         super(errorRes);
-        this.minValue = minValue;
+        this.minLength = minLength;
     }
 
-    public MinRule(int minValue, @NonNull String errorMessage) {
+    public MinRule(int minLength, @NonNull String errorMessage) {
         super(errorMessage);
-        this.minValue = minValue;
+        this.minLength = minLength;
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
-        return value.length() >= minValue;
+
+        if (value instanceof String) {
+            return ((String) value).length() >= minLength;
+        }
+
+        throw new ClassCastException("Required String value");
     }
 }

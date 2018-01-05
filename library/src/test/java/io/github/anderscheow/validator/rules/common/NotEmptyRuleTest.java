@@ -30,6 +30,14 @@ public class NotEmptyRuleTest {
         notEmptyRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        notEmptyRule = new NotEmptyRule();
+
+        // Any value other than String
+        notEmptyRule.validate(123);
+    }
+
     @Test
     public void validate_ValidSample_ReturnTrue() throws Exception {
         notEmptyRule = new NotEmptyRule();

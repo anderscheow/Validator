@@ -20,10 +20,15 @@ public class NotEmptyRule extends BaseRule {
     }
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
-        return !value.isEmpty();
+
+        if (value instanceof String) {
+            return !((String) value).isEmpty();
+        }
+
+        throw new ClassCastException("Required String value");
     }
 }

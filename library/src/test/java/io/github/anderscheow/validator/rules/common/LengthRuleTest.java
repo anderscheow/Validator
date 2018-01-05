@@ -36,6 +36,14 @@ public class LengthRuleTest {
         lengthRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        lengthRule = new LengthRule(MIN_LENGTH, MAX_LENGTH);
+
+        // Any value other than String
+        lengthRule.validate(123);
+    }
+
     @Test
     public void validate_SampleWithinMinMax_ReturnTrue() throws Exception {
         lengthRule = new LengthRule(MIN_LENGTH, MAX_LENGTH);

@@ -32,6 +32,14 @@ public class RegexRuleTest {
         regexRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        regexRule = new RegexRule(REGEX) {};
+
+        // Any value other than String
+        regexRule.validate(123);
+    }
+
     @Test
     public void validate_ValidSample_ReturnTrue() throws Exception {
         regexRule = new RegexRule(REGEX) {};

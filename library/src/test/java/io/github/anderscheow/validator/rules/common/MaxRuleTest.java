@@ -32,6 +32,14 @@ public class MaxRuleTest {
         maxRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        maxRule = new MaxRule(MAX_LENGTH);
+
+        // Any value other than String
+        maxRule.validate(123);
+    }
+
     @Test
     public void validate_SampleEqualMax_ReturnTrue() throws Exception {
         maxRule = new MaxRule(MAX_LENGTH);

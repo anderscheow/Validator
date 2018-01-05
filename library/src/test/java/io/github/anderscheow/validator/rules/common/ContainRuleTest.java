@@ -33,6 +33,14 @@ public class ContainRuleTest {
         containRule.validate(null);
     }
 
+    @Test(expected = ClassCastException.class)
+    public void validate_NotStringSample_ThrowClassCastException() throws Exception {
+        containRule = new ContainRule(KEYWORD);
+
+        // Any value other than String
+        containRule.validate(123);
+    }
+
     @Test
     public void validate_ValidSample_ReturnTrue() throws Exception {
         containRule = new ContainRule(KEYWORD);
