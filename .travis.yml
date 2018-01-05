@@ -5,13 +5,12 @@ android:
   - tools
   - build-tools-27.0.0
   - android-27
-  licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
 script:
 - "./gradlew assembleRelease"
 - "./gradlew build jacocoTestReport"
+
+before_install:
+- yes | sdkmanager "platforms;android-27"
 
 notifications:
   email: true
