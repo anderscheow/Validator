@@ -5,7 +5,7 @@ import android.support.annotation.StringRes;
 
 import io.github.anderscheow.validator.rules.BaseRule;
 
-public abstract class RegexRule extends BaseRule {
+public class RegexRule extends BaseRule {
 
     private String regex;
 

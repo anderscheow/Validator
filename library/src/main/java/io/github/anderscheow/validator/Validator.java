@@ -2,6 +2,7 @@ package io.github.anderscheow.validator;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class Validator {
     }
 
     public void validate(OnValidateListener listener, Validation... validations) {
+        boolean isOverallValid = true;
         boolean isValid = false;
         List<String> values = new ArrayList<>();
 
@@ -66,6 +68,7 @@ public class Validator {
                 isValid = true;
                 values.add(value);
             } else {
+                isOverallValid = false;
                 isValid = false;
 
                 if (mode.equals(Mode.SINGLE)) {
@@ -74,7 +77,7 @@ public class Validator {
             }
         }
 
-        if (isValid) {
+        if (isValid && isOverallValid) {
             listener.onValidateSuccess(values);
         } else {
             listener.onValidateFailed();
@@ -90,15 +93,19 @@ public class Validator {
     // Iterate each type of rules
     private boolean validate(String value, Validation validation) {
         boolean isCurrentValueValid = validateBaseRules(value, validation);
+        Log.e("Validator", isCurrentValueValid + "1");
         if (isCurrentValueValid) {
             isCurrentValueValid = validateAndRules(value, validation);
         }
+        Log.e("Validator", isCurrentValueValid + "2");
         if (isCurrentValueValid) {
             isCurrentValueValid = validateOrRules(value, validation);
         }
+        Log.e("Validator", isCurrentValueValid + "3");
         if (isCurrentValueValid) {
             isCurrentValueValid = validateConditions(value, validation);
         }
+        Log.e("Validator", isCurrentValueValid + "4");
 
         return isCurrentValueValid;
     }
