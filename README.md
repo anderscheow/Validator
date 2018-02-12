@@ -18,13 +18,19 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.1.3'
+  compile 'io.github.anderscheow:validator:1.1.4'
 }
 ```
 
 ## Version
 
-**1.1.3 (Newest)**
+**1.1.4 (Newest)**
+
+* Fixed an issue where validate will success if last validation pass the rules in Mode.CONTINUOUS
+
+* RegexRule now is open class rather than abstract class
+
+**1.1.3**
 
 * Input can be any object, previously restrict to String (Along with proper validation with different object)
 
