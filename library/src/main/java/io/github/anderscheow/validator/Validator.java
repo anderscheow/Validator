@@ -93,19 +93,15 @@ public class Validator {
     // Iterate each type of rules
     private boolean validate(String value, Validation validation) {
         boolean isCurrentValueValid = validateBaseRules(value, validation);
-        Log.e("Validator", isCurrentValueValid + "1");
         if (isCurrentValueValid) {
             isCurrentValueValid = validateAndRules(value, validation);
         }
-        Log.e("Validator", isCurrentValueValid + "2");
         if (isCurrentValueValid) {
             isCurrentValueValid = validateOrRules(value, validation);
         }
-        Log.e("Validator", isCurrentValueValid + "3");
         if (isCurrentValueValid) {
             isCurrentValueValid = validateConditions(value, validation);
         }
-        Log.e("Validator", isCurrentValueValid + "4");
 
         return isCurrentValueValid;
     }
