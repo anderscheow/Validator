@@ -18,13 +18,17 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.1.4'
+  compile 'io.github.anderscheow:validator:1.1.5'
 }
 ```
 
 ## Version
 
-**1.1.4 (Newest)**
+**1.1.5 (Newest)**
+
+* Removed unwanted log
+
+**1.1.4**
 
 * Fixed an issue where validate will success if last validation pass the rules in Mode.CONTINUOUS
 
