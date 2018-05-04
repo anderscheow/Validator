@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
-class MinRule : BaseRule<Any> {
+class MinRule : BaseRule {
 
     private var minLength: Int = 0
 

@@ -6,13 +6,13 @@ import io.github.anderscheow.validator.util.ErrorMessage
 import io.github.anderscheow.validator.util.Validate
 import java.util.*
 
-abstract class Condition : Validate<Any>, ErrorMessage {
+abstract class Condition : Validate, ErrorMessage {
 
     @StringRes
     private var errorRes: Int = -1
     private var errorString: String = "Invalid input"
 
-    val baseRules: MutableList<BaseRule<Any>> = ArrayList()
+    val baseRules: MutableList<BaseRule> = ArrayList()
 
     constructor()
 
@@ -32,7 +32,7 @@ abstract class Condition : Validate<Any>, ErrorMessage {
         return errorString
     }
 
-    fun add(baseRule: BaseRule<Any>): Condition {
+    fun add(baseRule: BaseRule): Condition {
         baseRules.add(baseRule)
         return this
     }

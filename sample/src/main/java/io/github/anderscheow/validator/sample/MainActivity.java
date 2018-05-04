@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 .add(new Or().add(new MinRule(5)).add(new MaxRule(10)));
 
         final Validation passwordValidation = new Validation(passwordInput)
-                .and(new BaseRule<Object>() {
+                .and(new BaseRule() {
                     @Override
                     public boolean validate(Object s) {
                         return !((String) s).isEmpty();
                     }
                 })
-                .and(new BaseRule<Object>() {
+                .and(new BaseRule() {
                     @Override
                     public boolean validate(Object s) {
                         return ((String) s).length() >= 8;

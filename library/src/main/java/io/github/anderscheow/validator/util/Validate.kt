@@ -1,6 +1,6 @@
 package io.github.anderscheow.validator.util
 
-interface Validate<T> {
+interface Validate {
 
-    fun validate(value: T?): Boolean
+    fun validate(value: Any?): Boolean
 }

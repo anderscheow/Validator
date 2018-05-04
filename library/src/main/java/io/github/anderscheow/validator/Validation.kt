@@ -10,9 +10,9 @@ class Validation {
     var textInputLayout: TextInputLayout? = null
     var textInput: Any? = null
 
-    val baseRules: MutableList<BaseRule<Any>> = ArrayList()
-    val andRules: MutableList<BaseRule<Any>> = ArrayList()
-    val orRules: MutableList<BaseRule<Any>> = ArrayList()
+    val baseRules: MutableList<BaseRule> = ArrayList()
+    val andRules: MutableList<BaseRule> = ArrayList()
+    val orRules: MutableList<BaseRule> = ArrayList()
 
     val conditions: MutableList<Condition> = ArrayList()
 
@@ -24,12 +24,12 @@ class Validation {
         this.textInput = textInput
     }
 
-    fun and(baseRule: BaseRule<Any>): Validation {
+    fun and(baseRule: BaseRule): Validation {
         andRules.add(baseRule)
         return this
     }
 
-    fun or(baseRule: BaseRule<Any>): Validation {
+    fun or(baseRule: BaseRule): Validation {
         orRules.add(baseRule)
         return this
     }

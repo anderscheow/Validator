@@ -9,7 +9,7 @@ import java.util.*
 
 class EqualRuleTest {
 
-    private lateinit var equalRule: EqualRule<Any>
+    private lateinit var equalRule: EqualRule
 
     @Before
     @Throws(Exception::class)
