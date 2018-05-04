@@ -18,13 +18,25 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.1.5'
+  compile 'io.github.anderscheow:validator:1.2.0'
 }
 ```
 
 ## Version
 
-**1.1.5 (Newest)**
+**1.2.0 (Newest)**
+
+* **For version lower than 1.2.0, upgrading to latest version may broke your code. Use it at your risk**
+
+* Updated to Kotlin
+
+* BaseRule support for generic parameter
+
+* Validation does support for `Object` parameter instead of just TextInputLayout (Refer to example below)
+
+* Set TextInputLayout.setErrorEnabled(false) on every Validate method called
+
+**1.1.5**
 
 * Removed unwanted log
 
@@ -101,14 +113,15 @@ Usage
 * NotContainRule
 * EqualRule
 * NotEqualRule
+* NotNullRule
 
 ### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
 ```java
-public class CustomRule extends BaseRule {
+public class CustomRule extends BaseRule<String> {
 
     @Override
-    public boolean validate(Object value) {
+    public boolean validate(String value) {
         if (value == null) {
             throw new NullPointerException();
         }
@@ -118,14 +131,14 @@ public class CustomRule extends BaseRule {
     // You can use this to return error message
     @NonNull
     @Override
-    public String errorMessage() {
+    public String getErrorMessage() {
         return "Value doesn't match 'ABC'";
     }
 
     // or use this to return error message as StringRes
 
     @Override
-    public int errorRes() {
+    public int getErrorRes() {
         return R.string.error_not_match;
     }
 }
@@ -141,7 +154,7 @@ final Validation usernameValidation = new Validation(usernameInput)
                 .addRule(new NotEmptyRule() {   
                     // You can also override the default error message
                     @Override
-                    public int errorRes() {
+                    public int getErrorRes() {
                         return R.string.error_not_empty;
                     }
 
@@ -150,7 +163,7 @@ final Validation usernameValidation = new Validation(usernameInput)
 
                     @NonNull
                     @Override
-                    public String errorMessage() {
+                    public String getErrorMessage() {
                         return "Value is empty";
                     }
                 })
@@ -224,6 +237,12 @@ Validator.getInstance(getApplicationContext())
                         usernameValidation, passwordValidation);
 ```
 
+### **New Feature:** Validation does support for `Object (Java)` and `Any (Kotlin)` parameter
+```java
+final Validation usernameWithConditionValidation = new Validation("test@email.com")
+                .add(new And().add(new EmailRule()));
+```
+
 ## Testing
 I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under[Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
 
@@ -231,4 +250,4 @@ I have added unit testing for Rules and Conditions, soon will provide test code 
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ## License
-Validator is released under the[Apache License](https://github.com/anderscheow/Validator/blob/master/LICENSE)
+Validator is released under the[MIT License](https://github.com/anderscheow/Validator/blob/master/LICENSE)

@@ -1,0 +1,33 @@
+package io.github.anderscheow.validator.rules.common
+
+import android.support.annotation.StringRes
+import io.github.anderscheow.validator.rules.BaseRule
+import java.util.*
+
+class MinRule : BaseRule<Any> {
+
+    private var minLength: Int = 0
+
+    constructor(minLength: Int) :
+            super(String.format(Locale.getDefault(), "Length must exceed at least %d characters", minLength)) {
+        this.minLength = minLength
+    }
+
+    constructor(minLength: Int, @StringRes errorRes: Int) :
+            super(errorRes) {
+        this.minLength = minLength
+    }
+
+    constructor(minLength: Int, errorMessage: String) :
+            super(errorMessage) {
+        this.minLength = minLength
+    }
+
+    override fun validate(value: Any?): Boolean {
+        if (value == null) {
+            throw NullPointerException()
+        } else {
+            return value.toString().length >= minLength
+        }
+    }
+}
