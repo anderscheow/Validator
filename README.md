@@ -18,19 +18,23 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.2.0'
+  compile 'io.github.anderscheow:validator:1.2.1'
 }
 ```
 
 ## Version
 
-**1.2.0 (Newest)**
+**1.2.1 (Newest)**
+
+* Removed generic type from BaseRule as there's a limitation
+
+* validate() only accept "Any?" as parameter
+
+**1.2.0**
 
 * **For version lower than 1.2.0, upgrading to latest version may broke your code. Use it at your risk**
 
 * Updated to Kotlin
-
-* BaseRule support for generic parameter
 
 * Validation does support for `Object` parameter instead of just TextInputLayout (Refer to example below)
 
