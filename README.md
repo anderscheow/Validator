@@ -122,10 +122,10 @@ Usage
 ### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
 ```java
-public class CustomRule extends BaseRule<String> {
+public class CustomRule extends BaseRule {
 
     @Override
-    public boolean validate(String value) {
+    public boolean validate(Object value) {
         if (value == null) {
             throw new NullPointerException();
         }
