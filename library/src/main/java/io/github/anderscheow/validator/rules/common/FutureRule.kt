@@ -6,7 +6,7 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.util.*
 
-class FutureRule : BaseRule<Any> {
+class FutureRule : BaseRule {
 
     private var dateFormat: DateFormat
 

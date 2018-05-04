@@ -4,23 +4,23 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
-class NotEqualRule<T> : BaseRule<T> {
+class NotEqualRule : BaseRule {
 
-    private var keyword: T? = null
+    private var keyword: Any
 
-    constructor(keyword: T) : super(String.format(Locale.getDefault(), "Value equal to '%s'", keyword)) {
+    constructor(keyword: Any) : super(String.format(Locale.getDefault(), "Value equal to '%s'", keyword)) {
         this.keyword = keyword
     }
 
-    constructor(keyword: T, @StringRes errorRes: Int) : super(errorRes) {
+    constructor(keyword: Any, @StringRes errorRes: Int) : super(errorRes) {
         this.keyword = keyword
     }
 
-    constructor(keyword: T, errorMessage: String) : super(errorMessage) {
+    constructor(keyword: Any, errorMessage: String) : super(errorMessage) {
         this.keyword = keyword
     }
 
-    override fun validate(value: T?): Boolean {
+    override fun validate(value: Any?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {

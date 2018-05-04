@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
-class ContainRule : BaseRule<Any> {
+class ContainRule : BaseRule {
 
     private var keyword: String
 

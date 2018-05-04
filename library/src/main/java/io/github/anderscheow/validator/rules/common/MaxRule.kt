@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
-class MaxRule : BaseRule<Any> {
+class MaxRule : BaseRule {
 
     private var maxLength: Int = 0
 

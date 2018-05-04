@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 
 import io.github.anderscheow.validator.rules.BaseRule
 
-open class RegexRule : BaseRule<Any> {
+open class RegexRule : BaseRule {
 
     private var regex: String
 

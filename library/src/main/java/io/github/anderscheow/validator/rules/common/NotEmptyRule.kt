@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 
 import io.github.anderscheow.validator.rules.BaseRule
 
-class NotEmptyRule : BaseRule<Any> {
+class NotEmptyRule : BaseRule {
 
     constructor() : super("Value must not be empty")
 

@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
-class NotContainRule : BaseRule<Any> {
+class NotContainRule : BaseRule {
 
     private var keyword: String
 

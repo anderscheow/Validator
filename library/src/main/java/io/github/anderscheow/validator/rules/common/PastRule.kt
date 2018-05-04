@@ -6,7 +6,7 @@ import java.text.DateFormat
 import java.text.ParseException
 import java.util.*
 
-class PastRule : BaseRule<Any> {
+class PastRule : BaseRule {
 
     private var dateFormat: DateFormat
 

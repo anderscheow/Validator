@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.util.ErrorMessage
 import io.github.anderscheow.validator.util.Validate
 
-abstract class BaseRule<T> : Validate<T>, ErrorMessage {
+abstract class BaseRule : Validate, ErrorMessage {
 
     @StringRes
     private var errorRes: Int = -1

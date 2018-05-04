@@ -9,7 +9,7 @@ import java.util.*
 
 class NotEqualRuleTest {
 
-    private lateinit var notEqualRule: NotEqualRule<Any>
+    private lateinit var notEqualRule: NotEqualRule
 
     @Before
     @Throws(Exception::class)

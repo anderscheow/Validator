@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 
 import io.github.anderscheow.validator.rules.BaseRule
 
-class NotNullRule : BaseRule<Any> {
+class NotNullRule : BaseRule {
 
     constructor() : super("Value must not be null")
 
