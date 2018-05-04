@@ -43,26 +43,26 @@ public class MainActivity extends AppCompatActivity {
                 .add(new Or().add(new MinRule(5)).add(new MaxRule(10)));
 
         final Validation passwordValidation = new Validation(passwordInput)
-                .and(new BaseRule() {
+                .and(new BaseRule<Object>() {
                     @Override
                     public boolean validate(Object s) {
                         return !((String) s).isEmpty();
                     }
                 })
-                .and(new BaseRule() {
+                .and(new BaseRule<Object>() {
                     @Override
                     public boolean validate(Object s) {
                         return ((String) s).length() >= 8;
                     }
 
                     @Override
-                    public int errorRes() {
+                    public int getErrorRes() {
                         return R.string.error_password_too_short;
                     }
 
                     @NonNull
                     @Override
-                    public String errorMessage() {
+                    public String getErrorMessage() {
                         return "Invalid input, please try again";
                     }
                 });
@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Validator.with(getApplicationContext())
+                Validator.Companion.with(getApplicationContext())
                         .setMode(Mode.CONTINUOUS)
                         .validate(new Validator.OnValidateListener() {
 
                                       @Override
-                                      public void onValidateSuccess(List<String> values) {
+                                      public void onValidateSuccess(@NonNull List<String> values) {
                                           Log.d("MainActivity", Arrays.toString(values.toArray()));
                                           Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
                                       }

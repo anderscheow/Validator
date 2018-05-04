@@ -1,10 +1,13 @@
 apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
 apply plugin: 'jacoco-android'
+
 apply from: 'maven-push.gradle'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.0'
 
     defaultConfig {
         minSdkVersion 16
@@ -32,9 +35,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api 'com.android.support:appcompat-v7:27.0.2'
-    api "com.android.support:design:27.0.2"
-    testApi 'junit:junit:4.12'
-    androidTestApi 'com.android.support.test:runner:1.0.1'
-    androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.1'
+    api "com.android.support:appcompat-v7:$android_support_version"
+    api "com.android.support:design:$android_support_version"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "com.android.support.test:runner:$runner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_core"
+}
+
+repositories {
+    mavenCentral()
 }
