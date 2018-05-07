@@ -8,7 +8,7 @@ import org.junit.Test
 
 class BaseRuleTest {
 
-    private lateinit var baseRule: BaseRule<String>
+    private lateinit var baseRule: BaseRule
 
     @Before
     @Throws(Exception::class)
@@ -25,8 +25,8 @@ class BaseRuleTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Invalid input"
 
-        baseRule = object : BaseRule<String>(errorMessage) {
-            override fun validate(value: String?): Boolean {
+        baseRule = object : BaseRule(errorMessage) {
+            override fun validate(value: Any?): Boolean {
                 return false
             }
         }
@@ -39,8 +39,8 @@ class BaseRuleTest {
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
-        baseRule = object : BaseRule<String>(errorMessage) {
-            override fun validate(value: String?): Boolean {
+        baseRule = object : BaseRule(errorMessage) {
+            override fun validate(value: Any?): Boolean {
                 return false
             }
         }
@@ -53,8 +53,8 @@ class BaseRuleTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        baseRule = object : BaseRule<String>(errorRes) {
-            override fun validate(value: String?): Boolean {
+        baseRule = object : BaseRule(errorRes) {
+            override fun validate(value: Any?): Boolean {
                 return false
             }
         }
