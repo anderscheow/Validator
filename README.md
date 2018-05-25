@@ -18,13 +18,17 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.2.1'
+  compile 'io.github.anderscheow:validator:1.2.2'
 }
 ```
 
 ## Version
 
-**1.2.1 (Newest)**
+**1.2.2 (Newest)**
+
+* Added Dokka to show Kotlin sources
+
+**1.2.1**
 
 * Removed generic type from BaseRule as there's a limitation
 
@@ -117,7 +121,6 @@ Usage
 * NotContainRule
 * EqualRule
 * NotEqualRule
-* NotNullRule
 
 ### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
 
