@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'jacoco-android'
 
+apply plugin: 'org.jetbrains.dokka-android'
+
 apply from: 'maven-push.gradle'
 
 android {
@@ -31,6 +33,11 @@ android {
         html.enabled true
         xml.enabled true
     }
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
 }
 
 dependencies {
