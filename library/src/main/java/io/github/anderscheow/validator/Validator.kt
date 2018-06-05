@@ -9,6 +9,8 @@ class Validator private constructor(private val context: Context) {
 
     private var mode = Mode.CONTINUOUS
 
+    private var listener: OnValidateListener? = null
+
     interface OnValidateListener {
         @Throws(IndexOutOfBoundsException::class)
         fun onValidateSuccess(values: List<String>)
@@ -21,7 +23,12 @@ class Validator private constructor(private val context: Context) {
         return this
     }
 
-    fun validate(listener: OnValidateListener, vararg validations: Validation) {
+    fun setListener(listener: OnValidateListener): Validator {
+        this.listener = listener
+        return this
+    }
+
+    fun validate(vararg validations: Validation) {
         var isOverallValid = true
         var isValid = false
         val values = ArrayList<String>()
@@ -49,9 +56,9 @@ class Validator private constructor(private val context: Context) {
         }
 
         if (isValid && isOverallValid) {
-            listener.onValidateSuccess(values)
+            listener?.onValidateSuccess(values)
         } else {
-            listener.onValidateFailed()
+            listener?.onValidateFailed()
         }
     }
 
@@ -66,12 +73,6 @@ class Validator private constructor(private val context: Context) {
     private fun validate(value: String, validation: Validation): Boolean {
         var isCurrentValueValid = validateBaseRules(value, validation)
         if (isCurrentValueValid) {
-            isCurrentValueValid = validateAndRules(value, validation)
-        }
-        if (isCurrentValueValid) {
-            isCurrentValueValid = validateOrRules(value, validation)
-        }
-        if (isCurrentValueValid) {
             isCurrentValueValid = validateConditions(value, validation)
         }
 
@@ -84,33 +85,6 @@ class Validator private constructor(private val context: Context) {
                 showErrorMessage(validation, baseRule)
 
                 return false
-            }
-        }
-
-        return true
-    }
-
-    private fun validateAndRules(value: String, validation: Validation): Boolean {
-        for (baseRule in validation.andRules) {
-            if (!baseRule.validate(value)) {
-                showErrorMessage(validation, baseRule)
-
-                return false
-            }
-        }
-
-        return true
-    }
-
-    private fun validateOrRules(value: String, validation: Validation): Boolean {
-        if (validation.orRules.size > 0) {
-            val baseRule = validation.orRules[0]
-
-            return if (baseRule.validate(value)) {
-                true
-            } else {
-                showErrorMessage(validation, baseRule)
-                false
             }
         }
 
@@ -144,11 +118,6 @@ class Validator private constructor(private val context: Context) {
     }
 
     companion object {
-
-        @Deprecated("Use {@link #with(Context)} )} instead.")
-        fun getInstance(context: Context): Validator {
-            return Validator(context)
-        }
 
         fun with(context: Context): Validator {
             return Validator(context)

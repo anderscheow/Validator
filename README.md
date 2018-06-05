@@ -18,13 +18,185 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.2.2'
+  compile 'io.github.anderscheow:validator:1.3.0'
 }
 ```
 
-## Version
+Usage
+-----
+### Available rules
 
-**1.2.2 (Newest)**
+* LengthRule
+* MaxRule
+* MinRule
+* NotEmptyRule
+* NotNullRule
+* RegexRule
+* AlphabetRule
+* AlphanumericRule
+* DigitsRule
+* EmailRule
+* PasswordRule
+* FutureRule
+* PastRule
+* CreditCardRule
+* ContainRule
+* NotContainRule
+* EqualRule
+* NotEqualRule
+
+### Additional predefined rules to use in Validation or Condition
+
+* contain
+* notContain
+* notEqualTo
+* withinRange
+* minimumLength
+* maximumLength
+* email
+* alphanumericOnly
+* alphabetOnly
+* digitsOnly
+* symbolsOnly
+* allUppercase
+* allLowercase
+* startsWith
+* endsWith
+* withCreditCard
+* withPassword
+* matchAtLeastOneRule (Only for Validation)
+* matchAllRules (Only for Validation)
+
+#### You can create your own Predefined Rules
+
+```kotlin
+// For Validation
+fun Validation.customPredefinedRule(keyword: String, ignoreCase: Boolean = false): Validation {
+    baseRules.add(ContainRule(keyword, ignoreCase))
+    return this
+}
+ 
+// For Condition
+fun Condition.customPredefinedRule(keyword: String, ignoreCase: Boolean = false): Condition {
+    baseRules.add(ContainRule(keyword, ignoreCase))
+    return this
+}
+```
+
+### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
+
+```kotlin
+class CustomRule : BaseRule {
+ 
+    override fun validate(value: Any?): Boolean {
+        if (value == null) {
+            throw NullPointerException()
+        }
+        return value == "ABC"
+    }
+ 
+    // You can use this to return error message
+    override fun getErrorMessage(): String {
+        return "Value doesn't match 'ABC'"
+    }
+ 
+    // or use this to return error message as StringRes
+    override fun getErrorRes(): Int {
+        return R.string.error_not_match
+    }
+}
+```
+
+### Add it to your Activity class
+
+```kotlin
+// Username
+// Input: hello@test.com
+val usernameInput = findViewById(R.id.layout_username)
+val usernameValidation = Validation(usernameInput)
+                .addRule(
+                    // You can also override the default error message
+                    NotEmptyRule(R.string.error_not_empty)
+                     
+                    // Use either errorRes() or errorMessage()
+                    // Note: errorRes() has higher priority
+                    NotEmptyRule("Value is empty")
+                )
+                .addRule(CustomRule())
+ 
+// Password
+// Input: 12345abc
+val passwordInput = findViewById(R.id.layout_password)
+val passwordValidation = Validation(passwordInput)
+                .addRule(NotEmptyRule())
+                .withPassword(PasswordRegex.ALPHA_NUMERIC)
+                .minimumLength(8)
+```
+
+### Condition
+
+```kotlin
+// And Condition
+val usernameWithConditionValidation = Validation(usernameInput)
+                .add(And().add(EmailRule()))
+ 
+// Or Condition
+val usernameWithConditionValidation = Validation(usernameInput)
+                .add(Or().add(MinRule(5)).add(MaxRule(10)))
+ 
+// Both by using Predefined Rules
+val usernameWithConditionValidation = new Validation(usernameInput)
+                .matchAllRules(listOf(EmailRule()))
+                .matchAtLeastOneRule(listOf(MinRule(5), MaxRule(10)))
+```
+
+### Mode
+
+```kotlin
+Validator.with(applicationContext)
+            /* Set your mode here, by default is CONTINUOUS */
+            .setMode(Mode.CONTINUOUS));
+```
+
+| Single                                                          | Continuous                                                      |
+| ---                                                             | ---                                                             |
+| ![](https://media.giphy.com/media/3ohs7YJIZfbrC7txyU/giphy.gif) | ![](https://media.giphy.com/media/3ohs84PogwMOkUg0Jq/giphy.gif) |
+
+
+### Validate the input field
+
+```kotlin
+// Order of the values on the success callback follow the sequence of your Validation object
+Validator.with(applicationContext)
+            .setMode(Mode.CONTINUOUS)
+            .setListener(object : Validator.OnValidateListener {
+                    override fun onValidateSuccess(values: List<String>) {
+                        Log.d("MainActivity", Arrays.toString(values.toTypedArray()))
+                        Toast.makeText(applicationContext, "Validate successfully", Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onValidateFailed() {
+                        Toast.makeText(applicationContext, "Validate failed", Toast.LENGTH_LONG).show()
+                    }
+                })
+            .validate(usernameValidation, passwordValidation)
+```
+
+### **New Feature:** Validation does support for `Object (Java)` and `Any (Kotlin)` parameter
+```java
+final Validation usernameWithConditionValidation = new Validation("test@email.com")
+                .add(new And().add(new EmailRule()));
+```
+
+## Changelog
+
+**1.3.0**
+
+* Removed Validation.and() and Validation.or() by encouraging user to use Condition
+* Removed listener parameter from Validator.validate() and required to assigned manually using Validator.setListener()
+* Added some predefined rules in Validation and Condition to simplify procedure on adding rules
+
+**1.2.2**
 
 * Added Dokka to show Kotlin sources
 
@@ -100,161 +272,11 @@ dependencies {
 
 * Introduce Validator library
 
-Usage
------
-### Available Rules
-
-* LengthRule
-* MaxRule
-* MinRule
-* NotEmptyRule
-* NotNullRule
-* RegexRule
-* AlphanumericRule
-* DigitsRule
-* EmailRule
-* PasswordRule
-* FutureRule
-* PastRule
-* CreditCardRule
-* ContainRule
-* NotContainRule
-* EqualRule
-* NotEqualRule
-
-### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
-
-```java
-public class CustomRule extends BaseRule {
-
-    @Override
-    public boolean validate(Object value) {
-        if (value == null) {
-            throw new NullPointerException();
-        }
-        return value.equals("ABC");
-    }
-
-    // You can use this to return error message
-    @NonNull
-    @Override
-    public String getErrorMessage() {
-        return "Value doesn't match 'ABC'";
-    }
-
-    // or use this to return error message as StringRes
-
-    @Override
-    public int getErrorRes() {
-        return R.string.error_not_match;
-    }
-}
-```
-
-### Add it to your Activity class
-
-```java
-// Username
-// Input: hello@test.com
-TextInputLayout usernameInput = findViewById(R.id.layout_username); 
-final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new NotEmptyRule() {   
-                    // You can also override the default error message
-                    @Override
-                    public int getErrorRes() {
-                        return R.string.error_not_empty;
-                    }
-
-                    // Use either errorRes() or errorMessage()
-                    // Note: errorRes() has higher priority
-
-                    @NonNull
-                    @Override
-                    public String getErrorMessage() {
-                        return "Value is empty";
-                    }
-                })
-                .addRule(new CustomRule());
-
-// You can also use the constructor to override errorRes or errorMessage
-final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new NotEmptyRule(R.string.error_not_empty));
-                
-final Validation usernameValidation = new Validation(usernameInput)
-                .addRule(new NotEmptyRule("Value is empty"));
-
-// Password
-// Input: 12345abc
-TextInputLayout passwordInput = findViewById(R.id.layout_password); 
-final Validation passwordValidation = new Validation(passwordInput)
-                .addRule(new NotEmptyRule())
-                .addRule(new PasswordRule(PasswordRegex.ALPHA_NUMERIC))
-                .addRule(new MinRule(8));
-```
-
-### Condition
-
-```java
-// And Condition
-final Validation usernameWithConditionValidation = new Validation(usernameInput)
-                .add(new And().add(new EmailRule()));
-
-// Or Condition
-final Validation usernameWithConditionValidation = new Validation(usernameInput)
-                .add(new Or().add(new MinRule(5)).add(new MaxRule(10)));
-
-// Both
-final Validation usernameWithConditionValidation = new Validation(usernameInput)
-                .add(new And().add(new EmailRule()))
-                .add(new Or().add(new MinRule(5)).add(new MaxRule(10)));
-```
-
-### Mode
-
-```java
-Validator.getInstance(getApplicationContext())
-                        /* Set your mode here, by default is CONTINUOUS */
-                        .setMode(Mode.CONTINUOUS));
-```
-
-| Single                                                          | Continuous                                                      |
-| ---                                                             | ---                                                             |
-| ![](https://media.giphy.com/media/3ohs7YJIZfbrC7txyU/giphy.gif) | ![](https://media.giphy.com/media/3ohs84PogwMOkUg0Jq/giphy.gif) |
-
-
-### Validate the input field
-
-```java
-// Order of the values on the success callback follow the sequence of your Validation object
-Validator.getInstance(getApplicationContext())
-                        .setMode(Mode.CONTINUOUS))
-                        .validate(new Validator.OnValidateListener() {
-
-                                      @Override
-                                      public void onValidateSuccess(List<String> values) {
-                                          Log.d("MainActivity", Arrays.toString(values.toArray())); // Output: [hello@test.com, 12345abc]
-                                          Toast.makeText(getApplicationContext(), "Validate successfully", Toast.LENGTH_LONG).show();
-                                      }
-
-                                      @Override
-                                      public void onValidateFailed() {
-
-                                      }
-                        },
-                        usernameValidation, passwordValidation);
-```
-
-### **New Feature:** Validation does support for `Object (Java)` and `Any (Kotlin)` parameter
-```java
-final Validation usernameWithConditionValidation = new Validation("test@email.com")
-                .add(new And().add(new EmailRule()));
-```
-
 ## Testing
-I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under[Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
+I have added unit testing for Rules and Conditions, soon will provide test code on Validation and Validator, please check it out under [Test code](https://github.com/anderscheow/Validator/tree/master/library/src/test/java/io/github/anderscheow/validator)
 
 ## Contributions
 Any contribution is more than welcome! You can contribute through pull requests and issues on GitHub.
 
 ## License
-Validator is released under the[MIT License](https://github.com/anderscheow/Validator/blob/master/LICENSE)
+Validator is released under the [MIT License](https://github.com/anderscheow/Validator/blob/master/LICENSE)

@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED")
+
 package io.github.anderscheow.validator
 
 import android.support.design.widget.TextInputLayout
@@ -11,9 +13,6 @@ class Validation {
     var textInput: Any? = null
 
     val baseRules: MutableList<BaseRule> = ArrayList()
-    val andRules: MutableList<BaseRule> = ArrayList()
-    val orRules: MutableList<BaseRule> = ArrayList()
-
     val conditions: MutableList<Condition> = ArrayList()
 
     constructor(textInputLayout: TextInputLayout) {
@@ -24,13 +23,8 @@ class Validation {
         this.textInput = textInput
     }
 
-    fun and(baseRule: BaseRule): Validation {
-        andRules.add(baseRule)
-        return this
-    }
-
-    fun or(baseRule: BaseRule): Validation {
-        orRules.add(baseRule)
+    fun add(baseRule: BaseRule): Validation {
+        baseRules.add(baseRule)
         return this
     }
 
