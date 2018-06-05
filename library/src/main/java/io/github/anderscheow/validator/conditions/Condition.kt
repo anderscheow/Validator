@@ -36,4 +36,9 @@ abstract class Condition : Validate, ErrorMessage {
         baseRules.add(baseRule)
         return this
     }
+
+    fun addAll(baseRules: List<BaseRule>): Condition {
+        this.baseRules.addAll(baseRules)
+        return this
+    }
 }
