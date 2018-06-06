@@ -18,7 +18,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.3.0'
+  compile 'io.github.anderscheow:validator:1.3.1'
 }
 ```
 
@@ -189,6 +189,11 @@ final Validation usernameWithConditionValidation = new Validation("test@email.co
 ```
 
 ## Changelog
+
+**1.3.1**
+
+* Addressed some algorithm issues
+* Added more test cases
 
 **1.3.0**
 
