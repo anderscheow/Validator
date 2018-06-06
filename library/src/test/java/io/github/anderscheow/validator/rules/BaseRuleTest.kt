@@ -2,7 +2,7 @@ package io.github.anderscheow.validator.rules
 
 import android.support.annotation.StringRes
 import org.junit.After
-import org.junit.Assert.assertEquals
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
@@ -25,13 +25,16 @@ class BaseRuleTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Invalid input"
 
-        baseRule = object : BaseRule(errorMessage) {
+        baseRule = object : BaseRule() {
             override fun validate(value: Any?): Boolean {
                 return false
             }
         }
 
         assertEquals(errorMessage, baseRule.getErrorMessage())
+        assertTrue(baseRule.isErrorAvailable)
+        assertTrue(baseRule.isErrorMessageAvailable)
+        assertFalse(baseRule.isErrorResAvailable)
     }
 
     @Test
@@ -46,6 +49,9 @@ class BaseRuleTest {
         }
 
         assertEquals(errorMessage, baseRule.getErrorMessage())
+        assertTrue(baseRule.isErrorAvailable)
+        assertTrue(baseRule.isErrorMessageAvailable)
+        assertFalse(baseRule.isErrorResAvailable)
     }
 
     @Test
@@ -60,5 +66,8 @@ class BaseRuleTest {
         }
 
         assertEquals(errorRes, baseRule.getErrorRes())
+        assertTrue(baseRule.isErrorAvailable)
+        assertTrue(baseRule.isErrorMessageAvailable)
+        assertTrue(baseRule.isErrorResAvailable)
     }
 }

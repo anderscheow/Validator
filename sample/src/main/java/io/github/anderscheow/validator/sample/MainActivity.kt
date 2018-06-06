@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val usernameValidation = Validation(usernameInput)
                 .email()
-                .matchAtLeastOneRule(listOf(MinRule(5), MaxRule(10)))
+                .matchAtLeastOneRule(arrayOf(MinRule(5), MaxRule(10)))
 
         val usernameWithConditionValidation = Validation(usernameInput)
                 .add(And().add(EmailRule()))

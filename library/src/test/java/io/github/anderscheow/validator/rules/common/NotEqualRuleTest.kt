@@ -21,6 +21,14 @@ class NotEqualRuleTest {
     fun tearDown() {
     }
 
+    @Test(expected = NullPointerException::class)
+    @Throws(Exception::class)
+    fun validate_EmptySample_ThrowNullPointerException() {
+        notEqualRule = NotEqualRule(INT_KEYWORD)
+
+        notEqualRule.validate(null)
+    }
+
     @Test
     @Throws(Exception::class)
     fun validate_IntSample_ReturnTrue() {

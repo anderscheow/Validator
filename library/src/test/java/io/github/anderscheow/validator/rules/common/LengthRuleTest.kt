@@ -99,6 +99,26 @@ class LengthRuleTest {
         assertFalse(lengthRule.validate(sample))
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun validate_MinLengthEqualToIntegerMinValue_ReturnFalse() {
+        lengthRule = LengthRule(Int.MIN_VALUE, MAX_LENGTH)
+
+        val sample = "testing"
+
+        assertTrue(lengthRule.validate(sample))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun validate_MinLengthEqualToIntegerMaxValue_ReturnFalse() {
+        lengthRule = LengthRule(MIN_LENGTH, Int.MAX_VALUE)
+
+        val sample = "testing"
+
+        assertTrue(lengthRule.validate(sample))
+    }
+
     @Test(expected = IllegalStateException::class)
     @Throws(Exception::class)
     fun validate_SampleSwitchMinMax_ThrowIllegalStateException() {
