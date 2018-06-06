@@ -4,7 +4,7 @@ import android.support.annotation.StringRes
 import io.github.anderscheow.validator.rules.common.MaxRule
 import io.github.anderscheow.validator.rules.common.MinRule
 import org.junit.After
-import org.junit.Assert.assertEquals
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
@@ -49,6 +49,18 @@ class ConditionTest {
 
     @Test
     @Throws(Exception::class)
+    fun addAll_TwoBaseRule() {
+        condition = object : Condition() {
+            override fun validate(value: Any?): Boolean {
+                return false
+            }
+        }.addAll(listOf(MinRule(5), MaxRule(10)))
+
+        assertEquals(2, condition.baseRules.size.toLong())
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Invalid input"
 
@@ -59,6 +71,9 @@ class ConditionTest {
         }
 
         assertEquals(errorMessage, condition.getErrorMessage())
+        assertTrue(condition.isErrorAvailable)
+        assertTrue(condition.isErrorMessageAvailable)
+        assertFalse(condition.isErrorResAvailable)
     }
 
     @Test
@@ -73,6 +88,9 @@ class ConditionTest {
         }
 
         assertEquals(errorMessage, condition.getErrorMessage())
+        assertTrue(condition.isErrorAvailable)
+        assertTrue(condition.isErrorMessageAvailable)
+        assertFalse(condition.isErrorResAvailable)
     }
 
     @Test
@@ -87,5 +105,8 @@ class ConditionTest {
         }
 
         assertEquals(errorRes, condition.getErrorRes())
+        assertTrue(condition.isErrorAvailable)
+        assertTrue(condition.isErrorMessageAvailable)
+        assertTrue(condition.isErrorResAvailable)
     }
 }

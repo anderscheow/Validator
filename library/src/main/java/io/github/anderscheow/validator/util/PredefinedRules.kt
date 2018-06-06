@@ -74,7 +74,7 @@ fun Validation.symbolsOnly(): Validation {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return !value.toString().matches("^[a-zA-Z0-9]*\$".toRegex())
+                return !value.toString().matches("^[a-zA-Z0-9\\s]*\$".toRegex())
             }
         }
     })
@@ -87,7 +87,7 @@ fun Validation.allUppercase(): Validation {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toUpperCase() != value.toString()
+                return value.toString().toUpperCase() == value.toString()
             }
         }
     })
@@ -100,7 +100,7 @@ fun Validation.allLowercase(): Validation {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toLowerCase() != value.toString()
+                return value.toString().toLowerCase() == value.toString()
             }
         }
     })
@@ -143,13 +143,13 @@ fun Validation.withPassword(regex: PasswordRule.PasswordRegex): Validation {
     return this
 }
 
-fun Validation.matchAtLeastOneRule(baseRules: List<BaseRule>): Validation {
-    conditions.add(Or().addAll(baseRules))
+fun Validation.matchAtLeastOneRule(baseRules: Array<BaseRule>): Validation {
+    conditions.add(Or().addAll(baseRules.toList()))
     return this
 }
 
-fun Validation.matchAllRules(baseRules: List<BaseRule>): Validation {
-    conditions.add(And().addAll(baseRules))
+fun Validation.matchAllRules(baseRules: Array<BaseRule>): Validation {
+    conditions.add(And().addAll(baseRules.toList()))
     return this
 }
 
@@ -217,7 +217,7 @@ fun Condition.symbolsOnly(): Condition {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return !value.toString().matches("^[a-zA-Z0-9]*\$".toRegex())
+                return !value.toString().matches("^[a-zA-Z0-9\\s]*\$".toRegex())
             }
         }
     })
@@ -230,7 +230,7 @@ fun Condition.allUppercase(): Condition {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toUpperCase() != value.toString()
+                return value.toString().toUpperCase() == value.toString()
             }
         }
     })
@@ -243,7 +243,7 @@ fun Condition.allLowercase(): Condition {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toLowerCase() != value.toString()
+                return value.toString().toLowerCase() == value.toString()
             }
         }
     })
