@@ -183,9 +183,9 @@ Validator.with(applicationContext)
 ```
 
 ### **New Feature:** Validation does support for `Object (Java)` and `Any (Kotlin)` parameter
-```java
-final Validation usernameWithConditionValidation = new Validation("test@email.com")
-                .add(new And().add(new EmailRule()));
+```kotlin
+val usernameWithConditionValidation = Validation("test@email.com")
+                .add(And().add(EmailRule()))
 ```
 
 ## Changelog
