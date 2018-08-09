@@ -31,10 +31,6 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "com.android.support.test:runner:$runner"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_core"
-
     implementation project(path: ':library')
 }
 

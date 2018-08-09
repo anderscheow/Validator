@@ -1,15 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.41'
+    ext.kotlin_version = '1.2.60'
 
     ext {
-        android_support_constraint_layout_version = '1.1.0'
+        android_support_constraint_layout_version = '1.1.2'
         android_support_version = '27.1.1'
 
         junit = '4.12'
-        runner = '1.0.2'
-        espresso_core = '3.0.2'
+        mockito = '2.7.22'
     }
 
     repositories {
@@ -17,7 +16,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
