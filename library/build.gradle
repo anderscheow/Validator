@@ -1,23 +1,15 @@
-apply plugin: 'com.android.library'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'jacoco'
-
-apply plugin: 'org.jetbrains.dokka-android'
+rootProject.libraryModulePlugins.each {
+    apply plugin: it
+}
 
 apply from: 'maven-push.gradle'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
-
+    def ext = rootProject.extensions.ext
+    compileSdkVersion ext.android.compileSdkVersion
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion ext.android.minSdkVersion
+        targetSdkVersion ext.android.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -78,15 +70,9 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    api "com.android.support:appcompat-v7:$android_support_version"
-    api "com.android.support:design:$android_support_version"
-
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    testImplementation "junit:junit:$junit"
-    testImplementation "org.mockito:mockito-core:$mockito"
+    rootProject.libraryModuleDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
 }
 
 repositories {
