@@ -1,6 +1,6 @@
 package io.github.anderscheow.validator.conditions.common
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import io.github.anderscheow.validator.conditions.Condition
 import io.github.anderscheow.validator.rules.common.MaxRule
 import io.github.anderscheow.validator.rules.common.MinRule

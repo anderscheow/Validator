@@ -1,6 +1,6 @@
 package io.github.anderscheow.validator.util
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 interface ErrorMessage {
 

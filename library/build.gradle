@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdkVersion ext.android.minSdkVersion
         targetSdkVersion ext.android.targetSdkVersion
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
