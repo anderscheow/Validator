@@ -18,7 +18,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  implementation 'io.github.anderscheow:validator:2.0.0'
+  implementation 'io.github.anderscheow:validator:2.0.1'
 }
 ```
 
@@ -190,7 +190,7 @@ val usernameWithConditionValidation = Validation("test@email.com")
 
 ## Changelog
 
-**2.0.0**
+**2.0.1**
 
 * Updated to support Android SDK 28
 * Converted Android Support to AndroidX
