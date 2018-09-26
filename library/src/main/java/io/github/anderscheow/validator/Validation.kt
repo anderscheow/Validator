@@ -2,9 +2,11 @@
 
 package io.github.anderscheow.validator
 
-import android.support.design.widget.TextInputLayout
+import android.content.Context
+import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.conditions.Condition
 import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.util.ErrorMessage
 import java.util.*
 
 class Validation {
@@ -31,5 +33,19 @@ class Validation {
     fun add(condition: Condition): Validation {
         conditions.add(condition)
         return this
+    }
+
+    fun setError(context: Context, errorMessage: ErrorMessage) {
+        if (errorMessage.isErrorAvailable) {
+            textInputLayout?.isErrorEnabled = true
+
+            if (errorMessage.isErrorResAvailable) {
+                textInputLayout?.error = context.getString(errorMessage.getErrorRes())
+            } else if (errorMessage.isErrorMessageAvailable) {
+                textInputLayout?.error = errorMessage.getErrorMessage()
+            }
+        } else {
+            throw IllegalStateException("Please either use errorRes or errorMessage as your error output")
+        }
     }
 }

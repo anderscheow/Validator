@@ -3,13 +3,14 @@ package io.github.anderscheow.validator
 import android.content.Context
 import io.github.anderscheow.validator.constant.Mode
 import io.github.anderscheow.validator.util.ErrorMessage
-import java.util.*
 
 class Validator private constructor(private val context: Context) {
 
     private var mode = Mode.CONTINUOUS
 
     private var listener: OnValidateListener? = null
+
+    private var validations = ArrayList<Validation>()
 
     interface OnValidateListener {
         @Throws(IndexOutOfBoundsException::class)
@@ -33,7 +34,14 @@ class Validator private constructor(private val context: Context) {
         var isValid = false
         val values = ArrayList<String>()
 
-        clearAllErrors(*validations)
+        // Clear all validations
+        this.validations.clear()
+
+        // Add all validations
+        this.validations.addAll(validations)
+
+        // Clear all errors before proceed
+        clear()
 
         // Iterate each validation
         for (validation in validations) {
@@ -55,6 +63,7 @@ class Validator private constructor(private val context: Context) {
             }
         }
 
+        // Verify result
         if (isValid && isOverallValid) {
             listener?.onValidateSuccess(values)
         } else {
@@ -62,7 +71,11 @@ class Validator private constructor(private val context: Context) {
         }
     }
 
-    private fun clearAllErrors(vararg validations: Validation) {
+    fun clear() {
+        clearAllErrors()
+    }
+
+    private fun clearAllErrors() {
         for (validation in validations) {
             validation.textInputLayout?.error = null
             validation.textInputLayout?.isErrorEnabled = false
@@ -104,17 +117,7 @@ class Validator private constructor(private val context: Context) {
     }
 
     private fun showErrorMessage(validation: Validation, errorMessage: ErrorMessage) {
-        if (errorMessage.isErrorAvailable) {
-            validation.textInputLayout?.isErrorEnabled = true
-
-            if (errorMessage.isErrorResAvailable) {
-                validation.textInputLayout?.error = context.getString(errorMessage.getErrorRes())
-            } else if (errorMessage.isErrorMessageAvailable) {
-                validation.textInputLayout?.error = errorMessage.getErrorMessage()
-            }
-        } else {
-            throw IllegalStateException("Please either use errorRes or errorMessage as your error output")
-        }
+        validation.setError(context, errorMessage)
     }
 
     companion object {

@@ -1,0 +1,100 @@
+ext {
+    android = [
+            compileSdkVersion   : 28,
+            minSdkVersion       : 16,
+            targetSdkVersion    : 28,
+    ]
+
+    /* build plugins versions */
+    build = [
+            gradle      : '3.2.0',
+            kotlin      : "1.2.71",
+            dcendents   : "2.1",
+            dokka       : "0.9.17",
+            jacoco      : "0.1.2",
+    ]
+
+    buildPlugins = [
+            gradle      : "com.android.tools.build:gradle:$build.gradle",
+            kotlin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$build.kotlin",
+            dcendents   : "com.github.dcendents:android-maven-gradle-plugin:$build.dcendents",
+            dokka       : "org.jetbrains.dokka:dokka-android-gradle-plugin:$build.dokka",
+            jacoco      : "com.dicedmelon.gradle:jacoco-android:$build.jacoco",
+    ]
+
+    /* dependencies versions */
+    def androidx_version = '1.0.0'
+    def androidx_constraint_layout_version = '1.1.0'
+    def androidx_espresso_core_version = '3.1.0'
+    def androidx_runner_version = '1.1.0'
+    def junit_version = '4.12'
+    def mockito_version = '2.7.22'
+
+    def libs = [
+            /* android support */
+            supportAppCompat            :   "androidx.appcompat:appcompat:$androidx_version",
+            supportConstraintLayout     :   "androidx.constraintlayout:constraintlayout:$androidx_constraint_layout_version",
+            supportDesign               :   "com.google.android.material:material:$androidx_version",
+
+            /* kotlin */
+            kotlinStdlib                :   "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$build.kotlin",
+    ]
+
+    def testLibs = [
+            jnuit                       :   "junit:junit:$junit_version",
+            androidSupportEspressoCore  :   "com.android.support.test.espresso:espresso-core:$androidx_espresso_core_version",
+            androidSupportRunner        :   "com.android.support.test:runner:$androidx_runner_version",
+            mockito                     :   "org.mockito:mockito-core:$mockito_version",
+    ]
+
+    def modules = [
+            library     :   ":library"
+    ]
+
+    libraryModuleDependencies = [
+            /* android support */
+            [configuration: "api", dependency: libs.supportAppCompat],
+            [configuration: "api", dependency: libs.supportDesign],
+
+            /* kotlin */
+            [configuration: "api", dependency: libs.kotlinStdlib],
+
+            /* test */
+            [configuration: "testImplementation", dependency: testLibs.jnuit],
+            [configuration: "testImplementation", dependency: testLibs.mockito],
+    ]
+
+    sampleModuleDependencies = [
+            /* android support */
+            [configuration: "implementation", dependency: libs.supportAppCompat],
+            [configuration: "implementation", dependency: libs.supportConstraintLayout],
+
+            /* kotlin */
+            [configuration: "implementation", dependency: libs.kotlinStdlib],
+
+            /* modules */
+            [configuration: "implementation", dependency: project(modules.library)],
+    ]
+
+    def plugins = [
+            android_library             : 'com.android.library',
+            android_application         : 'com.android.application',
+            dokka                       : 'org.jetbrains.dokka-android',
+            kotlin_android              : 'kotlin-android',
+            kotlin_android_extensions   : 'kotlin-android-extensions',
+            kotlin_kapt                 : 'kotlin-kapt',
+            jacoco                      : 'jacoco',
+    ]
+
+    libraryModulePlugins = [
+            plugins.android_library,
+            plugins.dokka,
+            plugins.kotlin_android,
+            plugins.jacoco,
+    ]
+
+    sampleModulePlugins = [
+            plugins.android_application,
+            plugins.kotlin_android,
+    ]
+}

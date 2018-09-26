@@ -18,7 +18,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  compile 'io.github.anderscheow:validator:1.3.1'
+  implementation 'io.github.anderscheow:validator:2.0.0'
 }
 ```
 
@@ -183,12 +183,17 @@ Validator.with(applicationContext)
 ```
 
 ### **New Feature:** Validation does support for `Object (Java)` and `Any (Kotlin)` parameter
-```java
-final Validation usernameWithConditionValidation = new Validation("test@email.com")
-                .add(new And().add(new EmailRule()));
+```kotlin
+val usernameWithConditionValidation = Validation("test@email.com")
+                .add(And().add(EmailRule()))
 ```
 
 ## Changelog
+
+**2.0.0**
+
+* Updated to support Android SDK 28
+* Converted Android Support to AndroidX
 
 **1.3.1**
 
