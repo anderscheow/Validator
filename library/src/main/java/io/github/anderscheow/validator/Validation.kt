@@ -3,7 +3,7 @@
 package io.github.anderscheow.validator
 
 import android.content.Context
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.conditions.Condition
 import io.github.anderscheow.validator.rules.BaseRule
 import io.github.anderscheow.validator.util.ErrorMessage

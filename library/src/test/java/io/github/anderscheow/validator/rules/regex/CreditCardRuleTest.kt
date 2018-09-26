@@ -1,6 +1,6 @@
 package io.github.anderscheow.validator.rules.regex
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

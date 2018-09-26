@@ -7,10 +7,11 @@ apply from: 'maven-push.gradle'
 android {
     def ext = rootProject.extensions.ext
     compileSdkVersion ext.android.compileSdkVersion
+    buildToolsVersion ext.android.buildToolsVersion
     defaultConfig {
         minSdkVersion ext.android.minSdkVersion
         targetSdkVersion ext.android.targetSdkVersion
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
