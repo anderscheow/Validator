@@ -36,7 +36,7 @@ ext {
             supportDesign               :   "com.google.android.material:material:$androidx_material_version",
 
             /* kotlin */
-            kotlinStdlib                :   "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$build.kotlin",
+            kotlinStdlib                :   "org.jetbrains.kotlin:kotlin-stdlib:$build.kotlin",
     ]
 
     def testLibs = [
