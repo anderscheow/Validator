@@ -3,22 +3,9 @@
 
 
 ## Download
-
-Step 1. Add it in your root build.gradle at the end of repositories:
-```groovy
-allprojects {
-  repositories {
-    ... 
-    
-    maven { url 'https://jitpack.io' }
-  }
-}
-```
-
-Step 2. Add the dependency
 ```groovy
 dependencies {
-  implementation 'io.github.anderscheow:validator:2.0.1'
+  implementation 'io.github.anderscheow:validator:2.1.0'
 }
 ```
 
@@ -189,6 +176,12 @@ val usernameWithConditionValidation = Validation("test@email.com")
 ```
 
 ## Changelog
+
+**2.1.0**
+
+* Updated Gradle and Kotlin version
+* Changed Android Support artifacts to AndroidX
+* Removed some install dependencies from README
 
 **2.0.1**
 
