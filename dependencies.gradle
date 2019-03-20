@@ -3,13 +3,12 @@ ext {
             compileSdkVersion   : 28,
             minSdkVersion       : 16,
             targetSdkVersion    : 28,
-            buildToolsVersion   : "28.0.2",
     ]
 
     /* build plugins versions */
     build = [
-            gradle      : "3.2.0",
-            kotlin      : "1.2.71",
+            gradle      : '3.3.2',
+            kotlin      : "1.3.21",
             dcendents   : "2.1",
             dokka       : "0.9.17",
             jacoco      : "0.1.2",
@@ -24,16 +23,17 @@ ext {
     ]
 
     /* dependencies versions */
-    def android_support_version = '28.0.0'
-    def android_support_runner_version = '1.0.2'
-    def android_support_espresso_core_version = '3.0.2'
+    def androidx_app_compat_version = '1.0.2'
+    def androidx_material_version = '1.0.0'
+    def androidx_runner_version = '1.1.0'
+    def androidx_espresso_core_version = '3.1.0'
     def junit_version = '4.12'
     def mockito_version = '2.7.22'
 
     def libs = [
             /* android support */
-            supportAppCompat            :   "com.android.support:appcompat-v7:$android_support_version",
-            supportDesign               :   "com.android.support:design:$android_support_version",
+            supportAppCompat            :   "androidx.appcompat:appcompat:$androidx_app_compat_version",
+            supportDesign               :   "com.google.android.material:material:$androidx_material_version",
 
             /* kotlin */
             kotlinStdlib                :   "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$build.kotlin",
@@ -41,8 +41,8 @@ ext {
 
     def testLibs = [
             jnuit                       :   "junit:junit:$junit_version",
-            androidSupportRunner        :   "com.android.support.test:runner:$android_support_runner_version",
-            androidSupportEspressoCore  :   "com.android.support.test.espresso:espresso-core:$android_support_espresso_core_version",
+            androidSupportRunner        :   "androidx.test:runner:$androidx_runner_version",
+            androidSupportEspressoCore  :   "androidx.test.espresso:espresso-core:$androidx_espresso_core_version",
             mockito                     :   "org.mockito:mockito-core:$mockito_version",
     ]
 
@@ -55,7 +55,7 @@ ext {
             [configuration: "implementation", dependency: libs.supportDesign],
 
             /* kotlin */
-            [configuration: "api", dependency: libs.kotlinStdlib],
+            [configuration: "implementation", dependency: libs.kotlinStdlib],
 
             /* test */
             [configuration: "testImplementation", dependency: testLibs.jnuit],
