@@ -7,8 +7,8 @@ ext {
 
     /* build plugins versions */
     build = [
-            gradle      : '3.3.2',
-            kotlin      : "1.3.21",
+            gradle      : '3.4.1',
+            kotlin      : "1.3.40",
             dcendents   : "2.1",
             dokka       : "0.9.17",
             jacoco      : "0.1.2",
@@ -36,7 +36,7 @@ ext {
             supportDesign               :   "com.google.android.material:material:$androidx_material_version",
 
             /* kotlin */
-            kotlinStdlib                :   "org.jetbrains.kotlin:kotlin-stdlib:$build.kotlin",
+            kotlinStdlib                :   "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$build.kotlin",
     ]
 
     def testLibs = [
