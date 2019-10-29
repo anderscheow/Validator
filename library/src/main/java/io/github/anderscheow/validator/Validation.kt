@@ -17,6 +17,7 @@ class Validation {
     val baseRules: MutableList<BaseRule> = ArrayList()
     val conditions: MutableList<Condition> = ArrayList()
 
+
     constructor(textInputLayout: TextInputLayout) {
         this.textInputLayout = textInputLayout
     }
@@ -35,14 +36,18 @@ class Validation {
         return this
     }
 
-    fun setError(context: Context, errorMessage: ErrorMessage) {
+    fun setError(context: Context, errorMessage: ErrorMessage, errors: ArrayList<String>) {
         if (errorMessage.isErrorAvailable) {
             textInputLayout?.isErrorEnabled = true
 
             if (errorMessage.isErrorResAvailable) {
-                textInputLayout?.error = context.getString(errorMessage.getErrorRes())
+                val error = context.getString(errorMessage.getErrorRes())
+                errors.add(error)
+                textInputLayout?.error = error
             } else if (errorMessage.isErrorMessageAvailable) {
-                textInputLayout?.error = errorMessage.getErrorMessage()
+                val error = errorMessage.getErrorMessage()
+                errors.add(error)
+                textInputLayout?.error = error
             }
         } else {
             throw IllegalStateException("Please either use errorRes or errorMessage as your error output")
