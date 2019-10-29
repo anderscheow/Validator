@@ -16,7 +16,7 @@ class Validator private constructor(private val context: Context) {
         @Throws(IndexOutOfBoundsException::class)
         fun onValidateSuccess(values: List<String>)
 
-        fun onValidateFailed()
+        fun onValidateFailed(errors: List<String>)
     }
 
     fun setMode(mode: Mode): Validator {
@@ -33,6 +33,7 @@ class Validator private constructor(private val context: Context) {
         var isOverallValid = true
         var isValid = false
         val values = ArrayList<String>()
+        val errors = ArrayList<String>()
 
         // Clear all validations
         this.validations.clear()
@@ -48,7 +49,7 @@ class Validator private constructor(private val context: Context) {
             val editText = validation.textInputLayout?.editText
 
             val value = (editText?.text ?: validation.textInput).toString()
-            val isCurrentValueValid = validate(value, validation)
+            val isCurrentValueValid = validate(value, validation, errors)
 
             if (isCurrentValueValid) {
                 isValid = true
@@ -58,7 +59,7 @@ class Validator private constructor(private val context: Context) {
                 isValid = false
 
                 if (mode == Mode.SINGLE) {
-                    return
+                    break
                 }
             }
         }
@@ -67,7 +68,7 @@ class Validator private constructor(private val context: Context) {
         if (isValid && isOverallValid) {
             listener?.onValidateSuccess(values)
         } else {
-            listener?.onValidateFailed()
+            listener?.onValidateFailed(errors)
         }
     }
 
@@ -83,19 +84,19 @@ class Validator private constructor(private val context: Context) {
     }
 
     // Iterate each type of rules
-    private fun validate(value: String, validation: Validation): Boolean {
-        var isCurrentValueValid = validateBaseRules(value, validation)
+    private fun validate(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
+        var isCurrentValueValid = validateBaseRules(value, validation, errors)
         if (isCurrentValueValid) {
-            isCurrentValueValid = validateConditions(value, validation)
+            isCurrentValueValid = validateConditions(value, validation, errors)
         }
 
         return isCurrentValueValid
     }
 
-    private fun validateBaseRules(value: String, validation: Validation): Boolean {
+    private fun validateBaseRules(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
         for (baseRule in validation.baseRules) {
             if (!baseRule.validate(value)) {
-                showErrorMessage(validation, baseRule)
+                showErrorMessage(validation, baseRule, errors)
 
                 return false
             }
@@ -104,10 +105,10 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun validateConditions(value: String, validation: Validation): Boolean {
+    private fun validateConditions(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
         for (condition in validation.conditions) {
             if (!condition.validate(value)) {
-                showErrorMessage(validation, condition)
+                showErrorMessage(validation, condition, errors)
 
                 return false
             }
@@ -116,8 +117,8 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun showErrorMessage(validation: Validation, errorMessage: ErrorMessage) {
-        validation.setError(context, errorMessage)
+    private fun showErrorMessage(validation: Validation, errorMessage: ErrorMessage, errors: ArrayList<String>) {
+        validation.setError(context, errorMessage, errors)
     }
 
     companion object {

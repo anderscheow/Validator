@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         val passwordValidation = Validation(passwordInput)
                 .add(object : BaseRule() {
                     override fun validate(value: Any?): Boolean {
-                        return !(value as String).isEmpty()
+                        return (value as String).isNotEmpty()
                     }
                 })
                 .add(object : BaseRule() {
@@ -59,14 +59,15 @@ class MainActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             Validator.with(applicationContext)
-                    .setMode(Mode.CONTINUOUS)
+                    .setMode(Mode.SINGLE)
                     .setListener(object : Validator.OnValidateListener {
                         override fun onValidateSuccess(values: List<String>) {
-                            Log.d("MainActivity", Arrays.toString(values.toTypedArray()))
+                            Log.d("MainActivity", values.toTypedArray().contentToString())
                             Toast.makeText(applicationContext, "Validate successfully", Toast.LENGTH_LONG).show()
                         }
 
-                        override fun onValidateFailed() {
+                        override fun onValidateFailed(errors: List<String>) {
+                            Log.e("MainActivity", errors.toTypedArray().contentToString())
                         }
                     })
                     .validate(usernameValidation, passwordValidation)
