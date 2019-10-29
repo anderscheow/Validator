@@ -6,9 +6,9 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class NotEmptyRuleTest {
+class NotBlankRuleTest {
 
-    private lateinit var notEmptyRule: NotEmptyRule
+    private lateinit var notBlankRule: NotBlankRule
 
     @Before
     @Throws(Exception::class)
@@ -23,59 +23,59 @@ class NotEmptyRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        notEmptyRule = NotEmptyRule()
+        notBlankRule = NotBlankRule()
 
-        notEmptyRule.validate(null)
+        notBlankRule.validate(null)
     }
 
     @Test
     @Throws(Exception::class)
     fun validate_IntSample_ReturnTrue() {
-        notEmptyRule = NotEmptyRule()
+        notBlankRule = NotBlankRule()
 
         val sample = 123
 
-        assertTrue(notEmptyRule.validate(sample))
+        assertTrue(notBlankRule.validate(sample))
     }
 
     @Test
     @Throws(Exception::class)
     fun validate_BoolSample_ReturnTrue() {
-        notEmptyRule = NotEmptyRule()
+        notBlankRule = NotBlankRule()
 
         val sample = false
 
-        assertTrue(notEmptyRule.validate(sample))
+        assertTrue(notBlankRule.validate(sample))
     }
 
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
-        notEmptyRule = NotEmptyRule()
+        notBlankRule = NotBlankRule()
 
         val sample = "not empty"
 
-        assertTrue(notEmptyRule.validate(sample))
+        assertTrue(notBlankRule.validate(sample))
     }
 
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnFalse() {
-        notEmptyRule = NotEmptyRule()
+        notBlankRule = NotBlankRule()
 
         val sample = ""
 
-        assertFalse(notEmptyRule.validate(sample))
+        assertFalse(notBlankRule.validate(sample))
     }
 
     @Test
     @Throws(Exception::class)
-    fun validate_SpaceSample_ReturnTrue() {
-        notEmptyRule = NotEmptyRule()
+    fun validate_SpaceSample_ReturnFalse() {
+        notBlankRule = NotBlankRule()
 
         val sample = " "
 
-        assertTrue(notEmptyRule.validate(sample))
+        assertFalse(notBlankRule.validate(sample))
     }
 
     @Test
@@ -83,9 +83,9 @@ class NotEmptyRuleTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Value must not be empty"
 
-        notEmptyRule = NotEmptyRule()
+        notBlankRule = NotBlankRule()
 
-        assertEquals(errorMessage, notEmptyRule.getErrorMessage())
+        assertEquals(errorMessage, notBlankRule.getErrorMessage())
     }
 
     @Test
@@ -93,9 +93,9 @@ class NotEmptyRuleTest {
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
-        notEmptyRule = NotEmptyRule(errorMessage)
+        notBlankRule = NotBlankRule(errorMessage)
 
-        assertEquals(errorMessage, notEmptyRule.getErrorMessage())
+        assertEquals(errorMessage, notBlankRule.getErrorMessage())
     }
 
     @Test
@@ -103,8 +103,8 @@ class NotEmptyRuleTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        notEmptyRule = NotEmptyRule(errorRes)
+        notBlankRule = NotBlankRule(errorRes)
 
-        assertEquals(errorRes, notEmptyRule.getErrorRes())
+        assertEquals(errorRes, notBlankRule.getErrorRes())
     }
 }
