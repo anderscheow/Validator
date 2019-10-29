@@ -5,7 +5,7 @@
 ## Download
 ```groovy
 dependencies {
-  implementation 'io.github.anderscheow:validator:2.1.0'
+  implementation 'io.github.anderscheow:validator:2.1.2'
 }
 ```
 
@@ -31,6 +31,7 @@ Usage
 * NotContainRule
 * EqualRule
 * NotEqualRule
+* NotBlankRule
 
 ### Additional predefined rules to use in Validation or Condition
 
@@ -158,12 +159,12 @@ Validator.with(applicationContext)
             .setMode(Mode.CONTINUOUS)
             .setListener(object : Validator.OnValidateListener {
                     override fun onValidateSuccess(values: List<String>) {
-                        Log.d("MainActivity", Arrays.toString(values.toTypedArray()))
+                        Log.d("MainActivity", values.toTypedArray().contentToString())
                         Toast.makeText(applicationContext, "Validate successfully", Toast.LENGTH_LONG).show()
                     }
 
-                    override fun onValidateFailed() {
-                        Toast.makeText(applicationContext, "Validate failed", Toast.LENGTH_LONG).show()
+                    override fun onValidateFailed(errors: List<String>) {
+                        Log.e("MainActivity", errors.toTypedArray().contentToString())
                     }
                 })
             .validate(usernameValidation, passwordValidation)
@@ -176,6 +177,17 @@ val usernameWithConditionValidation = Validation("test@email.com")
 ```
 
 ## Changelog
+
+**2.1.2**
+
+* Added `NotEmptyRule`
+* Added error messages into `Validator.OnValidateListener.onValidateFailed()`
+
+**2.1.0**
+
+* Updated Gradle and Kotlin version
+* Changed Android Support artifacts to AndroidX
+* Removed some install dependencies from README
 
 **2.1.0**
 
