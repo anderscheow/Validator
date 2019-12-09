@@ -48,18 +48,20 @@ class Validator private constructor(private val context: Context) {
         for (validation in validations) {
             val editText = validation.textInputLayout?.editText
 
-            val value = (editText?.text ?: validation.textInput).toString()
-            val isCurrentValueValid = validate(value, validation, errors)
+            val value = (editText?.text ?: validation.textInput)?.toString()
+            if (value != null) {
+                val isCurrentValueValid = validate(value, validation, errors)
 
-            if (isCurrentValueValid) {
-                isValid = true
-                values.add(value)
-            } else {
-                isOverallValid = false
-                isValid = false
+                if (isCurrentValueValid) {
+                    isValid = true
+                    values.add(value)
+                } else {
+                    isOverallValid = false
+                    isValid = false
 
-                if (mode == Mode.SINGLE) {
-                    break
+                    if (mode == Mode.SINGLE) {
+                        break
+                    }
                 }
             }
         }

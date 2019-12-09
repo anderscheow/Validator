@@ -12,7 +12,9 @@ import java.util.*
 class Validation {
 
     var textInputLayout: TextInputLayout? = null
+        private set
     var textInput: Any? = null
+        private set
 
     val baseRules: MutableList<BaseRule> = ArrayList()
     val conditions: MutableList<Condition> = ArrayList()
