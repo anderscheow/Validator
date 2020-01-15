@@ -14,12 +14,12 @@ class AllUpperCaseRule : BaseRule {
         this.locale = locale
     }
 
-    constructor(locale: Locale = Locale.getDefault(), @StringRes errorRes: Int)
+    constructor(@StringRes errorRes: Int, locale: Locale = Locale.getDefault())
             : super(errorRes) {
         this.locale = locale
     }
 
-    constructor(locale: Locale = Locale.getDefault(), errorMessage: String)
+    constructor(errorMessage: String, locale: Locale = Locale.getDefault())
             : super(errorMessage) {
         this.locale = locale
     }

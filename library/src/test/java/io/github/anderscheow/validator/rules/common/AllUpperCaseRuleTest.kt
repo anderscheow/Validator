@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class AllUpperCaseRuleTest {
 
@@ -94,7 +93,7 @@ class AllUpperCaseRuleTest {
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
-        allUpperCaseRule = AllUpperCaseRule(Locale.getDefault(), errorMessage)
+        allUpperCaseRule = AllUpperCaseRule(errorMessage)
 
         assertEquals(errorMessage, allUpperCaseRule.getErrorMessage())
     }
@@ -104,7 +103,7 @@ class AllUpperCaseRuleTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        allUpperCaseRule = AllUpperCaseRule(Locale.getDefault(), errorRes)
+        allUpperCaseRule = AllUpperCaseRule(errorRes)
 
         assertEquals(errorRes, allUpperCaseRule.getErrorRes())
     }

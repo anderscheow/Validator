@@ -3,6 +3,7 @@ package io.github.anderscheow.validator.util
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.common.And
 import io.github.anderscheow.validator.conditions.common.Or
+import io.github.anderscheow.validator.extensions.*
 import io.github.anderscheow.validator.rules.common.*
 import io.github.anderscheow.validator.rules.regex.*
 import org.junit.After

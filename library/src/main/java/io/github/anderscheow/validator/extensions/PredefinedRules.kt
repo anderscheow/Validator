@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED")
 
-package io.github.anderscheow.validator.util
+package io.github.anderscheow.validator.extensions
 
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.Condition

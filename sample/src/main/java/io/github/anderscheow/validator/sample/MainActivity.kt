@@ -15,9 +15,8 @@ import io.github.anderscheow.validator.rules.BaseRule
 import io.github.anderscheow.validator.rules.common.MaxRule
 import io.github.anderscheow.validator.rules.common.MinRule
 import io.github.anderscheow.validator.rules.regex.EmailRule
-import io.github.anderscheow.validator.util.email
-import io.github.anderscheow.validator.util.matchAtLeastOneRule
-import java.util.*
+import io.github.anderscheow.validator.extensions.email
+import io.github.anderscheow.validator.extensions.matchAtLeastOneRule
 
 class MainActivity : AppCompatActivity() {
 
