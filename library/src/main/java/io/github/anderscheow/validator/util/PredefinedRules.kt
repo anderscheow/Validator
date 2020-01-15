@@ -9,6 +9,7 @@ import io.github.anderscheow.validator.conditions.common.Or
 import io.github.anderscheow.validator.rules.BaseRule
 import io.github.anderscheow.validator.rules.common.*
 import io.github.anderscheow.validator.rules.regex.*
+import java.util.*
 
 /**
  *  Extension for Validation
@@ -81,26 +82,26 @@ fun Validation.symbolsOnly(): Validation {
     return this
 }
 
-fun Validation.allUppercase(): Validation {
+fun Validation.allUppercase(locale: Locale = Locale.getDefault()): Validation {
     baseRules.add(object : BaseRule("Value is not all uppercase") {
         override fun validate(value: Any?): Boolean {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toUpperCase() == value.toString()
+                return value.toString().toUpperCase(locale) == value.toString()
             }
         }
     })
     return this
 }
 
-fun Validation.allLowercase(): Validation {
+fun Validation.allLowercase(locale: Locale = Locale.getDefault()): Validation {
     baseRules.add(object : BaseRule("Value is not all lowercase") {
         override fun validate(value: Any?): Boolean {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toLowerCase() == value.toString()
+                return value.toString().toLowerCase(locale) == value.toString()
             }
         }
     })
@@ -224,26 +225,26 @@ fun Condition.symbolsOnly(): Condition {
     return this
 }
 
-fun Condition.allUppercase(): Condition {
+fun Condition.allUppercase(locale: Locale = Locale.getDefault()): Condition {
     baseRules.add(object : BaseRule("Value is not all uppercase") {
         override fun validate(value: Any?): Boolean {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toUpperCase() == value.toString()
+                return value.toString().toUpperCase(locale) == value.toString()
             }
         }
     })
     return this
 }
 
-fun Condition.allLowercase(): Condition {
+fun Condition.allLowercase(locale: Locale = Locale.getDefault()): Condition {
     baseRules.add(object : BaseRule("Value is not all lowercase") {
         override fun validate(value: Any?): Boolean {
             if (value == null) {
                 throw NullPointerException()
             } else {
-                return value.toString().toLowerCase() == value.toString()
+                return value.toString().toLowerCase(locale) == value.toString()
             }
         }
     })
