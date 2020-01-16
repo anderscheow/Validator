@@ -5,7 +5,7 @@
 ## Download
 ```groovy
 dependencies {
-  implementation 'io.github.anderscheow:validator:2.1.2'
+  implementation 'io.github.anderscheow:validator:2.2.0'
 }
 ```
 
@@ -32,6 +32,11 @@ Usage
 * EqualRule
 * NotEqualRule
 * NotBlankRule
+* AllUpperCaseRule
+* AllLowerCaseRule
+* EndsWithRule
+* StartsWithRule
+* SymbolRule
 
 ### Additional predefined rules to use in Validation or Condition
 
@@ -177,6 +182,11 @@ val usernameWithConditionValidation = Validation("test@email.com")
 ```
 
 ## Changelog
+
+**2.2.0**
+
+* Added `AllUpperCaseRule`, `AllLowerCaseRule`, `StartsWithRule`, `EndsWithRule` and `SymbolRule`
+* Changed `validate(Any?)` to `validate(String?)`
 
 **2.1.2**
 
