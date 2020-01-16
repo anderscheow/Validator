@@ -28,11 +28,11 @@ class EndsWithRule : BaseRule {
         this.ignoreCase = ignoreCase
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toString().endsWith(keyword, ignoreCase)
+            return value.endsWith(keyword, ignoreCase)
         }
     }
 }

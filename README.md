@@ -76,7 +76,7 @@ fun Condition.customPredefinedRule(keyword: String, ignoreCase: Boolean = false)
 ```kotlin
 class CustomRule : BaseRule {
  
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         }

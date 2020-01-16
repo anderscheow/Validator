@@ -2,5 +2,5 @@ package io.github.anderscheow.validator.util
 
 interface Validate {
 
-    fun validate(value: Any?): Boolean
+    fun validate(value: String?): Boolean
 }

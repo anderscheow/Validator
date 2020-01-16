@@ -11,7 +11,7 @@ class Or : Condition {
 
     constructor(errorMessage: String) : super(errorMessage)
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         for (baseRule in baseRules) {
             if (baseRule.validate(value)) {
                 return true

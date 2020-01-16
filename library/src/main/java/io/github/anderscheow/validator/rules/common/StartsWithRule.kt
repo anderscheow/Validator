@@ -28,11 +28,11 @@ class StartsWithRule : BaseRule {
         this.ignoreCase = ignoreCase
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toString().startsWith(keyword, ignoreCase)
+            return value.startsWith(keyword, ignoreCase)
         }
     }
 }

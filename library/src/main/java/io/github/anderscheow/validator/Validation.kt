@@ -13,7 +13,7 @@ class Validation {
 
     var textInputLayout: TextInputLayout? = null
         private set
-    var textInput: Any? = null
+    var textInput: String? = null
         private set
 
     val baseRules: MutableList<BaseRule> = ArrayList()
@@ -24,7 +24,7 @@ class Validation {
         this.textInputLayout = textInputLayout
     }
 
-    constructor(textInput: Any) {
+    constructor(textInput: String) {
         this.textInput = textInput
     }
 

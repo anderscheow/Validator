@@ -23,7 +23,7 @@ class EqualRule : BaseRule {
         this.keyword = keyword
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {

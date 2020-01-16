@@ -1,22 +1,22 @@
 package io.github.anderscheow.validator.sample
 
 import android.os.Bundle
-import com.google.android.material.textfield.TextInputLayout
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.Validator
 import io.github.anderscheow.validator.conditions.common.And
 import io.github.anderscheow.validator.conditions.common.Or
 import io.github.anderscheow.validator.constant.Mode
+import io.github.anderscheow.validator.extensions.email
+import io.github.anderscheow.validator.extensions.matchAtLeastOneRule
 import io.github.anderscheow.validator.rules.BaseRule
 import io.github.anderscheow.validator.rules.common.MaxRule
 import io.github.anderscheow.validator.rules.common.MinRule
 import io.github.anderscheow.validator.rules.regex.EmailRule
-import io.github.anderscheow.validator.extensions.email
-import io.github.anderscheow.validator.extensions.matchAtLeastOneRule
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,12 +38,12 @@ class MainActivity : AppCompatActivity() {
 
         val passwordValidation = Validation(passwordInput)
                 .add(object : BaseRule() {
-                    override fun validate(value: Any?): Boolean {
+                    override fun validate(value: String?): Boolean {
                         return (value as String).isNotEmpty()
                     }
                 })
                 .add(object : BaseRule() {
-                    override fun validate(value: Any?): Boolean {
+                    override fun validate(value: String?): Boolean {
                         return (value as String).length >= 8
                     }
 

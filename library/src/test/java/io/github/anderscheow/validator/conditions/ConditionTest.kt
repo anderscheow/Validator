@@ -26,7 +26,7 @@ class ConditionTest {
     @Throws(Exception::class)
     fun add_OneBaseRule() {
         condition = object : Condition() {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }.add(MinRule(5))
@@ -38,7 +38,7 @@ class ConditionTest {
     @Throws(Exception::class)
     fun add_TwoBaseRule() {
         condition = object : Condition() {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }.add(MinRule(5))
@@ -51,7 +51,7 @@ class ConditionTest {
     @Throws(Exception::class)
     fun addAll_TwoBaseRule() {
         condition = object : Condition() {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }.addAll(listOf(MinRule(5), MaxRule(10)))
@@ -65,7 +65,7 @@ class ConditionTest {
         val errorMessage = "Invalid input"
 
         condition = object : Condition() {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }
@@ -82,7 +82,7 @@ class ConditionTest {
         val errorMessage = "This is a custom error message"
 
         condition = object : Condition(errorMessage) {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }
@@ -99,7 +99,7 @@ class ConditionTest {
         @StringRes val errorRes = 0
 
         condition = object : Condition(errorRes) {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }

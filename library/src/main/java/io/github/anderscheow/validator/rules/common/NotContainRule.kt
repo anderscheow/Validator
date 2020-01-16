@@ -28,11 +28,11 @@ class NotContainRule : BaseRule {
         this.ignoreCase = ignoreCase
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return !value.toString().contains(keyword, ignoreCase)
+            return !value.contains(keyword, ignoreCase)
         }
     }
 }

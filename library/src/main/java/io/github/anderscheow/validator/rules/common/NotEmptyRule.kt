@@ -12,11 +12,11 @@ class NotEmptyRule : BaseRule {
 
     constructor(errorMessage: String) : super(errorMessage)
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toString().isNotEmpty()
+            return value.isNotEmpty()
         }
     }
 }

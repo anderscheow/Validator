@@ -20,11 +20,11 @@ open class RegexRule : BaseRule {
         this.regex = regex
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toString().matches(regex.toRegex())
+            return value.matches(regex.toRegex())
         }
     }
 }

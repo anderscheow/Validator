@@ -22,21 +22,15 @@ class PastRule : BaseRule {
         this.dateFormat = dateFormat
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
             var parsedDate: Date? = null
 
-            when (value) {
-                is String -> try {
-                    parsedDate = dateFormat.parse(value)
-                } catch (ignored: ParseException) {
-                }
-
-                is Date -> parsedDate = value
-
-                else -> throw ClassCastException("Required String or Date value")
+            try {
+                parsedDate = dateFormat.parse(value)
+            } catch (ignored: ParseException) {
             }
 
             return parsedDate != null && parsedDate.before(Date())
