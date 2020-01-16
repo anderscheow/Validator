@@ -1,6 +1,6 @@
 @file:Suppress("UNUSED")
 
-package io.github.anderscheow.validator.util
+package io.github.anderscheow.validator.extensions
 
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.Condition
@@ -9,6 +9,7 @@ import io.github.anderscheow.validator.conditions.common.Or
 import io.github.anderscheow.validator.rules.BaseRule
 import io.github.anderscheow.validator.rules.common.*
 import io.github.anderscheow.validator.rules.regex.*
+import java.util.*
 
 /**
  *  Extension for Validation
@@ -69,67 +70,27 @@ fun Validation.digitsOnly(): Validation {
 }
 
 fun Validation.symbolsOnly(): Validation {
-    baseRules.add(object : BaseRule("Value does not contain symbols") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return !value.toString().matches("^[a-zA-Z0-9\\s]*\$".toRegex())
-            }
-        }
-    })
+    baseRules.add(SymbolRule())
     return this
 }
 
-fun Validation.allUppercase(): Validation {
-    baseRules.add(object : BaseRule("Value is not all uppercase") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().toUpperCase() == value.toString()
-            }
-        }
-    })
+fun Validation.allUppercase(locale: Locale = Locale.getDefault()): Validation {
+    baseRules.add(AllUpperCaseRule(locale))
     return this
 }
 
-fun Validation.allLowercase(): Validation {
-    baseRules.add(object : BaseRule("Value is not all lowercase") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().toLowerCase() == value.toString()
-            }
-        }
-    })
+fun Validation.allLowercase(locale: Locale = Locale.getDefault()): Validation {
+    baseRules.add(AllLowerCaseRule(locale))
     return this
 }
 
 fun Validation.startsWith(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(object : BaseRule("Value is not start with $keyword") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().startsWith(keyword, ignoreCase)
-            }
-        }
-    })
+    baseRules.add(StartsWithRule(keyword, ignoreCase))
     return this
 }
 
 fun Validation.endsWith(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(object : BaseRule("Value is not end with $keyword") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().endsWith(keyword, ignoreCase)
-            }
-        }
-    })
+    baseRules.add(EndsWithRule(keyword, ignoreCase))
     return this
 }
 
@@ -212,67 +173,27 @@ fun Condition.digitsOnly(): Condition {
 }
 
 fun Condition.symbolsOnly(): Condition {
-    baseRules.add(object : BaseRule("Value does not contain symbols") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return !value.toString().matches("^[a-zA-Z0-9\\s]*\$".toRegex())
-            }
-        }
-    })
+    baseRules.add(SymbolRule())
     return this
 }
 
-fun Condition.allUppercase(): Condition {
-    baseRules.add(object : BaseRule("Value is not all uppercase") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().toUpperCase() == value.toString()
-            }
-        }
-    })
+fun Condition.allUppercase(locale: Locale = Locale.getDefault()): Condition {
+    baseRules.add(AllUpperCaseRule(locale))
     return this
 }
 
-fun Condition.allLowercase(): Condition {
-    baseRules.add(object : BaseRule("Value is not all lowercase") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().toLowerCase() == value.toString()
-            }
-        }
-    })
+fun Condition.allLowercase(locale: Locale = Locale.getDefault()): Condition {
+    baseRules.add(AllLowerCaseRule(locale))
     return this
 }
 
 fun Condition.startsWith(keyword: String, ignoreCase: Boolean = false): Condition {
-    baseRules.add(object : BaseRule("Value is not start with $keyword") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().startsWith(keyword, ignoreCase)
-            }
-        }
-    })
+    baseRules.add(StartsWithRule(keyword, ignoreCase))
     return this
 }
 
 fun Condition.endsWith(keyword: String, ignoreCase: Boolean = false): Condition {
-    baseRules.add(object : BaseRule("Value is not end with $keyword") {
-        override fun validate(value: Any?): Boolean {
-            if (value == null) {
-                throw NullPointerException()
-            } else {
-                return value.toString().endsWith(keyword, ignoreCase)
-            }
-        }
-    })
+    baseRules.add(EndsWithRule(keyword, ignoreCase))
     return this
 }
 

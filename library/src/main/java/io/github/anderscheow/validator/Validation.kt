@@ -12,7 +12,9 @@ import java.util.*
 class Validation {
 
     var textInputLayout: TextInputLayout? = null
-    var textInput: Any? = null
+        private set
+    var textInput: String? = null
+        private set
 
     val baseRules: MutableList<BaseRule> = ArrayList()
     val conditions: MutableList<Condition> = ArrayList()
@@ -22,7 +24,7 @@ class Validation {
         this.textInputLayout = textInputLayout
     }
 
-    constructor(textInput: Any) {
+    constructor(textInput: String) {
         this.textInput = textInput
     }
 

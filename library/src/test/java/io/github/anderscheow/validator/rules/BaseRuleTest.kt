@@ -26,7 +26,7 @@ class BaseRuleTest {
         val errorMessage = "Invalid input"
 
         baseRule = object : BaseRule() {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }
@@ -43,7 +43,7 @@ class BaseRuleTest {
         val errorMessage = "This is a custom error message"
 
         baseRule = object : BaseRule(errorMessage) {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }
@@ -60,7 +60,7 @@ class BaseRuleTest {
         @StringRes val errorRes = 0
 
         baseRule = object : BaseRule(errorRes) {
-            override fun validate(value: Any?): Boolean {
+            override fun validate(value: String?): Boolean {
                 return false
             }
         }

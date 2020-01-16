@@ -12,7 +12,7 @@ class NotNullRule : BaseRule {
 
     constructor(errorMessage: String) : super(errorMessage)
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         return value != null
     }
 }

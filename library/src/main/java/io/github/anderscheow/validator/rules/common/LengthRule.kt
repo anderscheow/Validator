@@ -27,11 +27,11 @@ class LengthRule : BaseRule {
         this.maxLength = maxLength
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            value.toString().let {
+            value.let {
                 assertMinMax(minLength, maxLength)
 
                 val length = it.length

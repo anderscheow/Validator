@@ -4,14 +4,14 @@ import androidx.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
-class ContainRule : BaseRule {
+class EndsWithRule : BaseRule {
 
     private var keyword: String
 
     private var ignoreCase = false
 
     constructor(keyword: String, ignoreCase: Boolean = false) :
-            super(String.format(Locale.getDefault(), "Value does not contain '%s'", keyword)) {
+            super(String.format(Locale.getDefault(), "Value does not end with '%s'", keyword)) {
         this.keyword = keyword
         this.ignoreCase = ignoreCase
     }
@@ -32,7 +32,7 @@ class ContainRule : BaseRule {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.contains(keyword, ignoreCase)
+            return value.endsWith(keyword, ignoreCase)
         }
     }
 }

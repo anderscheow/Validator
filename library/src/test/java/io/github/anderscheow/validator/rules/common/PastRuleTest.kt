@@ -30,15 +30,6 @@ class PastRuleTest {
         pastRule.validate(null)
     }
 
-    @Test(expected = ClassCastException::class)
-    @Throws(Exception::class)
-    fun validate_NotStringOrDateSample_ThrowClassCastException() {
-        pastRule = PastRule(VALID_DATE_FORMAT)
-
-        // Any value other than String or Date
-        pastRule.validate(123)
-    }
-
     @Test
     @Throws(Exception::class)
     fun validate_ValidDateFormatAndValidValue_ReturnTrue() {
@@ -55,20 +46,6 @@ class PastRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_ValidDateValue_ReturnTrue() {
-        pastRule = PastRule(VALID_DATE_FORMAT)
-
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_YEAR, -1)
-
-        val sample = calendar.time
-
-        assertTrue(pastRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_ValidDateFormatAndInvalidValue_ReturnFalse() {
         pastRule = PastRule(VALID_DATE_FORMAT)
 
@@ -77,20 +54,6 @@ class PastRuleTest {
         calendar.add(Calendar.DAY_OF_YEAR, 1)
 
         val sample = VALID_DATE_FORMAT.format(calendar.time)
-
-        assertFalse(pastRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_InvalidDateValue_ReturnFalse() {
-        pastRule = PastRule(VALID_DATE_FORMAT)
-
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_YEAR, 1)
-
-        val sample = calendar.time
 
         assertFalse(pastRule.validate(sample))
     }

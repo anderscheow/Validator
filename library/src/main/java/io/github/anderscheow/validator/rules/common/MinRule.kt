@@ -23,11 +23,11 @@ class MinRule : BaseRule {
         this.minLength = minLength
     }
 
-    override fun validate(value: Any?): Boolean {
+    override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toString().length >= minLength
+            return value.length >= minLength
         }
     }
 }
