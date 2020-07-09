@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
@@ -35,4 +36,19 @@ class StartsWithRule : BaseRule {
             return value.startsWith(keyword, ignoreCase)
         }
     }
+}
+
+fun Validation.startsWith(keyword: String, ignoreCase: Boolean = false): Validation {
+    baseRules.add(StartsWithRule(keyword, ignoreCase))
+    return this
+}
+
+fun Validation.startsWith(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
+    baseRules.add(StartsWithRule(keyword, errorRes, ignoreCase))
+    return this
+}
+
+fun Validation.startsWith(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
+    baseRules.add(StartsWithRule(keyword, errorMessage, ignoreCase))
+    return this
 }

@@ -1,7 +1,7 @@
 package io.github.anderscheow.validator.rules.regex
 
 import androidx.annotation.StringRes
-
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.common.RegexRule
 
 class EmailRule : RegexRule {
@@ -16,4 +16,19 @@ class EmailRule : RegexRule {
 
         private const val EMAIL_REGEX = "\\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}\\b"
     }
+}
+
+fun Validation.email(): Validation {
+    baseRules.add(EmailRule())
+    return this
+}
+
+fun Validation.email(@StringRes errorRes: Int): Validation {
+    baseRules.add(EmailRule(errorRes))
+    return this
+}
+
+fun Validation.email(errorMessage: String): Validation {
+    baseRules.add(EmailRule(errorMessage))
+    return this
 }

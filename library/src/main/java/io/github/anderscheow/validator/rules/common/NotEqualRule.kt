@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
@@ -27,4 +28,19 @@ class NotEqualRule : BaseRule {
             return value != keyword
         }
     }
+}
+
+fun Validation.notEqualTo(keyword: String): Validation {
+    baseRules.add(NotEqualRule(keyword))
+    return this
+}
+
+fun Validation.notEqualTo(keyword: String, @StringRes errorRes: Int): Validation {
+    baseRules.add(NotEqualRule(keyword, errorRes))
+    return this
+}
+
+fun Validation.notEqualTo(keyword: String, errorMessage: String): Validation {
+    baseRules.add(NotEqualRule(keyword, errorMessage))
+    return this
 }

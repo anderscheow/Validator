@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.text.DateFormat
 import java.text.ParseException
@@ -39,4 +40,19 @@ class FutureRule : BaseRule {
             return parsedDate != null && parsedDate.after(Date())
         }
     }
+}
+
+fun Validation.future(dateFormat: DateFormat): Validation {
+    baseRules.add(FutureRule(dateFormat))
+    return this
+}
+
+fun Validation.future(dateFormat: DateFormat, @StringRes errorRes: Int): Validation {
+    baseRules.add(FutureRule(dateFormat, errorRes))
+    return this
+}
+
+fun Validation.future(dateFormat: DateFormat, errorMessage: String): Validation {
+    baseRules.add(FutureRule(dateFormat, errorMessage))
+    return this
 }

@@ -31,46 +31,6 @@ class LengthRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSampleWithinMinMax_ReturnTrue() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
-
-        val sample = 1234567890
-
-        assertTrue(lengthRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSampleWithinMinMax_ReturnFalse() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
-
-        val sample = 1234
-
-        assertFalse(lengthRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSampleWithinMinMax_ReturnTrue() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
-
-        val sample = false
-
-        assertTrue(lengthRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSampleWithinMinMax_ReturnFalse() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
-
-        val sample = true
-
-        assertFalse(lengthRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSampleWithinMinMax_ReturnTrue() {
         lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
 

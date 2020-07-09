@@ -5,7 +5,7 @@
 ## Download
 ```groovy
 dependencies {
-  implementation 'io.github.anderscheow:validator:2.2.0'
+  implementation 'com.github.anderscheow:validator:2.2.1'
 }
 ```
 
@@ -57,6 +57,12 @@ Usage
 * endsWith
 * withCreditCard
 * withPassword
+* notNull
+* notEmpty
+* notBlank
+* regex
+* future
+* past
 * matchAtLeastOneRule (Only for Validation)
 * matchAllRules (Only for Validation)
 
@@ -175,13 +181,12 @@ Validator.with(applicationContext)
             .validate(usernameValidation, passwordValidation)
 ```
 
-### **New Feature:** Validation does support for `Object (Java)` and `Any (Kotlin)` parameter
-```kotlin
-val usernameWithConditionValidation = Validation("test@email.com")
-                .add(And().add(EmailRule()))
-```
-
 ## Changelog
+
+**2.2.1**
+
+* Added `Validation.notNull`, `Validation.notEmpty`, `Validation.notBlank`, `Validation.regex`, `Validation.past` and `Validation.future`
+* Can use `TextInputLayout.validate` or `TextInputLayout.add` instead of `Validation(TextInputLayout)` in Kotlin
 
 **2.2.0**
 

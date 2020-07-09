@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
@@ -35,4 +36,19 @@ class NotContainRule : BaseRule {
             return !value.contains(keyword, ignoreCase)
         }
     }
+}
+
+fun Validation.notContain(keyword: String, ignoreCase: Boolean = false): Validation {
+    baseRules.add(NotContainRule(keyword, ignoreCase))
+    return this
+}
+
+fun Validation.notContain(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
+    baseRules.add(NotContainRule(keyword, errorRes, ignoreCase))
+    return this
+}
+
+fun Validation.notContain(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
+    baseRules.add(NotContainRule(keyword, errorMessage, ignoreCase))
+    return this
 }

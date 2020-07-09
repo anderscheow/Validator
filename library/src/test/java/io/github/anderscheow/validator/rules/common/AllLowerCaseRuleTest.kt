@@ -30,26 +30,6 @@ class AllLowerCaseRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnFalse() {
-        allLowerCaseRule = AllLowerCaseRule()
-
-        val sample = 123
-
-        assertTrue(allLowerCaseRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnFalse() {
-        allLowerCaseRule = AllLowerCaseRule()
-
-        val sample = false
-
-        assertTrue(allLowerCaseRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
         allLowerCaseRule = AllLowerCaseRule()
 

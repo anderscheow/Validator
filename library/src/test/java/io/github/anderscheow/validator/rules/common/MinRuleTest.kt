@@ -31,56 +31,6 @@ class MinRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSampleEqualMax_ReturnTrue() {
-        minRule = MinRule(MIN_LENGTH)
-
-        val sample = 12345
-
-        assertTrue(minRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSampleLessThanMax_ReturnFalse() {
-        minRule = MinRule(MIN_LENGTH)
-
-        val sample = 123
-
-        assertFalse(minRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSampleMoreThanMax_ReturnTrue() {
-        minRule = MinRule(MIN_LENGTH)
-
-        val sample = 1234567
-
-        assertTrue(minRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSampleEqualMax_ReturnTrue() {
-        minRule = MinRule(MIN_LENGTH)
-
-        val sample = false
-
-        assertTrue(minRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSampleMoreThanMax_ReturnFalse() {
-        minRule = MinRule(MIN_LENGTH)
-
-        val sample = true
-
-        assertFalse(minRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSampleEqualMin_ReturnTrue() {
         minRule = MinRule(MIN_LENGTH)
 

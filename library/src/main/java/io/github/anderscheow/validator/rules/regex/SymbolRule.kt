@@ -1,7 +1,7 @@
 package io.github.anderscheow.validator.rules.regex
 
 import androidx.annotation.StringRes
-
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.common.RegexRule
 
 class SymbolRule : RegexRule {
@@ -16,4 +16,19 @@ class SymbolRule : RegexRule {
 
         private const val ALPHABET_REGEX = "^[-!@#\$%^&*()_+|~=`{}\\[\\]:\";'<>?,.\\/]*\$"
     }
+}
+
+fun Validation.symbolsOnly(): Validation {
+    baseRules.add(SymbolRule())
+    return this
+}
+
+fun Validation.symbolsOnly(@StringRes errorRes: Int): Validation {
+    baseRules.add(SymbolRule(errorRes))
+    return this
+}
+
+fun Validation.symbolsOnly(errorMessage: String): Validation {
+    baseRules.add(SymbolRule(errorMessage))
+    return this
 }

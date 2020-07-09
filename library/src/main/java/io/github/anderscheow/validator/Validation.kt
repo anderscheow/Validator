@@ -19,7 +19,6 @@ class Validation {
     val baseRules: MutableList<BaseRule> = ArrayList()
     val conditions: MutableList<Condition> = ArrayList()
 
-
     constructor(textInputLayout: TextInputLayout) {
         this.textInputLayout = textInputLayout
     }

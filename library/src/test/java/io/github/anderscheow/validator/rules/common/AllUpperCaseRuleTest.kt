@@ -30,26 +30,6 @@ class AllUpperCaseRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnFalse() {
-        allUpperCaseRule = AllUpperCaseRule()
-
-        val sample = 123
-
-        assertTrue(allUpperCaseRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnFalse() {
-        allUpperCaseRule = AllUpperCaseRule()
-
-        val sample = false
-
-        assertFalse(allUpperCaseRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
         allUpperCaseRule = AllUpperCaseRule()
 

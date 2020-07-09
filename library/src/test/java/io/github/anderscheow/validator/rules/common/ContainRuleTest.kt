@@ -31,46 +31,6 @@ class ContainRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnTrue() {
-        containRule = ContainRule(INT_KEYWORD)
-
-        val sample = 1234567890
-
-        assertTrue(containRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSample_ReturnFalse() {
-        containRule = ContainRule(INT_KEYWORD)
-
-        val sample = 1237890
-
-        assertFalse(containRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnTrue() {
-        containRule = ContainRule(BOOL_KEYWORD)
-
-        val sample = true
-
-        assertTrue(containRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnFalse() {
-        containRule = ContainRule(BOOL_KEYWORD)
-
-        val sample = false
-
-        assertFalse(containRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_WithIgnoreCase_ReturnTrue() {
         containRule = ContainRule(STRING_KEYWORD, true)
 
