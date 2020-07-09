@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
@@ -30,4 +31,19 @@ class EqualRule : BaseRule {
             return value == keyword
         }
     }
+}
+
+fun Validation.equalTo(keyword: String): Validation {
+    baseRules.add(EqualRule(keyword))
+    return this
+}
+
+fun Validation.equalTo(keyword: String, @StringRes errorRes: Int): Validation {
+    baseRules.add(EqualRule(keyword, errorRes))
+    return this
+}
+
+fun Validation.equalTo(keyword: String, errorMessage: String): Validation {
+    baseRules.add(EqualRule(keyword, errorMessage))
+    return this
 }

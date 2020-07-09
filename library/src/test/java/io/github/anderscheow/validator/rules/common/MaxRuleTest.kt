@@ -31,56 +31,6 @@ class MaxRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSampleEqualMax_ReturnTrue() {
-        maxRule = MaxRule(MAX_LENGTH)
-
-        val sample = 1234
-
-        assertTrue(maxRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSampleLessThanMax_ReturnTrue() {
-        maxRule = MaxRule(MAX_LENGTH)
-
-        val sample = 123
-
-        assertTrue(maxRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSampleMoreThanMax_ReturnFalse() {
-        maxRule = MaxRule(MAX_LENGTH)
-
-        val sample = 1234567
-
-        assertFalse(maxRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSampleEqualMax_ReturnTrue() {
-        maxRule = MaxRule(MAX_LENGTH)
-
-        val sample = true
-
-        assertTrue(maxRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSampleMoreThanMax_ReturnFalse() {
-        maxRule = MaxRule(MAX_LENGTH)
-
-        val sample = false
-
-        assertFalse(maxRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSampleEqualMax_ReturnTrue() {
         maxRule = MaxRule(MAX_LENGTH)
 

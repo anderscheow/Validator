@@ -31,46 +31,6 @@ class EqualRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnTrue() {
-        equalRule = EqualRule(INT_KEYWORD)
-
-        val sample = 456
-
-        assertTrue(equalRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSample_ReturnFalse() {
-        equalRule = EqualRule(INT_KEYWORD)
-
-        val sample = 123
-
-        assertFalse(equalRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnTrue() {
-        equalRule = EqualRule(BOOL_KEYWORD)
-
-        val sample = false
-
-        assertTrue(equalRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnFalse() {
-        equalRule = EqualRule(BOOL_KEYWORD)
-
-        val sample = true
-
-        assertFalse(equalRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
         equalRule = EqualRule(STRING_KEYWORD)
 

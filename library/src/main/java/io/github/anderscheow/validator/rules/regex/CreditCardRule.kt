@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.regex
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 
 import io.github.anderscheow.validator.rules.common.RegexRule
 
@@ -25,4 +26,19 @@ class CreditCardRule : RegexRule {
     constructor(regex: CreditCardRegex, @StringRes errorRes: Int) : super(regex.toString(), errorRes)
 
     constructor(regex: CreditCardRegex, errorMessage: String) : super(regex.toString(), errorMessage)
+}
+
+fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex): Validation {
+    baseRules.add(CreditCardRule(regex))
+    return this
+}
+
+fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex, @StringRes errorRes: Int): Validation {
+    baseRules.add(CreditCardRule(regex, errorRes))
+    return this
+}
+
+fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex, errorMessage: String): Validation {
+    baseRules.add(CreditCardRule(regex, errorMessage))
+    return this
 }

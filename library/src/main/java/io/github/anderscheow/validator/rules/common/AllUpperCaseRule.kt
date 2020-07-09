@@ -1,7 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
@@ -31,4 +31,19 @@ class AllUpperCaseRule : BaseRule {
             return value.toUpperCase(locale) == value
         }
     }
+}
+
+fun Validation.allUppercase(locale: Locale = Locale.getDefault()): Validation {
+    baseRules.add(AllUpperCaseRule(locale))
+    return this
+}
+
+fun Validation.allUppercase(@StringRes errorRes: Int, locale: Locale = Locale.getDefault()): Validation {
+    baseRules.add(AllUpperCaseRule(errorRes, locale))
+    return this
+}
+
+fun Validation.allUppercase(errorMessage: String, locale: Locale = Locale.getDefault()): Validation {
+    baseRules.add(AllUpperCaseRule(errorMessage, locale))
+    return this
 }

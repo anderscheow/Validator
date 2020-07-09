@@ -1,7 +1,7 @@
 package io.github.anderscheow.validator.rules.regex
 
 import androidx.annotation.StringRes
-
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.common.RegexRule
 
 class PasswordRule : RegexRule {
@@ -24,4 +24,19 @@ class PasswordRule : RegexRule {
     constructor(regex: PasswordRegex, @StringRes errorRes: Int) : super(regex.toString(), errorRes)
 
     constructor(regex: PasswordRegex, errorMessage: String) : super(regex.toString(), errorMessage)
+}
+
+fun Validation.withPassword(regex: PasswordRule.PasswordRegex): Validation {
+    baseRules.add(PasswordRule(regex))
+    return this
+}
+
+fun Validation.withPassword(regex: PasswordRule.PasswordRegex, @StringRes errorRes: Int): Validation {
+    baseRules.add(PasswordRule(regex, errorRes))
+    return this
+}
+
+fun Validation.withPassword(regex: PasswordRule.PasswordRegex, errorMessage: String): Validation {
+    baseRules.add(PasswordRule(regex, errorMessage))
+    return this
 }

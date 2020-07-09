@@ -31,46 +31,6 @@ class NotContainRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnTrue() {
-        notContainRule = NotContainRule(INT_KEYWORD)
-
-        val sample = 1237890
-
-        assertTrue(notContainRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSample_ReturnFalse() {
-        notContainRule = NotContainRule(INT_KEYWORD)
-
-        val sample = 1234567890
-
-        assertFalse(notContainRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnTrue() {
-        notContainRule = NotContainRule(BOOL_KEYWORD)
-
-        val sample = false
-
-        assertTrue(notContainRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnFalse() {
-        notContainRule = NotContainRule(BOOL_KEYWORD)
-
-        val sample = true
-
-        assertFalse(notContainRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
         notContainRule = NotContainRule(STRING_KEYWORD)
 

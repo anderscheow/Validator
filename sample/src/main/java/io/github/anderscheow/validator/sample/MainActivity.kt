@@ -10,13 +10,13 @@ import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.Validator
 import io.github.anderscheow.validator.conditions.common.And
 import io.github.anderscheow.validator.conditions.common.Or
+import io.github.anderscheow.validator.conditions.common.matchAtLeastOneRule
 import io.github.anderscheow.validator.constant.Mode
-import io.github.anderscheow.validator.extensions.email
-import io.github.anderscheow.validator.extensions.matchAtLeastOneRule
 import io.github.anderscheow.validator.rules.BaseRule
 import io.github.anderscheow.validator.rules.common.MaxRule
 import io.github.anderscheow.validator.rules.common.MinRule
 import io.github.anderscheow.validator.rules.regex.EmailRule
+import io.github.anderscheow.validator.rules.regex.email
 
 class MainActivity : AppCompatActivity() {
 

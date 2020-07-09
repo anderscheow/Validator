@@ -30,26 +30,6 @@ class NotEmptyRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnTrue() {
-        notEmptyRule = NotEmptyRule()
-
-        val sample = 123
-
-        assertTrue(notEmptyRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnTrue() {
-        notEmptyRule = NotEmptyRule()
-
-        val sample = false
-
-        assertTrue(notEmptyRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
         notEmptyRule = NotEmptyRule()
 

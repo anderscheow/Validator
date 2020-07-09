@@ -1,7 +1,9 @@
 package io.github.anderscheow.validator.conditions.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.Condition
+import io.github.anderscheow.validator.rules.BaseRule
 
 class And : Condition {
 
@@ -19,4 +21,19 @@ class And : Condition {
         }
         return true
     }
+}
+
+fun Validation.matchAllRules(baseRules: Array<BaseRule>): Validation {
+    conditions.add(And().addAll(baseRules.toList()))
+    return this
+}
+
+fun Validation.matchAllRules(baseRules: Array<BaseRule>, @StringRes errorRes: Int): Validation {
+    conditions.add(And(errorRes).addAll(baseRules.toList()))
+    return this
+}
+
+fun Validation.matchAllRules(baseRules: Array<BaseRule>, errorMessage: String): Validation {
+    conditions.add(And(errorMessage).addAll(baseRules.toList()))
+    return this
 }

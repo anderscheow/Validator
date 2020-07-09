@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.BaseRule
 import java.util.*
 
@@ -30,4 +31,19 @@ class MinRule : BaseRule {
             return value.length >= minLength
         }
     }
+}
+
+fun Validation.minimumLength(minLength: Int): Validation {
+    baseRules.add(MinRule(minLength))
+    return this
+}
+
+fun Validation.minimumLength(minLength: Int, @StringRes errorRes: Int): Validation {
+    baseRules.add(MinRule(minLength, errorRes))
+    return this
+}
+
+fun Validation.minimumLength(minLength: Int, errorMessage: String): Validation {
+    baseRules.add(MinRule(minLength, errorMessage))
+    return this
 }

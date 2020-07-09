@@ -1,6 +1,7 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
+import io.github.anderscheow.validator.Validation
 
 import io.github.anderscheow.validator.rules.BaseRule
 
@@ -27,4 +28,19 @@ open class RegexRule : BaseRule {
             return value.matches(regex.toRegex())
         }
     }
+}
+
+fun Validation.regex(regex: String): Validation {
+    baseRules.add(RegexRule(regex))
+    return this
+}
+
+fun Validation.regex(regex: String, @StringRes errorRes: Int): Validation {
+    baseRules.add(RegexRule(regex, errorRes))
+    return this
+}
+
+fun Validation.regex(regex: String, errorMessage: String): Validation {
+    baseRules.add(RegexRule(regex, errorMessage))
+    return this
 }

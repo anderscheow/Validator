@@ -31,46 +31,6 @@ class NotEqualRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun validate_IntSample_ReturnTrue() {
-        notEqualRule = NotEqualRule(INT_KEYWORD)
-
-        val sample = 123
-
-        assertTrue(notEqualRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_IntSample_ReturnFalse() {
-        notEqualRule = NotEqualRule(INT_KEYWORD)
-
-        val sample = 456
-
-        assertFalse(notEqualRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnTrue() {
-        notEqualRule = NotEqualRule(BOOL_KEYWORD)
-
-        val sample = true
-
-        assertTrue(notEqualRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun validate_BoolSample_ReturnFalse() {
-        notEqualRule = NotEqualRule(BOOL_KEYWORD)
-
-        val sample = false
-
-        assertFalse(notEqualRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
         notEqualRule = NotEqualRule(STRING_KEYWORD)
 
