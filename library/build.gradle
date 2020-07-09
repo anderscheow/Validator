@@ -53,20 +53,20 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
             '**/*Activity.*'
     ]
     // generated classes
-    classDirectories = fileTree(
+    classDirectories.setFrom(fileTree(
             dir: "$buildDir/intermediates/classes/debug",
             excludes: excludes
     ) + fileTree(
             dir: "$buildDir/tmp/kotlin-classes/debug",
             excludes: excludes
-    )
+    ))
 
     // sources
-    sourceDirectories = files([
+    sourceDirectories.setFrom(files([
             android.sourceSets.main.java.srcDirs,
             "src/main/kotlin"
-    ])
-    executionData = files("$buildDir/jacoco/testDebugUnitTest.exec")
+    ]))
+    executionData.setFrom(files("$buildDir/jacoco/testDebugUnitTest.exec"))
 }
 
 dependencies {
