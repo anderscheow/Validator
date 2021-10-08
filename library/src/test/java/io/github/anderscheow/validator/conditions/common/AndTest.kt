@@ -27,10 +27,13 @@ class AndTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchThreeConditionsOutOfThree_ReturnTrue() {
-        and = And()
-                .add(MinRule(5)) // match
-                .add(MaxRule(10)) // match
-                .add(DigitsRule()) // match
+        and = And(
+            listOf(
+                MinRule(5), // Match
+                MaxRule(10), // Match
+                DigitsRule() // Match
+            )
+        )// match
 
         val sample = "1234567"
 
@@ -40,14 +43,19 @@ class AndTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchTwoConditionsOutOfThree_ReturnFalse() {
-        and = And()
-                .add(MinRule(5)) // A
-                .add(MaxRule(10)) // B
-                .add(DigitsRule()) // C
+        and = And(
+            listOf(
+                MinRule(5), // A
+                MaxRule(10), // B
+                DigitsRule() // C
+            )
+        )
 
-        val samples = arrayOf("abcde", // Match A,B
-                "12345678901", // Match A,C
-                "123")// Match B,C
+        val samples = arrayOf(
+            "abcde", // Match A,B
+            "12345678901", // Match A,C
+            "123"
+        )// Match B,C
 
         for (sample in samples) {
             assertFalse("This sample failed: $sample", and.validate(sample))
@@ -57,14 +65,19 @@ class AndTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchOneConditionOutOfThree_ReturnFalse() {
-        and = And()
-                .add(MinRule(5)) // A
-                .add(MaxRule(10)) // B
-                .add(DigitsRule()) // C
+        and = And(
+            listOf(
+                MinRule(5), // A
+                MaxRule(10), // B
+                DigitsRule() // C
+            )
+        )
 
-        val samples = arrayOf("abc 12", // Match A
-                "test-123", // Match B
-                "123456789012345")// Match C
+        val samples = arrayOf(
+            "abc 12", // Match A
+            "test-123", // Match B
+            "123456789012345"
+        ) // Match C
 
         for (sample in samples) {
             assertFalse("This sample failed: $sample", and.validate(sample))
@@ -74,10 +87,13 @@ class AndTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchZeroConditionOutOfThree_ReturnFalse() {
-        and = And()
-                .add(MinRule(5)) // A
-                .add(MaxRule(10)) // B
-                .add(DigitsRule()) // C
+        and = And(
+            listOf(
+                MinRule(5), // A
+                MaxRule(10), // B
+                DigitsRule() // C
+            )
+        )
 
         val samples = arrayOf("testing 123, how are you")
 
@@ -91,7 +107,7 @@ class AndTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Does not match 'And' condition"
 
-        and = And()
+        and = And(MinRule(5))
 
         assertEquals(errorMessage, and.errorString)
     }
@@ -101,7 +117,7 @@ class AndTest {
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
-        and = And(errorMessage)
+        and = And(MinRule(5), errorMessage)
 
         assertEquals(errorMessage, and.errorString)
     }
@@ -111,7 +127,7 @@ class AndTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        and = And(errorRes)
+        and = And(MinRule(5), errorRes)
 
         assertEquals(errorRes, and.errorRes)
     }

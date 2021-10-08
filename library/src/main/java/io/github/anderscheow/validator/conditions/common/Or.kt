@@ -7,11 +7,17 @@ import io.github.anderscheow.validator.rules.Rule
 
 class Or : Condition {
 
-    constructor() : super("Does not match 'Or' condition")
+    constructor(rules: List<Rule>) : super(rules, "Does not match 'Or' condition")
 
-    constructor(@StringRes errorRes: Int) : super(errorRes)
+    constructor(rules: List<Rule>, @StringRes errorRes: Int) : super(rules, errorRes)
 
-    constructor(errorMessage: String) : super(errorMessage)
+    constructor(rules: List<Rule>, errorMessage: String) : super(rules, errorMessage)
+
+    constructor(rule: Rule) : super(listOf(rule), "Does not match 'Or' condition")
+
+    constructor(rule: Rule, @StringRes errorRes: Int) : super(listOf(rule), errorRes)
+
+    constructor(rule: Rule, errorMessage: String) : super(listOf(rule), errorMessage)
 
     override fun validate(value: String?): Boolean {
         for (baseRule in rules) {
@@ -23,17 +29,17 @@ class Or : Condition {
     }
 }
 
-fun Validation.matchAtLeastOneRule(rules: Array<Rule>): Validation {
-    conditions.add(Or().addAll(rules.toList()))
+fun Validation.matchAtLeastOneRule(rules: List<Rule>): Validation {
+    conditions.add(Or(rules))
     return this
 }
 
-fun Validation.matchAtLeastOneRule(rules: Array<Rule>, @StringRes errorRes: Int): Validation {
-    conditions.add(Or(errorRes).addAll(rules.toList()))
+fun Validation.matchAtLeastOneRule(rules: List<Rule>, @StringRes errorRes: Int): Validation {
+    conditions.add(Or(rules, errorRes))
     return this
 }
 
-fun Validation.matchAtLeastOneRule(rules: Array<Rule>, errorMessage: String): Validation {
-    conditions.add(Or(errorMessage).addAll(rules.toList()))
+fun Validation.matchAtLeastOneRule(rules: List<Rule>, errorMessage: String): Validation {
+    conditions.add(Or(rules, errorMessage))
     return this
 }

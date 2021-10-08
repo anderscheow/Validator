@@ -8,21 +8,29 @@ import java.util.*
 
 abstract class Condition : ErrorImpl, Validate {
 
-    val rules: MutableList<Rule> = ArrayList()
+    val rules: List<Rule>
 
-    constructor()
-
-    constructor(@StringRes errorRes: Int) : super(errorRes)
-
-    constructor(errorString: String) : super(errorString)
-
-    fun add(rule: Rule): Condition {
-        rules.add(rule)
-        return this
+    constructor(rules: List<Rule>) {
+        this.rules = rules
     }
 
-    fun addAll(rules: List<Rule>): Condition {
-        this.rules.addAll(rules)
-        return this
+    constructor(rules: List<Rule>, @StringRes errorRes: Int) : super(errorRes) {
+        this.rules = rules
+    }
+
+    constructor(rules: List<Rule>, errorString: String) : super(errorString) {
+        this.rules = rules
+    }
+
+    constructor(rule: Rule) {
+        this.rules = listOf(rule)
+    }
+
+    constructor(rule: Rule, @StringRes errorRes: Int) : super(errorRes) {
+        this.rules = listOf(rule)
+    }
+
+    constructor(rule: Rule, errorString: String) : super(errorString) {
+        this.rules = listOf(rule)
     }
 }

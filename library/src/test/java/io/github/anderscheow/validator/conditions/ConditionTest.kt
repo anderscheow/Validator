@@ -25,11 +25,11 @@ class ConditionTest {
     @Test
     @Throws(Exception::class)
     fun add_OneBaseRule() {
-        condition = object : Condition() {
+        condition = object : Condition(MinRule(5)) {
             override fun validate(value: String?): Boolean {
                 return false
             }
-        }.add(MinRule(5))
+        }
 
         assertEquals(1, condition.rules.size.toLong())
     }
@@ -37,12 +37,11 @@ class ConditionTest {
     @Test
     @Throws(Exception::class)
     fun add_TwoBaseRule() {
-        condition = object : Condition() {
+        condition = object : Condition(listOf(MinRule(5), MaxRule(10))) {
             override fun validate(value: String?): Boolean {
                 return false
             }
-        }.add(MinRule(5))
-                .add(MaxRule(10))
+        }
 
         assertEquals(2, condition.rules.size.toLong())
     }
@@ -50,11 +49,11 @@ class ConditionTest {
     @Test
     @Throws(Exception::class)
     fun addAll_TwoBaseRule() {
-        condition = object : Condition() {
+        condition = object : Condition(listOf(MinRule(5), MaxRule(10))) {
             override fun validate(value: String?): Boolean {
                 return false
             }
-        }.addAll(listOf(MinRule(5), MaxRule(10)))
+        }
 
         assertEquals(2, condition.rules.size.toLong())
     }
@@ -64,7 +63,7 @@ class ConditionTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Invalid input"
 
-        condition = object : Condition() {
+        condition = object : Condition(MinRule(5)) {
             override fun validate(value: String?): Boolean {
                 return false
             }
@@ -81,7 +80,7 @@ class ConditionTest {
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
-        condition = object : Condition(errorMessage) {
+        condition = object : Condition(MinRule(5), errorMessage) {
             override fun validate(value: String?): Boolean {
                 return false
             }
@@ -98,7 +97,7 @@ class ConditionTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        condition = object : Condition(errorRes) {
+        condition = object : Condition(MinRule(5), errorRes) {
             override fun validate(value: String?): Boolean {
                 return false
             }

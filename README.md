@@ -154,7 +154,7 @@ val usernameWithConditionValidation = new Validation(usernameInput)
 ```kotlin
 Validator.with(applicationContext)
             /* Set your mode here, by default is CONTINUOUS */
-            .setMode(Mode.CONTINUOUS));
+            .setMode(Mode.CONTINUOUS)
 ```
 
 | Single                                                          | Continuous                                                      |

@@ -7,15 +7,21 @@ import io.github.anderscheow.validator.rules.Rule
 
 class And : Condition {
 
-    constructor() : super("Does not match 'And' condition")
+    constructor(rules: List<Rule>) : super(rules, "Does not match 'And' condition")
 
-    constructor(@StringRes errorRes: Int) : super(errorRes)
+    constructor(rules: List<Rule>, @StringRes errorRes: Int) : super(rules, errorRes)
 
-    constructor(errorMessage: String) : super(errorMessage)
+    constructor(rules: List<Rule>, errorMessage: String) : super(rules, errorMessage)
+
+    constructor(rule: Rule) : super(listOf(rule), "Does not match 'And' condition")
+
+    constructor(rule: Rule, @StringRes errorRes: Int) : super(listOf(rule), errorRes)
+
+    constructor(rule: Rule, errorMessage: String) : super(listOf(rule), errorMessage)
 
     override fun validate(value: String?): Boolean {
         for (baseRule in rules) {
-            if (!baseRule.validate(value)) {
+            if (baseRule.validate(value).not()) {
                 return false
             }
         }
@@ -23,17 +29,17 @@ class And : Condition {
     }
 }
 
-fun Validation.matchAllRules(rules: Array<Rule>): Validation {
-    conditions.add(And().addAll(rules.toList()))
+fun Validation.matchAllRules(rules: List<Rule>): Validation {
+    conditions.add(And(rules))
     return this
 }
 
-fun Validation.matchAllRules(rules: Array<Rule>, @StringRes errorRes: Int): Validation {
-    conditions.add(And(errorRes).addAll(rules.toList()))
+fun Validation.matchAllRules(rules: List<Rule>, @StringRes errorRes: Int): Validation {
+    conditions.add(And(rules, errorRes))
     return this
 }
 
-fun Validation.matchAllRules(rules: Array<Rule>, errorMessage: String): Validation {
-    conditions.add(And(errorMessage).addAll(rules.toList()))
+fun Validation.matchAllRules(rules: List<Rule>, errorMessage: String): Validation {
+    conditions.add(And(rules, errorMessage))
     return this
 }
