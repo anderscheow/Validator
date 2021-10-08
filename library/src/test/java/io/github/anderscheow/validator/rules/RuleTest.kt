@@ -6,9 +6,9 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class BaseRuleTest {
+class RuleTest {
 
-    private lateinit var baseRule: BaseRule
+    private lateinit var rule: Rule
 
     @Before
     @Throws(Exception::class)
@@ -25,16 +25,16 @@ class BaseRuleTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Invalid input"
 
-        baseRule = object : BaseRule() {
+        rule = object : Rule() {
             override fun validate(value: String?): Boolean {
                 return false
             }
         }
 
-        assertEquals(errorMessage, baseRule.errorString)
-        assertTrue(baseRule.isErrorAvailable)
-        assertTrue(baseRule.isErrorMessageAvailable)
-        assertFalse(baseRule.isErrorResAvailable)
+        assertEquals(errorMessage, rule.errorString)
+        assertTrue(rule.isErrorAvailable)
+        assertTrue(rule.isErrorMessageAvailable)
+        assertFalse(rule.isErrorResAvailable)
     }
 
     @Test
@@ -42,16 +42,16 @@ class BaseRuleTest {
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
-        baseRule = object : BaseRule(errorMessage) {
+        rule = object : Rule(errorMessage) {
             override fun validate(value: String?): Boolean {
                 return false
             }
         }
 
-        assertEquals(errorMessage, baseRule.errorString)
-        assertTrue(baseRule.isErrorAvailable)
-        assertTrue(baseRule.isErrorMessageAvailable)
-        assertFalse(baseRule.isErrorResAvailable)
+        assertEquals(errorMessage, rule.errorString)
+        assertTrue(rule.isErrorAvailable)
+        assertTrue(rule.isErrorMessageAvailable)
+        assertFalse(rule.isErrorResAvailable)
     }
 
     @Test
@@ -59,15 +59,15 @@ class BaseRuleTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        baseRule = object : BaseRule(errorRes) {
+        rule = object : Rule(errorRes) {
             override fun validate(value: String?): Boolean {
                 return false
             }
         }
 
-        assertEquals(errorRes, baseRule.errorRes)
-        assertTrue(baseRule.isErrorAvailable)
-        assertTrue(baseRule.isErrorMessageAvailable)
-        assertTrue(baseRule.isErrorResAvailable)
+        assertEquals(errorRes, rule.errorRes)
+        assertTrue(rule.isErrorAvailable)
+        assertTrue(rule.isErrorMessageAvailable)
+        assertTrue(rule.isErrorResAvailable)
     }
 }

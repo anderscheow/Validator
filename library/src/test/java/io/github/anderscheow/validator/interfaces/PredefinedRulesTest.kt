@@ -389,8 +389,8 @@ class PredefinedRulesTest {
         ))
 
         assertTrue(validation.conditions[0].javaClass == Or::class.java)
-        assertTrue(validation.conditions[0].baseRules[0].javaClass == EmailRule::class.java &&
-                validation.conditions[0].baseRules[1].javaClass == MaxRule::class.java)
+        assertTrue(validation.conditions[0].rules[0].javaClass == EmailRule::class.java &&
+                validation.conditions[0].rules[1].javaClass == MaxRule::class.java)
         assertTrue(validation.conditions[0].validate(sample))
         assertFalse(validation.conditions[0].validate(invalidSample))
     }
@@ -407,8 +407,8 @@ class PredefinedRulesTest {
         ))
 
         assertTrue(validation.conditions[0].javaClass == And::class.java)
-        assertTrue(validation.conditions[0].baseRules[0].javaClass == EmailRule::class.java &&
-                validation.conditions[0].baseRules[1].javaClass == MaxRule::class.java)
+        assertTrue(validation.conditions[0].rules[0].javaClass == EmailRule::class.java &&
+                validation.conditions[0].rules[1].javaClass == MaxRule::class.java)
         assertTrue(validation.conditions[0].validate(sample))
         assertFalse(validation.conditions[0].validate(invalidSample))
     }

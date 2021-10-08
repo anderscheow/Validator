@@ -2,12 +2,12 @@ package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.Validation
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import java.text.DateFormat
 import java.text.ParseException
 import java.util.*
 
-class PastRule : BaseRule {
+class PastRule : Rule {
 
     private var dateFormat: DateFormat
 

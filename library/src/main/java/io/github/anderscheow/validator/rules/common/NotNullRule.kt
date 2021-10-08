@@ -3,9 +3,9 @@ package io.github.anderscheow.validator.rules.common
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.Validation
 
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 
-class NotNullRule : BaseRule {
+class NotNullRule : Rule {
 
     constructor() : super("Value must not be null")
 

@@ -2,10 +2,10 @@ package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.Validation
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import java.util.*
 
-class AllUpperCaseRule : BaseRule {
+class AllUpperCaseRule : Rule {
 
     private var locale: Locale
 

@@ -3,9 +3,9 @@ package io.github.anderscheow.validator.rules.common
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.Validation
 
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 
-open class RegexRule : BaseRule {
+open class RegexRule : Rule {
 
     private var regex: String
 

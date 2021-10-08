@@ -1,14 +1,14 @@
 package io.github.anderscheow.validator.conditions
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import io.github.anderscheow.validator.interfaces.ErrorImpl
 import io.github.anderscheow.validator.interfaces.Validate
 import java.util.*
 
 abstract class Condition : ErrorImpl, Validate {
 
-    val baseRules: MutableList<BaseRule> = ArrayList()
+    val rules: MutableList<Rule> = ArrayList()
 
     constructor()
 
@@ -16,13 +16,13 @@ abstract class Condition : ErrorImpl, Validate {
 
     constructor(errorString: String) : super(errorString)
 
-    fun add(baseRule: BaseRule): Condition {
-        baseRules.add(baseRule)
+    fun add(rule: Rule): Condition {
+        rules.add(rule)
         return this
     }
 
-    fun addAll(baseRules: List<BaseRule>): Condition {
-        this.baseRules.addAll(baseRules)
+    fun addAll(rules: List<Rule>): Condition {
+        this.rules.addAll(rules)
         return this
     }
 }

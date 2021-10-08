@@ -12,7 +12,7 @@ import io.github.anderscheow.validator.conditions.common.And
 import io.github.anderscheow.validator.conditions.common.Or
 import io.github.anderscheow.validator.conditions.common.matchAtLeastOneRule
 import io.github.anderscheow.validator.constant.Mode
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import io.github.anderscheow.validator.rules.common.MaxRule
 import io.github.anderscheow.validator.rules.common.MinRule
 import io.github.anderscheow.validator.rules.regex.EmailRule
@@ -37,12 +37,12 @@ class MainActivity : AppCompatActivity() {
                 .add(Or().add(MinRule(5)).add(MaxRule(10)))
 
         val passwordValidation = Validation(passwordInput)
-                .add(object : BaseRule() {
+                .add(object : Rule() {
                     override fun validate(value: String?): Boolean {
                         return (value as String).isNotEmpty()
                     }
                 })
-                .add(object : BaseRule() {
+                .add(object : Rule() {
                     override fun validate(value: String?): Boolean {
                         return (value as String).length >= 8
                     }

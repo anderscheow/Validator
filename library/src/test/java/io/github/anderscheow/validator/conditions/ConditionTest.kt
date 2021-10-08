@@ -31,7 +31,7 @@ class ConditionTest {
             }
         }.add(MinRule(5))
 
-        assertEquals(1, condition.baseRules.size.toLong())
+        assertEquals(1, condition.rules.size.toLong())
     }
 
     @Test
@@ -44,7 +44,7 @@ class ConditionTest {
         }.add(MinRule(5))
                 .add(MaxRule(10))
 
-        assertEquals(2, condition.baseRules.size.toLong())
+        assertEquals(2, condition.rules.size.toLong())
     }
 
     @Test
@@ -56,7 +56,7 @@ class ConditionTest {
             }
         }.addAll(listOf(MinRule(5), MaxRule(10)))
 
-        assertEquals(2, condition.baseRules.size.toLong())
+        assertEquals(2, condition.rules.size.toLong())
     }
 
     @Test

@@ -5,17 +5,17 @@ package io.github.anderscheow.validator
 import android.content.Context
 import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.conditions.Condition
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import io.github.anderscheow.validator.interfaces.ErrorImpl
 import java.util.*
 
 class Validation(val textInputLayout: TextInputLayout) {
 
-    val baseRules = arrayListOf<BaseRule>()
+    val baseRules = arrayListOf<Rule>()
     val conditions = arrayListOf<Condition>()
 
-    fun add(baseRule: BaseRule): Validation {
-        baseRules.add(baseRule)
+    fun add(rule: Rule): Validation {
+        baseRules.add(rule)
         return this
     }
 

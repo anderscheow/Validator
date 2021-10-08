@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import io.github.anderscheow.validator.interfaces.ErrorImpl
 import io.github.anderscheow.validator.interfaces.Validate
 
-abstract class BaseRule : ErrorImpl, Validate {
+abstract class Rule : ErrorImpl, Validate {
 
     constructor()
 
