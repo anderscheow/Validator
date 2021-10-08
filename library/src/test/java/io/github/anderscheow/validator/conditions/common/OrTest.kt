@@ -92,7 +92,7 @@ class OrTest {
 
         or = Or()
 
-        assertEquals(errorMessage, or.getErrorMessage())
+        assertEquals(errorMessage, or.errorString)
     }
 
     @Test
@@ -102,7 +102,7 @@ class OrTest {
 
         or = Or(errorMessage)
 
-        assertEquals(errorMessage, or.getErrorMessage())
+        assertEquals(errorMessage, or.errorString)
     }
 
     @Test
@@ -112,6 +112,6 @@ class OrTest {
 
         or = Or(errorRes)
 
-        assertEquals(errorRes, or.getErrorRes())
+        assertEquals(errorRes, or.errorRes)
     }
 }

@@ -45,7 +45,7 @@ class NotNullRuleTest {
 
         notNullRule = NotNullRule()
 
-        assertEquals(errorMessage, notNullRule.getErrorMessage())
+        assertEquals(errorMessage, notNullRule.errorString)
     }
 
     @Test
@@ -55,7 +55,7 @@ class NotNullRuleTest {
 
         notNullRule = NotNullRule(errorMessage)
 
-        assertEquals(errorMessage, notNullRule.getErrorMessage())
+        assertEquals(errorMessage, notNullRule.errorString)
     }
 
     @Test
@@ -65,6 +65,6 @@ class NotNullRuleTest {
 
         notNullRule = NotNullRule(errorRes)
 
-        assertEquals(errorRes, notNullRule.getErrorRes())
+        assertEquals(errorRes, notNullRule.errorRes)
     }
 }

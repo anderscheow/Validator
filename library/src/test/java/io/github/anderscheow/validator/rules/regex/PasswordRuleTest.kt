@@ -167,7 +167,7 @@ class PasswordRuleTest {
 
         passwordRule = PasswordRule(PasswordRule.PasswordRegex.ANY)
 
-        assertEquals(errorMessage, passwordRule.getErrorMessage())
+        assertEquals(errorMessage, passwordRule.errorString)
     }
 
     @Test
@@ -177,7 +177,7 @@ class PasswordRuleTest {
 
         passwordRule = PasswordRule(PasswordRule.PasswordRegex.ANY, errorMessage)
 
-        assertEquals(errorMessage, passwordRule.getErrorMessage())
+        assertEquals(errorMessage, passwordRule.errorString)
     }
 
     @Test
@@ -187,6 +187,6 @@ class PasswordRuleTest {
 
         passwordRule = PasswordRule(PasswordRule.PasswordRegex.ANY, errorRes)
 
-        assertEquals(errorRes, passwordRule.getErrorRes())
+        assertEquals(errorRes, passwordRule.errorRes)
     }
 }

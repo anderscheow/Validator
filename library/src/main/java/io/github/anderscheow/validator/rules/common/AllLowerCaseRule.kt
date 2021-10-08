@@ -29,7 +29,7 @@ class AllLowerCaseRule : BaseRule {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toLowerCase(locale) == value
+            return value.lowercase(locale) == value
         }
     }
 }

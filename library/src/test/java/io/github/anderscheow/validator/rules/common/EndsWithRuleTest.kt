@@ -66,7 +66,7 @@ class EndsWithRuleTest {
 
         endsWithRule = EndsWithRule(KEYWORD)
 
-        assertEquals(errorMessage, endsWithRule.getErrorMessage())
+        assertEquals(errorMessage, endsWithRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class EndsWithRuleTest {
 
         endsWithRule = EndsWithRule(KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, endsWithRule.getErrorMessage())
+        assertEquals(errorMessage, endsWithRule.errorString)
     }
 
     @Test
@@ -86,7 +86,7 @@ class EndsWithRuleTest {
 
         endsWithRule = EndsWithRule(KEYWORD, errorRes)
 
-        assertEquals(errorRes, endsWithRule.getErrorRes())
+        assertEquals(errorRes, endsWithRule.errorRes)
     }
 
     companion object {

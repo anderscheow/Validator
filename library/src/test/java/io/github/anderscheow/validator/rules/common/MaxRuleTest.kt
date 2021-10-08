@@ -66,7 +66,7 @@ class MaxRuleTest {
 
         maxRule = MaxRule(MAX_LENGTH)
 
-        assertEquals(errorMessage, maxRule.getErrorMessage())
+        assertEquals(errorMessage, maxRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class MaxRuleTest {
 
         maxRule = MaxRule(MAX_LENGTH, errorMessage)
 
-        assertEquals(errorMessage, maxRule.getErrorMessage())
+        assertEquals(errorMessage, maxRule.errorString)
     }
 
     @Test
@@ -86,7 +86,7 @@ class MaxRuleTest {
 
         maxRule = MaxRule(MAX_LENGTH, errorRes)
 
-        assertEquals(errorRes, maxRule.getErrorRes())
+        assertEquals(errorRes, maxRule.errorRes)
     }
 
     companion object {

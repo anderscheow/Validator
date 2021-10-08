@@ -66,7 +66,7 @@ class StartsWithRuleTest {
 
         startsWithRule = StartsWithRule(KEYWORD)
 
-        assertEquals(errorMessage, startsWithRule.getErrorMessage())
+        assertEquals(errorMessage, startsWithRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class StartsWithRuleTest {
 
         startsWithRule = StartsWithRule(KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, startsWithRule.getErrorMessage())
+        assertEquals(errorMessage, startsWithRule.errorString)
     }
 
     @Test
@@ -86,7 +86,7 @@ class StartsWithRuleTest {
 
         startsWithRule = StartsWithRule(KEYWORD, errorRes)
 
-        assertEquals(errorRes, startsWithRule.getErrorRes())
+        assertEquals(errorRes, startsWithRule.errorRes)
     }
 
     companion object {

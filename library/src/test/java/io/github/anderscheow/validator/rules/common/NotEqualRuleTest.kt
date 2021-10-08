@@ -56,7 +56,7 @@ class NotEqualRuleTest {
 
         notEqualRule = NotEqualRule(STRING_KEYWORD)
 
-        assertEquals(errorMessage, notEqualRule.getErrorMessage())
+        assertEquals(errorMessage, notEqualRule.errorString)
     }
 
     @Test
@@ -66,7 +66,7 @@ class NotEqualRuleTest {
 
         notEqualRule = NotEqualRule(STRING_KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, notEqualRule.getErrorMessage())
+        assertEquals(errorMessage, notEqualRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class NotEqualRuleTest {
 
         notEqualRule = NotEqualRule(STRING_KEYWORD, errorRes)
 
-        assertEquals(errorRes, notEqualRule.getErrorRes())
+        assertEquals(errorRes, notEqualRule.errorRes)
     }
 
     companion object {

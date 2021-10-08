@@ -1,30 +1,14 @@
 package io.github.anderscheow.validator.rules
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.util.ErrorMessage
-import io.github.anderscheow.validator.util.Validate
+import io.github.anderscheow.validator.interfaces.ErrorImpl
+import io.github.anderscheow.validator.interfaces.Validate
 
-abstract class BaseRule : Validate, ErrorMessage {
-
-    @StringRes
-    private var errorRes: Int = -1
-    private var errorString: String = "Invalid input"
+abstract class BaseRule : ErrorImpl, Validate {
 
     constructor()
 
-    constructor(@StringRes errorRes: Int) {
-        this.errorRes = errorRes
-    }
+    constructor(@StringRes errorRes: Int) : super(errorRes)
 
-    constructor(errorString: String) {
-        this.errorString = errorString
-    }
-
-    override fun getErrorRes(): Int {
-        return errorRes
-    }
-
-    override fun getErrorMessage(): String {
-        return errorString
-    }
+    constructor(errorString: String) : super(errorString)
 }

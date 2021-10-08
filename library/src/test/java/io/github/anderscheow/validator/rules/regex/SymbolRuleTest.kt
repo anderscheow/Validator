@@ -85,7 +85,7 @@ class SymbolRuleTest {
 
         symbolRule = SymbolRule()
 
-        assertEquals(errorMessage, symbolRule.getErrorMessage())
+        assertEquals(errorMessage, symbolRule.errorString)
     }
 
     @Test
@@ -95,7 +95,7 @@ class SymbolRuleTest {
 
         symbolRule = SymbolRule(errorMessage)
 
-        assertEquals(errorMessage, symbolRule.getErrorMessage())
+        assertEquals(errorMessage, symbolRule.errorString)
     }
 
     @Test
@@ -105,6 +105,6 @@ class SymbolRuleTest {
 
         symbolRule = SymbolRule(errorRes)
 
-        assertEquals(errorRes, symbolRule.getErrorRes())
+        assertEquals(errorRes, symbolRule.errorRes)
     }
 }

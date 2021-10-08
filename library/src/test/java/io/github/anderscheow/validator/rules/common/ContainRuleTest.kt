@@ -66,7 +66,7 @@ class ContainRuleTest {
 
         containRule = ContainRule(STRING_KEYWORD)
 
-        assertEquals(errorMessage, containRule.getErrorMessage())
+        assertEquals(errorMessage, containRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class ContainRuleTest {
 
         containRule = ContainRule(STRING_KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, containRule.getErrorMessage())
+        assertEquals(errorMessage, containRule.errorString)
     }
 
     @Test
@@ -86,7 +86,7 @@ class ContainRuleTest {
 
         containRule = ContainRule(STRING_KEYWORD, errorRes)
 
-        assertEquals(errorRes, containRule.getErrorRes())
+        assertEquals(errorRes, containRule.errorRes)
     }
 
     companion object {

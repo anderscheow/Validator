@@ -70,7 +70,7 @@ class ConditionTest {
             }
         }
 
-        assertEquals(errorMessage, condition.getErrorMessage())
+        assertEquals(errorMessage, condition.errorString)
         assertTrue(condition.isErrorAvailable)
         assertTrue(condition.isErrorMessageAvailable)
         assertFalse(condition.isErrorResAvailable)
@@ -87,7 +87,7 @@ class ConditionTest {
             }
         }
 
-        assertEquals(errorMessage, condition.getErrorMessage())
+        assertEquals(errorMessage, condition.errorString)
         assertTrue(condition.isErrorAvailable)
         assertTrue(condition.isErrorMessageAvailable)
         assertFalse(condition.isErrorResAvailable)
@@ -104,7 +104,7 @@ class ConditionTest {
             }
         }
 
-        assertEquals(errorRes, condition.getErrorRes())
+        assertEquals(errorRes, condition.errorRes)
         assertTrue(condition.isErrorAvailable)
         assertTrue(condition.isErrorMessageAvailable)
         assertTrue(condition.isErrorResAvailable)

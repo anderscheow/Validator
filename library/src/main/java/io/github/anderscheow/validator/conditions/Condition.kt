@@ -2,35 +2,19 @@ package io.github.anderscheow.validator.conditions
 
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.rules.BaseRule
-import io.github.anderscheow.validator.util.ErrorMessage
-import io.github.anderscheow.validator.util.Validate
+import io.github.anderscheow.validator.interfaces.ErrorImpl
+import io.github.anderscheow.validator.interfaces.Validate
 import java.util.*
 
-abstract class Condition : Validate, ErrorMessage {
-
-    @StringRes
-    private var errorRes: Int = -1
-    private var errorString: String = "Invalid input"
+abstract class Condition : ErrorImpl, Validate {
 
     val baseRules: MutableList<BaseRule> = ArrayList()
 
     constructor()
 
-    constructor(@StringRes errorRes: Int) {
-        this.errorRes = errorRes
-    }
+    constructor(@StringRes errorRes: Int) : super(errorRes)
 
-    constructor(errorString: String) {
-        this.errorString = errorString
-    }
-
-    override fun getErrorRes(): Int {
-        return errorRes
-    }
-
-    override fun getErrorMessage(): String {
-        return errorString
-    }
+    constructor(errorString: String) : super(errorString)
 
     fun add(baseRule: BaseRule): Condition {
         baseRules.add(baseRule)

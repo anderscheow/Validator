@@ -56,7 +56,7 @@ class NotContainRuleTest {
 
         notContainRule = NotContainRule(STRING_KEYWORD)
 
-        assertEquals(errorMessage, notContainRule.getErrorMessage())
+        assertEquals(errorMessage, notContainRule.errorString)
     }
 
     @Test
@@ -66,7 +66,7 @@ class NotContainRuleTest {
 
         notContainRule = NotContainRule(STRING_KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, notContainRule.getErrorMessage())
+        assertEquals(errorMessage, notContainRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class NotContainRuleTest {
 
         notContainRule = NotContainRule(STRING_KEYWORD, errorRes)
 
-        assertEquals(errorRes, notContainRule.getErrorRes())
+        assertEquals(errorRes, notContainRule.errorRes)
     }
 
     companion object {

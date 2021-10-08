@@ -1,4 +1,4 @@
-package io.github.anderscheow.validator.util
+package io.github.anderscheow.validator.interfaces
 
 interface Validate {
 

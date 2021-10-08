@@ -56,7 +56,7 @@ class EqualRuleTest {
 
         equalRule = EqualRule(STRING_KEYWORD)
 
-        assertEquals(errorMessage, equalRule.getErrorMessage())
+        assertEquals(errorMessage, equalRule.errorString)
     }
 
     @Test
@@ -66,7 +66,7 @@ class EqualRuleTest {
 
         equalRule = EqualRule(STRING_KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, equalRule.getErrorMessage())
+        assertEquals(errorMessage, equalRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class EqualRuleTest {
 
         equalRule = EqualRule(STRING_KEYWORD, errorRes)
 
-        assertEquals(errorRes, equalRule.getErrorRes())
+        assertEquals(errorRes, equalRule.errorRes)
     }
 
     companion object {

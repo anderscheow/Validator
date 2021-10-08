@@ -59,7 +59,7 @@ class EmailRuleTest {
 
         emailRule = EmailRule()
 
-        assertEquals(errorMessage, emailRule.getErrorMessage())
+        assertEquals(errorMessage, emailRule.errorString)
     }
 
     @Test
@@ -69,7 +69,7 @@ class EmailRuleTest {
 
         emailRule = EmailRule(errorMessage)
 
-        assertEquals(errorMessage, emailRule.getErrorMessage())
+        assertEquals(errorMessage, emailRule.errorString)
     }
 
     @Test
@@ -79,6 +79,6 @@ class EmailRuleTest {
 
         emailRule = EmailRule(errorRes)
 
-        assertEquals(errorRes, emailRule.getErrorRes())
+        assertEquals(errorRes, emailRule.errorRes)
     }
 }

@@ -66,7 +66,7 @@ class MinRuleTest {
 
         minRule = MinRule(MIN_LENGTH)
 
-        assertEquals(errorMessage, minRule.getErrorMessage())
+        assertEquals(errorMessage, minRule.errorString)
     }
 
     @Test
@@ -76,7 +76,7 @@ class MinRuleTest {
 
         minRule = MinRule(MIN_LENGTH, errorMessage)
 
-        assertEquals(errorMessage, minRule.getErrorMessage())
+        assertEquals(errorMessage, minRule.errorString)
     }
 
     @Test
@@ -86,7 +86,7 @@ class MinRuleTest {
 
         minRule = MinRule(MIN_LENGTH, errorRes)
 
-        assertEquals(errorRes, minRule.getErrorRes())
+        assertEquals(errorRes, minRule.errorRes)
     }
 
     companion object {

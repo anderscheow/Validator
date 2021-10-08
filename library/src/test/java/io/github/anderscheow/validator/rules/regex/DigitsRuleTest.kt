@@ -75,7 +75,7 @@ class DigitsRuleTest {
 
         digitsRule = DigitsRule()
 
-        assertEquals(errorMessage, digitsRule.getErrorMessage())
+        assertEquals(errorMessage, digitsRule.errorString)
     }
 
     @Test
@@ -85,7 +85,7 @@ class DigitsRuleTest {
 
         digitsRule = DigitsRule(errorMessage)
 
-        assertEquals(errorMessage, digitsRule.getErrorMessage())
+        assertEquals(errorMessage, digitsRule.errorString)
     }
 
     @Test
@@ -95,6 +95,6 @@ class DigitsRuleTest {
 
         digitsRule = DigitsRule(errorRes)
 
-        assertEquals(errorRes, digitsRule.getErrorRes())
+        assertEquals(errorRes, digitsRule.errorRes)
     }
 }

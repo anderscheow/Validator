@@ -31,7 +31,7 @@ class BaseRuleTest {
             }
         }
 
-        assertEquals(errorMessage, baseRule.getErrorMessage())
+        assertEquals(errorMessage, baseRule.errorString)
         assertTrue(baseRule.isErrorAvailable)
         assertTrue(baseRule.isErrorMessageAvailable)
         assertFalse(baseRule.isErrorResAvailable)
@@ -48,7 +48,7 @@ class BaseRuleTest {
             }
         }
 
-        assertEquals(errorMessage, baseRule.getErrorMessage())
+        assertEquals(errorMessage, baseRule.errorString)
         assertTrue(baseRule.isErrorAvailable)
         assertTrue(baseRule.isErrorMessageAvailable)
         assertFalse(baseRule.isErrorResAvailable)
@@ -65,7 +65,7 @@ class BaseRuleTest {
             }
         }
 
-        assertEquals(errorRes, baseRule.getErrorRes())
+        assertEquals(errorRes, baseRule.errorRes)
         assertTrue(baseRule.isErrorAvailable)
         assertTrue(baseRule.isErrorMessageAvailable)
         assertTrue(baseRule.isErrorResAvailable)

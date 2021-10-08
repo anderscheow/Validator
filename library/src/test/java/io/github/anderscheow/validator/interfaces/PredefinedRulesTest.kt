@@ -1,4 +1,4 @@
-package io.github.anderscheow.validator.util
+package io.github.anderscheow.validator.interfaces
 
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.common.And
@@ -254,7 +254,7 @@ class PredefinedRulesTest {
 
         val validation = Validation(sample).symbolsOnly()
 
-        assertEquals(validation.baseRules[0].getErrorMessage(), "Value does not contain symbols")
+        assertEquals(validation.baseRules[0].errorString, "Value does not contain symbols")
         assertTrue(validation.baseRules[0].validate(sample))
         assertFalse(validation.baseRules[0].validate(invalidSample))
     }
@@ -267,7 +267,7 @@ class PredefinedRulesTest {
 
         val validation = Validation(sample).allUppercase()
 
-        assertEquals(validation.baseRules[0].getErrorMessage(), "Value is not all uppercase")
+        assertEquals(validation.baseRules[0].errorString, "Value is not all uppercase")
         assertTrue(validation.baseRules[0].validate(sample))
         assertFalse(validation.baseRules[0].validate(invalidSample))
     }
@@ -290,7 +290,7 @@ class PredefinedRulesTest {
 
         val validation = Validation(sample).allLowercase()
 
-        assertEquals(validation.baseRules[0].getErrorMessage(), "Value is not all lowercase")
+        assertEquals(validation.baseRules[0].errorString, "Value is not all lowercase")
         assertTrue(validation.baseRules[0].validate(sample))
         assertFalse(validation.baseRules[0].validate(invalidSample))
     }
@@ -313,7 +313,7 @@ class PredefinedRulesTest {
 
         val validation = Validation(sample).startsWith("hello")
 
-        assertEquals(validation.baseRules[0].getErrorMessage(), "Value is not start with hello")
+        assertEquals(validation.baseRules[0].errorString, "Value is not start with hello")
         assertTrue(validation.baseRules[0].validate(sample))
         assertFalse(validation.baseRules[0].validate(invalidSample))
     }
@@ -336,7 +336,7 @@ class PredefinedRulesTest {
 
         val validation = Validation(sample).endsWith("world")
 
-        assertEquals(validation.baseRules[0].getErrorMessage(), "Value is not end with world")
+        assertEquals(validation.baseRules[0].errorString, "Value is not end with world")
         assertTrue(validation.baseRules[0].validate(sample))
         assertFalse(validation.baseRules[0].validate(invalidSample))
     }

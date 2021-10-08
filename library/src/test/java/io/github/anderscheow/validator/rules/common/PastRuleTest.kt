@@ -85,7 +85,7 @@ class PastRuleTest {
 
         pastRule = PastRule(VALID_DATE_FORMAT)
 
-        assertEquals(errorMessage, pastRule.getErrorMessage())
+        assertEquals(errorMessage, pastRule.errorString)
     }
 
     @Test
@@ -95,7 +95,7 @@ class PastRuleTest {
 
         pastRule = PastRule(VALID_DATE_FORMAT, errorMessage)
 
-        assertEquals(errorMessage, pastRule.getErrorMessage())
+        assertEquals(errorMessage, pastRule.errorString)
     }
 
     @Test
@@ -105,7 +105,7 @@ class PastRuleTest {
 
         pastRule = PastRule(VALID_DATE_FORMAT, errorRes)
 
-        assertEquals(errorRes, pastRule.getErrorRes())
+        assertEquals(errorRes, pastRule.errorRes)
     }
 
     companion object {

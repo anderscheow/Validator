@@ -65,7 +65,7 @@ class AllUpperCaseRuleTest {
 
         allUpperCaseRule = AllUpperCaseRule()
 
-        assertEquals(errorMessage, allUpperCaseRule.getErrorMessage())
+        assertEquals(errorMessage, allUpperCaseRule.errorString)
     }
 
     @Test
@@ -75,7 +75,7 @@ class AllUpperCaseRuleTest {
 
         allUpperCaseRule = AllUpperCaseRule(errorMessage)
 
-        assertEquals(errorMessage, allUpperCaseRule.getErrorMessage())
+        assertEquals(errorMessage, allUpperCaseRule.errorString)
     }
 
     @Test
@@ -85,6 +85,6 @@ class AllUpperCaseRuleTest {
 
         allUpperCaseRule = AllUpperCaseRule(errorRes)
 
-        assertEquals(errorRes, allUpperCaseRule.getErrorRes())
+        assertEquals(errorRes, allUpperCaseRule.errorRes)
     }
 }

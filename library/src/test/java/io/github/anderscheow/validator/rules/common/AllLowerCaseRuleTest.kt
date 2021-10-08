@@ -65,7 +65,7 @@ class AllLowerCaseRuleTest {
 
         allLowerCaseRule = AllLowerCaseRule()
 
-        assertEquals(errorMessage, allLowerCaseRule.getErrorMessage())
+        assertEquals(errorMessage, allLowerCaseRule.errorString)
     }
 
     @Test
@@ -75,7 +75,7 @@ class AllLowerCaseRuleTest {
 
         allLowerCaseRule = AllLowerCaseRule(errorMessage)
 
-        assertEquals(errorMessage, allLowerCaseRule.getErrorMessage())
+        assertEquals(errorMessage, allLowerCaseRule.errorString)
     }
 
     @Test
@@ -85,6 +85,6 @@ class AllLowerCaseRuleTest {
 
         allLowerCaseRule = AllLowerCaseRule(errorRes)
 
-        assertEquals(errorRes, allLowerCaseRule.getErrorRes())
+        assertEquals(errorRes, allLowerCaseRule.errorRes)
     }
 }

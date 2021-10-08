@@ -28,7 +28,7 @@ class AllUpperCaseRule : BaseRule {
         if (value == null) {
             throw NullPointerException()
         } else {
-            return value.toUpperCase(locale) == value
+            return value.uppercase(locale) == value
         }
     }
 }

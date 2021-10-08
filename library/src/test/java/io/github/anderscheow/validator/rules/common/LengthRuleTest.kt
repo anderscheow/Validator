@@ -96,7 +96,7 @@ class LengthRuleTest {
 
         lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
 
-        assertEquals(errorMessage, lengthRule.getErrorMessage())
+        assertEquals(errorMessage, lengthRule.errorString)
     }
 
     @Test
@@ -106,7 +106,7 @@ class LengthRuleTest {
 
         lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH, errorMessage)
 
-        assertEquals(errorMessage, lengthRule.getErrorMessage())
+        assertEquals(errorMessage, lengthRule.errorString)
     }
 
     @Test
@@ -116,7 +116,7 @@ class LengthRuleTest {
 
         lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH, errorRes)
 
-        assertEquals(errorRes, lengthRule.getErrorRes())
+        assertEquals(errorRes, lengthRule.errorRes)
     }
 
     companion object {

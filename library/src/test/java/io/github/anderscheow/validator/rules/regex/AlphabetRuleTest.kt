@@ -95,7 +95,7 @@ class AlphabetRuleTest {
 
         alphabetRule = AlphabetRule()
 
-        assertEquals(errorMessage, alphabetRule.getErrorMessage())
+        assertEquals(errorMessage, alphabetRule.errorString)
     }
 
     @Test
@@ -105,7 +105,7 @@ class AlphabetRuleTest {
 
         alphabetRule = AlphabetRule(errorMessage)
 
-        assertEquals(errorMessage, alphabetRule.getErrorMessage())
+        assertEquals(errorMessage, alphabetRule.errorString)
     }
 
     @Test
@@ -115,6 +115,6 @@ class AlphabetRuleTest {
 
         alphabetRule = AlphabetRule(errorRes)
 
-        assertEquals(errorRes, alphabetRule.getErrorRes())
+        assertEquals(errorRes, alphabetRule.errorRes)
     }
 }

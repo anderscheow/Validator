@@ -93,7 +93,7 @@ class AndTest {
 
         and = And()
 
-        assertEquals(errorMessage, and.getErrorMessage())
+        assertEquals(errorMessage, and.errorString)
     }
 
     @Test
@@ -103,7 +103,7 @@ class AndTest {
 
         and = And(errorMessage)
 
-        assertEquals(errorMessage, and.getErrorMessage())
+        assertEquals(errorMessage, and.errorString)
     }
 
     @Test
@@ -113,6 +113,6 @@ class AndTest {
 
         and = And(errorRes)
 
-        assertEquals(errorRes, and.getErrorRes())
+        assertEquals(errorRes, and.errorRes)
     }
 }

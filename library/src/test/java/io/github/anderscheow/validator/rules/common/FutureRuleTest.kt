@@ -85,7 +85,7 @@ class FutureRuleTest {
 
         futureRule = FutureRule(VALID_DATE_FORMAT)
 
-        assertEquals(errorMessage, futureRule.getErrorMessage())
+        assertEquals(errorMessage, futureRule.errorString)
     }
 
     @Test
@@ -95,7 +95,7 @@ class FutureRuleTest {
 
         futureRule = FutureRule(VALID_DATE_FORMAT, errorMessage)
 
-        assertEquals(errorMessage, futureRule.getErrorMessage())
+        assertEquals(errorMessage, futureRule.errorString)
     }
 
     @Test
@@ -105,7 +105,7 @@ class FutureRuleTest {
 
         futureRule = FutureRule(VALID_DATE_FORMAT, errorRes)
 
-        assertEquals(errorRes, futureRule.getErrorRes())
+        assertEquals(errorRes, futureRule.errorRes)
     }
 
     companion object {

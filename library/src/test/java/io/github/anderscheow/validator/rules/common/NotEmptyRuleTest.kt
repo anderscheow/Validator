@@ -65,7 +65,7 @@ class NotEmptyRuleTest {
 
         notEmptyRule = NotEmptyRule()
 
-        assertEquals(errorMessage, notEmptyRule.getErrorMessage())
+        assertEquals(errorMessage, notEmptyRule.errorString)
     }
 
     @Test
@@ -75,7 +75,7 @@ class NotEmptyRuleTest {
 
         notEmptyRule = NotEmptyRule(errorMessage)
 
-        assertEquals(errorMessage, notEmptyRule.getErrorMessage())
+        assertEquals(errorMessage, notEmptyRule.errorString)
     }
 
     @Test
@@ -85,6 +85,6 @@ class NotEmptyRuleTest {
 
         notEmptyRule = NotEmptyRule(errorRes)
 
-        assertEquals(errorRes, notEmptyRule.getErrorRes())
+        assertEquals(errorRes, notEmptyRule.errorRes)
     }
 }

@@ -95,7 +95,7 @@ class AlphanumericRuleTest {
 
         alphanumericRule = AlphanumericRule()
 
-        assertEquals(errorMessage, alphanumericRule.getErrorMessage())
+        assertEquals(errorMessage, alphanumericRule.errorString)
     }
 
     @Test
@@ -105,7 +105,7 @@ class AlphanumericRuleTest {
 
         alphanumericRule = AlphanumericRule(errorMessage)
 
-        assertEquals(errorMessage, alphanumericRule.getErrorMessage())
+        assertEquals(errorMessage, alphanumericRule.errorString)
     }
 
     @Test
@@ -115,6 +115,6 @@ class AlphanumericRuleTest {
 
         alphanumericRule = AlphanumericRule(errorRes)
 
-        assertEquals(errorRes, alphanumericRule.getErrorRes())
+        assertEquals(errorRes, alphanumericRule.errorRes)
     }
 }

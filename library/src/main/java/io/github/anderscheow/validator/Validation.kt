@@ -6,26 +6,13 @@ import android.content.Context
 import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.conditions.Condition
 import io.github.anderscheow.validator.rules.BaseRule
-import io.github.anderscheow.validator.util.ErrorMessage
+import io.github.anderscheow.validator.interfaces.ErrorImpl
 import java.util.*
 
-class Validation {
+class Validation(val textInputLayout: TextInputLayout) {
 
-    var textInputLayout: TextInputLayout? = null
-        private set
-    var textInput: String? = null
-        private set
-
-    val baseRules: MutableList<BaseRule> = ArrayList()
-    val conditions: MutableList<Condition> = ArrayList()
-
-    constructor(textInputLayout: TextInputLayout) {
-        this.textInputLayout = textInputLayout
-    }
-
-    constructor(textInput: String) {
-        this.textInput = textInput
-    }
+    val baseRules = arrayListOf<BaseRule>()
+    val conditions = arrayListOf<Condition>()
 
     fun add(baseRule: BaseRule): Validation {
         baseRules.add(baseRule)
@@ -37,18 +24,18 @@ class Validation {
         return this
     }
 
-    fun setError(context: Context, errorMessage: ErrorMessage, errors: ArrayList<String>) {
-        if (errorMessage.isErrorAvailable) {
-            textInputLayout?.isErrorEnabled = true
+    fun setError(context: Context, errorImpl: ErrorImpl, errors: ArrayList<String>) {
+        if (errorImpl.isErrorAvailable) {
+            textInputLayout.isErrorEnabled = true
 
-            if (errorMessage.isErrorResAvailable) {
-                val error = context.getString(errorMessage.getErrorRes())
+            if (errorImpl.isErrorResAvailable) {
+                val error = context.getString(errorImpl.errorRes)
                 errors.add(error)
-                textInputLayout?.error = error
-            } else if (errorMessage.isErrorMessageAvailable) {
-                val error = errorMessage.getErrorMessage()
+                textInputLayout.error = error
+            } else if (errorImpl.isErrorMessageAvailable) {
+                val error = errorImpl.errorString
                 errors.add(error)
-                textInputLayout?.error = error
+                textInputLayout.error = error
             }
         } else {
             throw IllegalStateException("Please either use errorRes or errorMessage as your error output")

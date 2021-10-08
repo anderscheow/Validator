@@ -2,7 +2,7 @@ package io.github.anderscheow.validator
 
 import android.content.Context
 import io.github.anderscheow.validator.constant.Mode
-import io.github.anderscheow.validator.util.ErrorMessage
+import io.github.anderscheow.validator.interfaces.ErrorImpl
 
 class Validator private constructor(private val context: Context) {
 
@@ -46,9 +46,9 @@ class Validator private constructor(private val context: Context) {
 
         // Iterate each validation
         for (validation in validations) {
-            val editText = validation.textInputLayout?.editText
+            val editText = validation.textInputLayout.editText
 
-            val value = (editText?.text ?: validation.textInput)?.toString()
+            val value = editText?.text?.toString()
             if (value != null) {
                 val isCurrentValueValid = validate(value, validation, errors)
 
@@ -119,7 +119,7 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun showErrorMessage(validation: Validation, errorMessage: ErrorMessage, errors: ArrayList<String>) {
+    private fun showErrorMessage(validation: Validation, errorMessage: ErrorImpl, errors: ArrayList<String>) {
         validation.setError(context, errorMessage, errors)
     }
 

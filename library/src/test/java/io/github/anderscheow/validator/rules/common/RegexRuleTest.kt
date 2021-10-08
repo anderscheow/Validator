@@ -59,7 +59,7 @@ class RegexRuleTest {
         regexRule = object : RegexRule(REGEX) {
         }
 
-        assertEquals(errorMessage, regexRule.getErrorMessage())
+        assertEquals(errorMessage, regexRule.errorString)
     }
 
     @Test
@@ -70,7 +70,7 @@ class RegexRuleTest {
         regexRule = object : RegexRule(REGEX, errorMessage) {
         }
 
-        assertEquals(errorMessage, regexRule.getErrorMessage())
+        assertEquals(errorMessage, regexRule.errorString)
     }
 
     @Test
@@ -81,7 +81,7 @@ class RegexRuleTest {
         regexRule = object : RegexRule(REGEX, errorRes) {
         }
 
-        assertEquals(errorRes, regexRule.getErrorRes())
+        assertEquals(errorRes, regexRule.errorRes)
     }
 
     companion object {

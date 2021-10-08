@@ -120,7 +120,7 @@ class CreditCardRuleTest {
 
         creditCardRule = CreditCardRule(CreditCardRule.CreditCardRegex.VISA)
 
-        assertEquals(errorMessage, creditCardRule.getErrorMessage())
+        assertEquals(errorMessage, creditCardRule.errorString)
     }
 
     @Test
@@ -130,7 +130,7 @@ class CreditCardRuleTest {
 
         creditCardRule = CreditCardRule(CreditCardRule.CreditCardRegex.VISA, errorMessage)
 
-        assertEquals(errorMessage, creditCardRule.getErrorMessage())
+        assertEquals(errorMessage, creditCardRule.errorString)
     }
 
     @Test
@@ -140,6 +140,6 @@ class CreditCardRuleTest {
 
         creditCardRule = CreditCardRule(CreditCardRule.CreditCardRegex.VISA, errorRes)
 
-        assertEquals(errorRes, creditCardRule.getErrorRes())
+        assertEquals(errorRes, creditCardRule.errorRes)
     }
 }
