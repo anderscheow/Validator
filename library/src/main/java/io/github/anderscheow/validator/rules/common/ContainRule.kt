@@ -39,16 +39,16 @@ class ContainRule : Rule {
 }
 
 fun Validation.contain(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, ignoreCase))
+    rules.add(ContainRule(keyword, ignoreCase))
     return this
 }
 
 fun Validation.contain(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, errorRes, ignoreCase))
+    rules.add(ContainRule(keyword, errorRes, ignoreCase))
     return this
 }
 
 fun Validation.contain(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, errorMessage, ignoreCase))
+    rules.add(ContainRule(keyword, errorMessage, ignoreCase))
     return this
 }

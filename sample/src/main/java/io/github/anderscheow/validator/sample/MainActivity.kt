@@ -8,15 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.Validator
-import io.github.anderscheow.validator.conditions.common.And
-import io.github.anderscheow.validator.conditions.common.Or
+import io.github.anderscheow.validator.conditions.common.and
 import io.github.anderscheow.validator.conditions.common.matchAtLeastOneRule
+import io.github.anderscheow.validator.conditions.common.or
 import io.github.anderscheow.validator.constant.Mode
 import io.github.anderscheow.validator.rules.Rule
 import io.github.anderscheow.validator.rules.common.ContainRule
 import io.github.anderscheow.validator.rules.common.MinRule
 import io.github.anderscheow.validator.rules.regex.EmailRule
 import io.github.anderscheow.validator.rules.regex.email
+import io.github.anderscheow.validator.validation
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,9 +33,17 @@ class MainActivity : AppCompatActivity() {
             .email()
             .matchAtLeastOneRule(listOf(MinRule(5), ContainRule(".com")))
 
-        val usernameWithConditionValidation = Validation(usernameInput)
-            .add(And(EmailRule()))
-            .add(Or(listOf(MinRule(5), ContainRule(".com"))))
+        val usernameWithConditionValidation = validation(usernameInput) {
+            conditions {
+                +and {
+                    +EmailRule()
+                }
+                +or {
+                    +MinRule(8)
+                    +ContainRule(".com")
+                }
+            }
+        }
 
         val passwordValidation = Validation(passwordInput)
             .add(object : Rule() {

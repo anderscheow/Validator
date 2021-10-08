@@ -39,16 +39,16 @@ class NotContainRule : Rule {
 }
 
 fun Validation.notContain(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(NotContainRule(keyword, ignoreCase))
+    rules.add(NotContainRule(keyword, ignoreCase))
     return this
 }
 
 fun Validation.notContain(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
-    baseRules.add(NotContainRule(keyword, errorRes, ignoreCase))
+    rules.add(NotContainRule(keyword, errorRes, ignoreCase))
     return this
 }
 
 fun Validation.notContain(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(NotContainRule(keyword, errorMessage, ignoreCase))
+    rules.add(NotContainRule(keyword, errorMessage, ignoreCase))
     return this
 }

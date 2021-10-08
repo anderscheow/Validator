@@ -31,16 +31,16 @@ open class RegexRule : Rule {
 }
 
 fun Validation.regex(regex: String): Validation {
-    baseRules.add(RegexRule(regex))
+    rules.add(RegexRule(regex))
     return this
 }
 
 fun Validation.regex(regex: String, @StringRes errorRes: Int): Validation {
-    baseRules.add(RegexRule(regex, errorRes))
+    rules.add(RegexRule(regex, errorRes))
     return this
 }
 
 fun Validation.regex(regex: String, errorMessage: String): Validation {
-    baseRules.add(RegexRule(regex, errorMessage))
+    rules.add(RegexRule(regex, errorMessage))
     return this
 }

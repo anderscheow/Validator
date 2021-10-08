@@ -27,16 +27,16 @@ class PasswordRule : RegexRule {
 }
 
 fun Validation.withPassword(regex: PasswordRule.PasswordRegex): Validation {
-    baseRules.add(PasswordRule(regex))
+    rules.add(PasswordRule(regex))
     return this
 }
 
 fun Validation.withPassword(regex: PasswordRule.PasswordRegex, @StringRes errorRes: Int): Validation {
-    baseRules.add(PasswordRule(regex, errorRes))
+    rules.add(PasswordRule(regex, errorRes))
     return this
 }
 
 fun Validation.withPassword(regex: PasswordRule.PasswordRegex, errorMessage: String): Validation {
-    baseRules.add(PasswordRule(regex, errorMessage))
+    rules.add(PasswordRule(regex, errorMessage))
     return this
 }

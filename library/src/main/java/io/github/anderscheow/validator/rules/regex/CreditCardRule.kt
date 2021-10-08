@@ -29,16 +29,16 @@ class CreditCardRule : RegexRule {
 }
 
 fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex): Validation {
-    baseRules.add(CreditCardRule(regex))
+    rules.add(CreditCardRule(regex))
     return this
 }
 
 fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex, @StringRes errorRes: Int): Validation {
-    baseRules.add(CreditCardRule(regex, errorRes))
+    rules.add(CreditCardRule(regex, errorRes))
     return this
 }
 
 fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex, errorMessage: String): Validation {
-    baseRules.add(CreditCardRule(regex, errorMessage))
+    rules.add(CreditCardRule(regex, errorMessage))
     return this
 }

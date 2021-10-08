@@ -12,3 +12,11 @@ abstract class Rule : ErrorImpl, Validate {
 
     constructor(errorString: String) : super(errorString)
 }
+
+class RuleBuilder {
+    val ruleList = arrayListOf<Rule>()
+
+    operator fun Rule.unaryPlus() {
+        ruleList.add(this)
+    }
+}

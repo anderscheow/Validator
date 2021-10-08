@@ -61,16 +61,16 @@ class LengthRule : Rule {
 }
 
 fun Validation.withinRange(minLength: Int, maxLength: Int): Validation {
-    baseRules.add(LengthRule(minLength, maxLength))
+    rules.add(LengthRule(minLength, maxLength))
     return this
 }
 
 fun Validation.withinRange(minLength: Int, maxLength: Int, @StringRes errorRes: Int): Validation {
-    baseRules.add(LengthRule(minLength, maxLength, errorRes))
+    rules.add(LengthRule(minLength, maxLength, errorRes))
     return this
 }
 
 fun Validation.withinRange(minLength: Int, maxLength: Int, errorMessage: String): Validation {
-    baseRules.add(LengthRule(minLength, maxLength, errorMessage))
+    rules.add(LengthRule(minLength, maxLength, errorMessage))
     return this
 }

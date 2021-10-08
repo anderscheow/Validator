@@ -19,16 +19,16 @@ class EmailRule : RegexRule {
 }
 
 fun Validation.email(): Validation {
-    baseRules.add(EmailRule())
+    rules.add(EmailRule())
     return this
 }
 
 fun Validation.email(@StringRes errorRes: Int): Validation {
-    baseRules.add(EmailRule(errorRes))
+    rules.add(EmailRule(errorRes))
     return this
 }
 
 fun Validation.email(errorMessage: String): Validation {
-    baseRules.add(EmailRule(errorMessage))
+    rules.add(EmailRule(errorMessage))
     return this
 }

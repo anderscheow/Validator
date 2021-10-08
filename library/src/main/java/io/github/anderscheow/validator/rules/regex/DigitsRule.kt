@@ -19,16 +19,16 @@ class DigitsRule : RegexRule {
 }
 
 fun Validation.digitsOnly(): Validation {
-    baseRules.add(DigitsRule())
+    rules.add(DigitsRule())
     return this
 }
 
 fun Validation.digitsOnly(@StringRes errorRes: Int): Validation {
-    baseRules.add(DigitsRule(errorRes))
+    rules.add(DigitsRule(errorRes))
     return this
 }
 
 fun Validation.digitsOnly(errorMessage: String): Validation {
-    baseRules.add(DigitsRule(errorMessage))
+    rules.add(DigitsRule(errorMessage))
     return this
 }

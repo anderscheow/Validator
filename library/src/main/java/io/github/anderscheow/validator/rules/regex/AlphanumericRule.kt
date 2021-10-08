@@ -20,16 +20,16 @@ class AlphanumericRule : RegexRule {
 }
 
 fun Validation.alphanumericOnly(): Validation {
-    baseRules.add(AlphanumericRule())
+    rules.add(AlphanumericRule())
     return this
 }
 
 fun Validation.alphanumericOnly(@StringRes errorRes: Int): Validation {
-    baseRules.add(AlphanumericRule(errorRes))
+    rules.add(AlphanumericRule(errorRes))
     return this
 }
 
 fun Validation.alphanumericOnly(errorMessage: String): Validation {
-    baseRules.add(AlphanumericRule(errorMessage))
+    rules.add(AlphanumericRule(errorMessage))
     return this
 }

@@ -39,16 +39,16 @@ class EndsWithRule : Rule {
 }
 
 fun Validation.endsWith(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(EndsWithRule(keyword, ignoreCase))
+    rules.add(EndsWithRule(keyword, ignoreCase))
     return this
 }
 
 fun Validation.endsWith(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
-    baseRules.add(EndsWithRule(keyword, errorRes, ignoreCase))
+    rules.add(EndsWithRule(keyword, errorRes, ignoreCase))
     return this
 }
 
 fun Validation.endsWith(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(EndsWithRule(keyword, errorMessage, ignoreCase))
+    rules.add(EndsWithRule(keyword, errorMessage, ignoreCase))
     return this
 }

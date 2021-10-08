@@ -34,16 +34,16 @@ class EqualRule : Rule {
 }
 
 fun Validation.equalTo(keyword: String): Validation {
-    baseRules.add(EqualRule(keyword))
+    rules.add(EqualRule(keyword))
     return this
 }
 
 fun Validation.equalTo(keyword: String, @StringRes errorRes: Int): Validation {
-    baseRules.add(EqualRule(keyword, errorRes))
+    rules.add(EqualRule(keyword, errorRes))
     return this
 }
 
 fun Validation.equalTo(keyword: String, errorMessage: String): Validation {
-    baseRules.add(EqualRule(keyword, errorMessage))
+    rules.add(EqualRule(keyword, errorMessage))
     return this
 }

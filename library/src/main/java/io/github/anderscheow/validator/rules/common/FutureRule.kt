@@ -43,16 +43,16 @@ class FutureRule : Rule {
 }
 
 fun Validation.future(dateFormat: DateFormat): Validation {
-    baseRules.add(FutureRule(dateFormat))
+    rules.add(FutureRule(dateFormat))
     return this
 }
 
 fun Validation.future(dateFormat: DateFormat, @StringRes errorRes: Int): Validation {
-    baseRules.add(FutureRule(dateFormat, errorRes))
+    rules.add(FutureRule(dateFormat, errorRes))
     return this
 }
 
 fun Validation.future(dateFormat: DateFormat, errorMessage: String): Validation {
-    baseRules.add(FutureRule(dateFormat, errorMessage))
+    rules.add(FutureRule(dateFormat, errorMessage))
     return this
 }

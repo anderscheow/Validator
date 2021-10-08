@@ -40,16 +40,16 @@ class PastRule : Rule {
 }
 
 fun Validation.past(dateFormat: DateFormat): Validation {
-    baseRules.add(PastRule(dateFormat))
+    rules.add(PastRule(dateFormat))
     return this
 }
 
 fun Validation.past(dateFormat: DateFormat, @StringRes errorRes: Int): Validation {
-    baseRules.add(PastRule(dateFormat, errorRes))
+    rules.add(PastRule(dateFormat, errorRes))
     return this
 }
 
 fun Validation.past(dateFormat: DateFormat, errorMessage: String): Validation {
-    baseRules.add(PastRule(dateFormat, errorMessage))
+    rules.add(PastRule(dateFormat, errorMessage))
     return this
 }

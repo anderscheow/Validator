@@ -80,8 +80,8 @@ class Validator private constructor(private val context: Context) {
 
     private fun clearAllErrors() {
         for (validation in validations) {
-            validation.textInputLayout?.error = null
-            validation.textInputLayout?.isErrorEnabled = false
+            validation.textInputLayout.error = null
+            validation.textInputLayout.isErrorEnabled = false
         }
     }
 
@@ -96,8 +96,8 @@ class Validator private constructor(private val context: Context) {
     }
 
     private fun validateBaseRules(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
-        for (baseRule in validation.baseRules) {
-            if (!baseRule.validate(value)) {
+        for (baseRule in validation.rules) {
+            if (baseRule.validate(value).not()) {
                 showErrorMessage(validation, baseRule, errors)
 
                 return false
@@ -109,7 +109,7 @@ class Validator private constructor(private val context: Context) {
 
     private fun validateConditions(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
         for (condition in validation.conditions) {
-            if (!condition.validate(value)) {
+            if (condition.validate(value).not()) {
                 showErrorMessage(validation, condition, errors)
 
                 return false

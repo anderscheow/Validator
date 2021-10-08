@@ -35,16 +35,16 @@ class AllLowerCaseRule : Rule {
 }
 
 fun Validation.allLowercase(locale: Locale = Locale.getDefault()): Validation {
-    baseRules.add(AllLowerCaseRule(locale))
+    rules.add(AllLowerCaseRule(locale))
     return this
 }
 
 fun Validation.allLowercase(@StringRes errorRes: Int, locale: Locale = Locale.getDefault()): Validation {
-    baseRules.add(AllLowerCaseRule(errorRes, locale))
+    rules.add(AllLowerCaseRule(errorRes, locale))
     return this
 }
 
 fun Validation.allLowercase(errorMessage: String, locale: Locale = Locale.getDefault()): Validation {
-    baseRules.add(AllLowerCaseRule(errorMessage, locale))
+    rules.add(AllLowerCaseRule(errorMessage, locale))
     return this
 }

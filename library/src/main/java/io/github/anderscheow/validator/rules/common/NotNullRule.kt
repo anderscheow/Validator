@@ -19,16 +19,16 @@ class NotNullRule : Rule {
 }
 
 fun Validation.notNull(): Validation {
-    baseRules.add(NotNullRule())
+    rules.add(NotNullRule())
     return this
 }
 
 fun Validation.notNull(@StringRes errorRes: Int): Validation {
-    baseRules.add(NotNullRule(errorRes))
+    rules.add(NotNullRule(errorRes))
     return this
 }
 
 fun Validation.notNull(errorMessage: String): Validation {
-    baseRules.add(NotNullRule(errorMessage))
+    rules.add(NotNullRule(errorMessage))
     return this
 }

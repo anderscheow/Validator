@@ -39,16 +39,16 @@ class StartsWithRule : Rule {
 }
 
 fun Validation.startsWith(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(StartsWithRule(keyword, ignoreCase))
+    rules.add(StartsWithRule(keyword, ignoreCase))
     return this
 }
 
 fun Validation.startsWith(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
-    baseRules.add(StartsWithRule(keyword, errorRes, ignoreCase))
+    rules.add(StartsWithRule(keyword, errorRes, ignoreCase))
     return this
 }
 
 fun Validation.startsWith(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(StartsWithRule(keyword, errorMessage, ignoreCase))
+    rules.add(StartsWithRule(keyword, errorMessage, ignoreCase))
     return this
 }

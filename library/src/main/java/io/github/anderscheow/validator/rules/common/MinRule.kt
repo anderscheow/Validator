@@ -34,16 +34,16 @@ class MinRule : Rule {
 }
 
 fun Validation.minimumLength(minLength: Int): Validation {
-    baseRules.add(MinRule(minLength))
+    rules.add(MinRule(minLength))
     return this
 }
 
 fun Validation.minimumLength(minLength: Int, @StringRes errorRes: Int): Validation {
-    baseRules.add(MinRule(minLength, errorRes))
+    rules.add(MinRule(minLength, errorRes))
     return this
 }
 
 fun Validation.minimumLength(minLength: Int, errorMessage: String): Validation {
-    baseRules.add(MinRule(minLength, errorMessage))
+    rules.add(MinRule(minLength, errorMessage))
     return this
 }

@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.Condition
 import io.github.anderscheow.validator.rules.Rule
+import io.github.anderscheow.validator.rules.RuleBuilder
 
 class Or : Condition {
 
@@ -26,6 +27,34 @@ class Or : Condition {
             }
         }
         return false
+    }
+}
+
+class OrBuilder {
+    val ruleList = arrayListOf<Rule>()
+
+    fun rules(init: RuleBuilder.() -> Unit) {
+        ruleList.addAll(RuleBuilder().apply(init).ruleList)
+    }
+
+    operator fun Rule.unaryPlus() {
+        ruleList.add(this)
+    }
+}
+
+fun or(@StringRes errorRes: Int? = null, errorMessage: String? = null, init: OrBuilder.() -> Unit): Or {
+    val or = OrBuilder()
+    or.init()
+    return when {
+        errorRes != null -> {
+            Or(or.ruleList, errorRes)
+        }
+        errorMessage != null -> {
+            Or(or.ruleList, errorMessage)
+        }
+        else -> {
+            Or(or.ruleList)
+        }
     }
 }
 

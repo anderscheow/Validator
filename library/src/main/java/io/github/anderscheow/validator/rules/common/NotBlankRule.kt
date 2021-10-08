@@ -23,16 +23,16 @@ class NotBlankRule : Rule {
 }
 
 fun Validation.notBlank(): Validation {
-    baseRules.add(NotBlankRule())
+    rules.add(NotBlankRule())
     return this
 }
 
 fun Validation.notBlank(@StringRes errorRes: Int): Validation {
-    baseRules.add(NotBlankRule(errorRes))
+    rules.add(NotBlankRule(errorRes))
     return this
 }
 
 fun Validation.notBlank(errorMessage: String): Validation {
-    baseRules.add(NotBlankRule(errorMessage))
+    rules.add(NotBlankRule(errorMessage))
     return this
 }

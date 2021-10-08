@@ -34,16 +34,16 @@ class MaxRule : Rule {
 }
 
 fun Validation.maximumLength(maxLength: Int): Validation {
-    baseRules.add(MaxRule(maxLength))
+    rules.add(MaxRule(maxLength))
     return this
 }
 
 fun Validation.maximumLength(maxLength: Int, @StringRes errorRes: Int): Validation {
-    baseRules.add(MaxRule(maxLength, errorRes))
+    rules.add(MaxRule(maxLength, errorRes))
     return this
 }
 
 fun Validation.maximumLength(maxLength: Int, errorMessage: String): Validation {
-    baseRules.add(MaxRule(maxLength, errorMessage))
+    rules.add(MaxRule(maxLength, errorMessage))
     return this
 }

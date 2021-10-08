@@ -23,16 +23,16 @@ class NotEmptyRule : Rule {
 }
 
 fun Validation.notEmpty(): Validation {
-    baseRules.add(NotEmptyRule())
+    rules.add(NotEmptyRule())
     return this
 }
 
 fun Validation.notEmpty(@StringRes errorRes: Int): Validation {
-    baseRules.add(NotEmptyRule(errorRes))
+    rules.add(NotEmptyRule(errorRes))
     return this
 }
 
 fun Validation.notEmpty(errorMessage: String): Validation {
-    baseRules.add(NotEmptyRule(errorMessage))
+    rules.add(NotEmptyRule(errorMessage))
     return this
 }

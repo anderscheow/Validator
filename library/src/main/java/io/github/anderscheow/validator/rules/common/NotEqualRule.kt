@@ -31,16 +31,16 @@ class NotEqualRule : Rule {
 }
 
 fun Validation.notEqualTo(keyword: String): Validation {
-    baseRules.add(NotEqualRule(keyword))
+    rules.add(NotEqualRule(keyword))
     return this
 }
 
 fun Validation.notEqualTo(keyword: String, @StringRes errorRes: Int): Validation {
-    baseRules.add(NotEqualRule(keyword, errorRes))
+    rules.add(NotEqualRule(keyword, errorRes))
     return this
 }
 
 fun Validation.notEqualTo(keyword: String, errorMessage: String): Validation {
-    baseRules.add(NotEqualRule(keyword, errorMessage))
+    rules.add(NotEqualRule(keyword, errorMessage))
     return this
 }

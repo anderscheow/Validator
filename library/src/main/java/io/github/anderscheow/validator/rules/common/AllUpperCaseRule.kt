@@ -34,16 +34,16 @@ class AllUpperCaseRule : Rule {
 }
 
 fun Validation.allUppercase(locale: Locale = Locale.getDefault()): Validation {
-    baseRules.add(AllUpperCaseRule(locale))
+    rules.add(AllUpperCaseRule(locale))
     return this
 }
 
 fun Validation.allUppercase(@StringRes errorRes: Int, locale: Locale = Locale.getDefault()): Validation {
-    baseRules.add(AllUpperCaseRule(errorRes, locale))
+    rules.add(AllUpperCaseRule(errorRes, locale))
     return this
 }
 
 fun Validation.allUppercase(errorMessage: String, locale: Locale = Locale.getDefault()): Validation {
-    baseRules.add(AllUpperCaseRule(errorMessage, locale))
+    rules.add(AllUpperCaseRule(errorMessage, locale))
     return this
 }

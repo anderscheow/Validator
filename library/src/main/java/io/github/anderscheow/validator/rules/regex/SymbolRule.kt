@@ -19,16 +19,16 @@ class SymbolRule : RegexRule {
 }
 
 fun Validation.symbolsOnly(): Validation {
-    baseRules.add(SymbolRule())
+    rules.add(SymbolRule())
     return this
 }
 
 fun Validation.symbolsOnly(@StringRes errorRes: Int): Validation {
-    baseRules.add(SymbolRule(errorRes))
+    rules.add(SymbolRule(errorRes))
     return this
 }
 
 fun Validation.symbolsOnly(errorMessage: String): Validation {
-    baseRules.add(SymbolRule(errorMessage))
+    rules.add(SymbolRule(errorMessage))
     return this
 }
