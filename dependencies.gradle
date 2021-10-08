@@ -7,28 +7,19 @@ ext {
 
     /* build plugins versions */
     build = [
-            gradle   : '4.0.0',
-            kotlin   : "1.3.40",
-            dcendents: "2.1",
-            dokka    : "0.9.17",
-            jacoco   : "0.1.2",
+            gradle   : '4.2.2',
+            kotlin   : "1.5.31",
     ]
 
     buildPlugins = [
             gradle      : "com.android.tools.build:gradle:$build.gradle",
             kotlin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$build.kotlin",
-            dcendents   : "com.github.dcendents:android-maven-gradle-plugin:$build.dcendents",
-            dokka       : "org.jetbrains.dokka:dokka-android-gradle-plugin:$build.dokka",
-            jacoco      : "com.dicedmelon.gradle:jacoco-android:$build.jacoco",
     ]
 
     /* dependencies versions */
-    def androidx_app_compat_version = '1.1.0'
-    def androidx_material_version = '1.0.0'
-    def androidx_runner_version = '1.1.0'
-    def androidx_espresso_core_version = '3.1.0'
-    def junit_version = '4.12'
-    def mockito_version = '2.7.22'
+    def androidx_app_compat_version = '1.3.1'
+    def androidx_material_version = '1.4.0'
+    def junit_version = '4.13.2'
 
     def libs = [
             /* android support */
@@ -41,9 +32,6 @@ ext {
 
     def testLibs = [
             jnuit                       :   "junit:junit:$junit_version",
-            androidSupportRunner        :   "androidx.test:runner:$androidx_runner_version",
-            androidSupportEspressoCore  :   "androidx.test.espresso:espresso-core:$androidx_espresso_core_version",
-            mockito                     :   "org.mockito:mockito-core:$mockito_version",
     ]
 
     def modules = [
@@ -59,7 +47,6 @@ ext {
 
             /* test */
             [configuration: "testImplementation", dependency: testLibs.jnuit],
-            [configuration: "testImplementation", dependency: testLibs.mockito],
     ]
 
     sampleModuleDependencies = [
@@ -77,18 +64,14 @@ ext {
     def plugins = [
             android_library             : 'com.android.library',
             android_application         : 'com.android.application',
-            dokka                       : 'org.jetbrains.dokka-android',
             kotlin_android              : 'kotlin-android',
             kotlin_android_extensions   : 'kotlin-android-extensions',
             kotlin_kapt                 : 'kotlin-kapt',
-            jacoco                      : 'jacoco',
     ]
 
     libraryModulePlugins = [
             plugins.android_library,
-            plugins.dokka,
             plugins.kotlin_android,
-            plugins.jacoco,
     ]
 
     sampleModulePlugins = [
