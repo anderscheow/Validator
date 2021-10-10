@@ -5,7 +5,7 @@
 ## Download
 ```groovy
 dependencies {
-  implementation 'com.github.anderscheow:validator:2.2.1'
+  implementation 'com.github.anderscheow:validator:3.0.0'
 }
 ```
 
@@ -66,42 +66,16 @@ Usage
 * matchAtLeastOneRule (Only for Validation)
 * matchAllRules (Only for Validation)
 
-#### You can create your own Predefined Rules
+### Beside from using the provided Rules, you can create your own Rule by extending Rule (Create as many as you want)
 
 ```kotlin
-// For Validation
-fun Validation.customPredefinedRule(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, ignoreCase))
-    return this
-}
- 
-// For Condition
-fun Condition.customPredefinedRule(keyword: String, ignoreCase: Boolean = false): Condition {
-    baseRules.add(ContainRule(keyword, ignoreCase))
-    return this
-}
-```
-
-### Beside from using the provided Rules, you can create your own Rule by extending BaseRule (Create as many as you want)
-
-```kotlin
-class CustomRule : BaseRule {
+class CustomRule : Rule("Value doesn't match 'ABC'") {
  
     override fun validate(value: String?): Boolean {
         if (value == null) {
             throw NullPointerException()
         }
         return value == "ABC"
-    }
- 
-    // You can use this to return error message
-    override fun getErrorMessage(): String {
-        return "Value doesn't match 'ABC'"
-    }
- 
-    // or use this to return error message as StringRes
-    override fun getErrorRes(): Int {
-        return R.string.error_not_match
     }
 }
 ```
@@ -112,49 +86,37 @@ class CustomRule : BaseRule {
 // Username
 // Input: hello@test.com
 val usernameInput = findViewById(R.id.layout_username)
-val usernameValidation = Validation(usernameInput)
-                .addRule(
-                    // You can also override the default error message
-                    NotEmptyRule(R.string.error_not_empty)
-                     
-                    // Use either errorRes() or errorMessage()
-                    // Note: errorRes() has higher priority
-                    NotEmptyRule("Value is empty")
-                )
-                .addRule(CustomRule())
+val usernameValidation = validation(usernameInput) {
+    conditions {
+        +and(errorMessage = "Does not match 'And' condition") {
+            +email(errorMessage = "")
+            +endsWith(keyword = ".com", errorMessage = "")
+        }
+        +or(errorMessage = "Does not match 'Or' condition") {
+            +minimumLength(minLength = 8, errorMessage = "")
+            +contain(keyword = "hello", errorMessage = "")
+        }
+    }
+}
  
 // Password
 // Input: 12345abc
 val passwordInput = findViewById(R.id.layout_password)
-val passwordValidation = Validation(passwordInput)
-                .addRule(NotEmptyRule())
-                .withPassword(PasswordRegex.ALPHA_NUMERIC)
-                .minimumLength(8)
-```
-
-### Condition
-
-```kotlin
-// And Condition
-val usernameWithConditionValidation = Validation(usernameInput)
-                .add(And().add(EmailRule()))
- 
-// Or Condition
-val usernameWithConditionValidation = Validation(usernameInput)
-                .add(Or().add(MinRule(5)).add(MaxRule(10)))
- 
-// Both by using Predefined Rules
-val usernameWithConditionValidation = new Validation(usernameInput)
-                .matchAllRules(listOf(EmailRule()))
-                .matchAtLeastOneRule(listOf(MinRule(5), MaxRule(10)))
+val passwordValidation = validation(passwordInput) {
+    rules {
+        +notEmpty(errorMessage = "Input is empty")
+        +minimumLength(minLength = 8, errorMessage = "Must have at least 8 characters")
+    }
+}
 ```
 
 ### Mode
 
 ```kotlin
-Validator.with(applicationContext)
-            /* Set your mode here, by default is CONTINUOUS */
-            .setMode(Mode.CONTINUOUS)
+validator(applicationContext) {
+    /* Set your mode here, by default is CONTINUOUS */
+    mode = Mode.SINGLE
+}
 ```
 
 | Single                                                          | Continuous                                                      |
@@ -166,19 +128,24 @@ Validator.with(applicationContext)
 
 ```kotlin
 // Order of the values on the success callback follow the sequence of your Validation object
-Validator.with(applicationContext)
-            .setMode(Mode.CONTINUOUS)
-            .setListener(object : Validator.OnValidateListener {
-                    override fun onValidateSuccess(values: List<String>) {
-                        Log.d("MainActivity", values.toTypedArray().contentToString())
-                        Toast.makeText(applicationContext, "Validate successfully", Toast.LENGTH_LONG).show()
-                    }
+validator(applicationContext) {
+    mode = Mode.SINGLE
+    listener = object : Validator.OnValidateListener {
+        override fun onValidateSuccess(values: List<String>) {
+            Log.d("MainActivity", values.toTypedArray().contentToString())
+            Toast.makeText(
+                applicationContext,
+                "Validate successfully",
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
-                    override fun onValidateFailed(errors: List<String>) {
-                        Log.e("MainActivity", errors.toTypedArray().contentToString())
-                    }
-                })
-            .validate(usernameValidation, passwordValidation)
+        override fun onValidateFailed(errors: List<String>) {
+            Log.e("MainActivity", errors.toTypedArray().contentToString())
+        }
+    }
+    validate(usernameValidation, passwordValidation)
+}
 ```
 
 * Introduce Validator library

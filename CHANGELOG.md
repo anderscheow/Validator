@@ -1,5 +1,15 @@
 ## Changelog
 
+**3.0.0**  
+*Breaking Changes*
+* Renamed `BaseRule` to `Rule`
+* No longer support empty constructor for `Rule`, `Condition`, `And` and `Or`
+* Removed support of extension methods for `Rule` and `Condition`. Encouraged to use Kotlin DSL instead
+* No longer accept `String` as input in constructor of `Validation`
+
+*New Feature*
+* Added Kotlin DSL support for `Rule`, `Condition`, `And`, `Or`, `Validation` and `Validator`
+
 **2.2.1**
 
 * Added `Validation.notNull`, `Validation.notEmpty`, `Validation.notBlank`, `Validation.regex`, `Validation.past` and `Validation.future`
