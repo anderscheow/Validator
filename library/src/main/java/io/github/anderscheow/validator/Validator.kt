@@ -7,10 +7,8 @@ import io.github.anderscheow.validator.interfaces.ErrorImpl
 class Validator private constructor(private val context: Context) {
 
     private var mode = Mode.CONTINUOUS
-
     private var listener: OnValidateListener? = null
-
-    private var validations = ArrayList<Validation>()
+    private var validations = mutableListOf<Validation>()
 
     interface OnValidateListener {
         @Throws(IndexOutOfBoundsException::class)
@@ -140,9 +138,28 @@ class Validator private constructor(private val context: Context) {
     }
 
     companion object {
-
         fun with(context: Context): Validator {
             return Validator(context)
         }
+    }
+}
+
+class ValidatorBuilder {
+    var mode = Mode.CONTINUOUS
+    lateinit var listener: Validator.OnValidateListener
+    lateinit var validations: Array<Validation>
+
+    fun validate(vararg validations: Validation) {
+        this.validations = arrayOf(*validations)
+    }
+}
+
+fun validator(context: Context, init: ValidatorBuilder.() -> Unit): Validator {
+    val validator = ValidatorBuilder()
+    validator.init()
+    return Validator.with(context).apply {
+        this.setMode(validator.mode)
+        this.setListener(validator.listener)
+        this.validate(*validator.validations)
     }
 }

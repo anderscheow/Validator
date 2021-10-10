@@ -16,6 +16,7 @@ import io.github.anderscheow.validator.rules.common.minimumLength
 import io.github.anderscheow.validator.rules.common.notEmpty
 import io.github.anderscheow.validator.rules.regex.email
 import io.github.anderscheow.validator.validation
+import io.github.anderscheow.validator.validator
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,9 +49,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
-            Validator.with(applicationContext)
-                .setMode(Mode.SINGLE)
-                .setListener(object : Validator.OnValidateListener {
+            validator(applicationContext) {
+                mode = Mode.SINGLE
+                listener = object : Validator.OnValidateListener {
                     override fun onValidateSuccess(values: List<String>) {
                         Log.d("MainActivity", values.toTypedArray().contentToString())
                         Toast.makeText(
@@ -63,8 +64,9 @@ class MainActivity : AppCompatActivity() {
                     override fun onValidateFailed(errors: List<String>) {
                         Log.e("MainActivity", errors.toTypedArray().contentToString())
                     }
-                })
-                .validate(usernameValidation, passwordValidation)
+                }
+                validate(usernameValidation, passwordValidation)
+            }
         }
     }
 }
