@@ -7,7 +7,7 @@ ext {
 
     /* build plugins versions */
     build = [
-            gradle   : '4.2.2',
+            gradle   : "7.0.2",
             kotlin   : "1.5.31",
     ]
 
@@ -67,11 +67,13 @@ ext {
             kotlin_android              : 'kotlin-android',
             kotlin_android_extensions   : 'kotlin-android-extensions',
             kotlin_kapt                 : 'kotlin-kapt',
+            maven_publish               : 'maven-publish',
     ]
 
     libraryModulePlugins = [
             plugins.android_library,
             plugins.kotlin_android,
+            plugins.maven_publish,
     ]
 
     sampleModulePlugins = [
