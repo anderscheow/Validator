@@ -11,7 +11,7 @@ abstract class Rule : ErrorImpl, Validate {
     constructor(errorString: String) : super(errorString)
 }
 
-class RuleBuilder {
+class RulesBuilder {
     val ruleList = arrayListOf<Rule>()
 
     operator fun Rule.unaryPlus() {

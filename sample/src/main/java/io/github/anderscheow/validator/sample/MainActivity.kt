@@ -6,13 +6,14 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.Validator
+import io.github.anderscheow.validator.conditions.common.and
 import io.github.anderscheow.validator.conditions.common.or
 import io.github.anderscheow.validator.constant.Mode
-import io.github.anderscheow.validator.rules.Rule
-import io.github.anderscheow.validator.rules.common.ContainRule
-import io.github.anderscheow.validator.rules.common.MinRule
+import io.github.anderscheow.validator.rules.common.contain
+import io.github.anderscheow.validator.rules.common.endsWith
+import io.github.anderscheow.validator.rules.common.minimumLength
+import io.github.anderscheow.validator.rules.common.notEmpty
 import io.github.anderscheow.validator.rules.regex.email
 import io.github.anderscheow.validator.validation
 
@@ -27,28 +28,24 @@ class MainActivity : AppCompatActivity() {
         val submitButton = findViewById<Button>(R.id.button_submit)
 
         val usernameValidation = validation(usernameInput) {
-            rules {
-                +email(errorMessage = "Invalid email")
-            }
             conditions {
+                +and(errorMessage = "Does not match 'And' condition") {
+                    +email(errorMessage = "")
+                    +endsWith(keyword = ".com", errorMessage = "")
+                }
                 +or(errorMessage = "Does not match 'Or' condition") {
-                    +MinRule(8, errorMessage = "Minimum 8 characters")
-                    +ContainRule(".com", errorMessage = "Must contain '.com'")
+                    +minimumLength(minLength = 8, errorMessage = "")
+                    +contain(keyword = "hello", errorMessage = "")
                 }
             }
         }
 
-        val passwordValidation = Validation(passwordInput)
-            .add(object : Rule("Input is empty") {
-                override fun validate(value: String?): Boolean {
-                    return (value as String).isNotEmpty()
-                }
-            })
-            .add(object : Rule("Invalid input, please try again") {
-                override fun validate(value: String?): Boolean {
-                    return (value as String).length >= 8
-                }
-            })
+        val passwordValidation = validation(passwordInput) {
+            rules {
+                +notEmpty(errorMessage = "Input is empty")
+                +minimumLength(minLength = 8, errorMessage = "Must have at least 8 characters")
+            }
+        }
 
         submitButton.setOnClickListener {
             Validator.with(applicationContext)

@@ -1,5 +1,6 @@
 package io.github.anderscheow.validator.interfaces
 
+import android.content.Context
 import androidx.annotation.StringRes
 
 abstract class ErrorImpl {
@@ -26,5 +27,19 @@ abstract class ErrorImpl {
 
     constructor(errorString: String) {
         this.errorString = errorString
+    }
+
+    fun getErrorMessage(context: Context): String {
+        return when {
+            isErrorResAvailable -> {
+                context.getString(errorRes)
+            }
+            isErrorMessageAvailable -> {
+                errorString
+            }
+            else -> {
+                throw IllegalStateException("Please either use errorRes or errorMessage as your error output")
+            }
+        }
     }
 }

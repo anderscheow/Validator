@@ -2,8 +2,9 @@ package io.github.anderscheow.validator.conditions.common
 
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.conditions.Condition
+import io.github.anderscheow.validator.conditions.ConditionBuilder
+import io.github.anderscheow.validator.conditions.ConditionsBuilder
 import io.github.anderscheow.validator.rules.Rule
-import io.github.anderscheow.validator.rules.RuleBuilder
 
 class And : Condition {
 
@@ -25,32 +26,23 @@ class And : Condition {
     }
 }
 
-class AndBuilder {
-    val ruleList = arrayListOf<Rule>()
-
-    fun rules(init: RuleBuilder.() -> Unit) {
-        ruleList.addAll(RuleBuilder().apply(init).ruleList)
-    }
-
-    operator fun Rule.unaryPlus() {
-        ruleList.add(this)
-    }
+class AndBuilder : ConditionBuilder() {
 }
 
-fun and(
-    @StringRes errorRes: Int? = null,
-    errorMessage: String? = null,
+fun ConditionsBuilder.and(
+    @StringRes errorRes: Int,
     init: AndBuilder.() -> Unit
 ): And {
     val and = AndBuilder()
     and.init()
-    return when {
-        errorRes != null -> {
-            And(and.ruleList, errorRes)
-        }
-        errorMessage != null -> {
-            And(and.ruleList, errorMessage)
-        }
-        else -> throw IllegalStateException("errorRes or errorMessage cannot be null")
-    }
+    return And(and.ruleList, errorRes)
+}
+
+fun ConditionsBuilder.and(
+    errorMessage: String,
+    init: AndBuilder.() -> Unit
+): And {
+    val and = AndBuilder()
+    and.init()
+    return And(and.ruleList, errorMessage)
 }

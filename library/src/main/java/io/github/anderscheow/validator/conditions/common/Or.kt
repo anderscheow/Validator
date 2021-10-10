@@ -2,8 +2,9 @@ package io.github.anderscheow.validator.conditions.common
 
 import androidx.annotation.StringRes
 import io.github.anderscheow.validator.conditions.Condition
+import io.github.anderscheow.validator.conditions.ConditionBuilder
+import io.github.anderscheow.validator.conditions.ConditionsBuilder
 import io.github.anderscheow.validator.rules.Rule
-import io.github.anderscheow.validator.rules.RuleBuilder
 
 class Or : Condition {
 
@@ -25,32 +26,23 @@ class Or : Condition {
     }
 }
 
-class OrBuilder {
-    val ruleList = arrayListOf<Rule>()
-
-    fun rules(init: RuleBuilder.() -> Unit) {
-        ruleList.addAll(RuleBuilder().apply(init).ruleList)
-    }
-
-    operator fun Rule.unaryPlus() {
-        ruleList.add(this)
-    }
+class OrBuilder : ConditionBuilder() {
 }
 
-fun or(
-    @StringRes errorRes: Int? = null,
-    errorMessage: String? = null,
+fun ConditionsBuilder.or(
+    @StringRes errorRes: Int,
     init: OrBuilder.() -> Unit
 ): Or {
     val or = OrBuilder()
     or.init()
-    return when {
-        errorRes != null -> {
-            Or(or.ruleList, errorRes)
-        }
-        errorMessage != null -> {
-            Or(or.ruleList, errorMessage)
-        }
-        else -> throw IllegalStateException("errorRes or errorMessage cannot be null")
-    }
+    return Or(or.ruleList, errorRes)
+}
+
+fun ConditionsBuilder.or(
+    errorMessage: String,
+    init: OrBuilder.() -> Unit
+): Or {
+    val or = OrBuilder()
+    or.init()
+    return Or(or.ruleList, errorMessage)
 }

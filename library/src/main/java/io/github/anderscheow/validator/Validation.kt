@@ -5,10 +5,10 @@ package io.github.anderscheow.validator
 import android.content.Context
 import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.conditions.Condition
-import io.github.anderscheow.validator.conditions.ConditionBuilder
+import io.github.anderscheow.validator.conditions.ConditionsBuilder
 import io.github.anderscheow.validator.interfaces.ErrorImpl
 import io.github.anderscheow.validator.rules.Rule
-import io.github.anderscheow.validator.rules.RuleBuilder
+import io.github.anderscheow.validator.rules.RulesBuilder
 import java.util.*
 
 class Validation(val textInputLayout: TextInputLayout) {
@@ -27,21 +27,10 @@ class Validation(val textInputLayout: TextInputLayout) {
     }
 
     fun setError(context: Context, errorImpl: ErrorImpl, errors: ArrayList<String>) {
-        if (errorImpl.isErrorAvailable) {
-            textInputLayout.isErrorEnabled = true
-
-            if (errorImpl.isErrorResAvailable) {
-                val error = context.getString(errorImpl.errorRes)
-                errors.add(error)
-                textInputLayout.error = error
-            } else if (errorImpl.isErrorMessageAvailable) {
-                val error = errorImpl.errorString
-                errors.add(error)
-                textInputLayout.error = error
-            }
-        } else {
-            throw IllegalStateException("Please either use errorRes or errorMessage as your error output")
-        }
+        val error = errorImpl.getErrorMessage(context)
+        textInputLayout.isErrorEnabled = true
+        errors.add(error)
+        textInputLayout.error = error
     }
 }
 
@@ -49,12 +38,12 @@ class ValidationBuilder {
     val ruleList = arrayListOf<Rule>()
     val conditionList = arrayListOf<Condition>()
 
-    fun rules(init: RuleBuilder.() -> Unit) {
-        ruleList.addAll(RuleBuilder().apply(init).ruleList)
+    fun rules(init: RulesBuilder.() -> Unit) {
+        ruleList.addAll(RulesBuilder().apply(init).ruleList)
     }
 
-    fun conditions(init: ConditionBuilder.() -> Unit) {
-        conditionList.addAll(ConditionBuilder().apply(init).conditionList)
+    fun conditions(init: ConditionsBuilder.() -> Unit) {
+        conditionList.addAll(ConditionsBuilder().apply(init).conditionList)
     }
 }
 

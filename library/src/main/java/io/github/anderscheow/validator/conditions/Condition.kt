@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import io.github.anderscheow.validator.interfaces.ErrorImpl
 import io.github.anderscheow.validator.interfaces.Validate
 import io.github.anderscheow.validator.rules.Rule
+import io.github.anderscheow.validator.rules.RulesBuilder
 
 abstract class Condition : ErrorImpl, Validate {
 
@@ -26,10 +27,26 @@ abstract class Condition : ErrorImpl, Validate {
     }
 }
 
-class ConditionBuilder {
+class ConditionsBuilder {
     val conditionList = arrayListOf<Condition>()
 
     operator fun Condition.unaryPlus() {
         conditionList.add(this)
+    }
+}
+
+open class ConditionBuilder {
+    val ruleList = arrayListOf<Rule>()
+
+    fun rules(init: RulesBuilder.() -> Unit) {
+        ruleList.addAll(RulesBuilder().apply(init).ruleList)
+    }
+
+    operator fun Rule.unaryPlus() {
+        ruleList.add(this)
+    }
+
+    operator fun List<Rule>.unaryPlus() {
+        ruleList.addAll(this)
     }
 }
