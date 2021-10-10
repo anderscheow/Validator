@@ -7,7 +7,7 @@ ext {
 
     /* build plugins versions */
     build = [
-            gradle   : '4.2.2',
+            gradle   : '7.0.2',
             kotlin   : "1.5.31",
     ]
 
