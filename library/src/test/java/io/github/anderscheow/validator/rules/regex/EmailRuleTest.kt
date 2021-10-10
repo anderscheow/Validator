@@ -23,7 +23,7 @@ class EmailRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        emailRule = EmailRule()
+        emailRule = EmailRule("")
 
         emailRule.validate(null)
     }
@@ -31,7 +31,7 @@ class EmailRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidSamples_ReturnTrue() {
-        emailRule = EmailRule()
+        emailRule = EmailRule("")
 
         val samples = arrayOf("test@hotmail.com", "test@hotmail.co.uk", "test@hotmail.my")
 
@@ -43,7 +43,7 @@ class EmailRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_InvalidSamples_ReturnFalse() {
-        emailRule = EmailRule()
+        emailRule = EmailRule("")
 
         val samples = arrayOf("test@hotmail.c", "test@hotmail.co.")
 
@@ -54,22 +54,12 @@ class EmailRuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value does not match email regex"
-
-        emailRule = EmailRule()
-
-        assertEquals(errorMessage, emailRule.getErrorMessage())
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 
         emailRule = EmailRule(errorMessage)
 
-        assertEquals(errorMessage, emailRule.getErrorMessage())
+        assertEquals(errorMessage, emailRule.errorString)
     }
 
     @Test
@@ -79,6 +69,6 @@ class EmailRuleTest {
 
         emailRule = EmailRule(errorRes)
 
-        assertEquals(errorRes, emailRule.getErrorRes())
+        assertEquals(errorRes, emailRule.errorRes)
     }
 }

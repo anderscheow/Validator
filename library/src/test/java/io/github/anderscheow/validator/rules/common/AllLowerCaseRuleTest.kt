@@ -23,7 +23,7 @@ class AllLowerCaseRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        allLowerCaseRule = AllLowerCaseRule()
+        allLowerCaseRule = AllLowerCaseRule("")
 
         allLowerCaseRule.validate(null)
     }
@@ -31,7 +31,7 @@ class AllLowerCaseRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
-        allLowerCaseRule = AllLowerCaseRule()
+        allLowerCaseRule = AllLowerCaseRule("")
 
         val sample = "lowercase"
 
@@ -41,7 +41,7 @@ class AllLowerCaseRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnFalse() {
-        allLowerCaseRule = AllLowerCaseRule()
+        allLowerCaseRule = AllLowerCaseRule("")
 
         val sample = "UPPERCASE"
 
@@ -51,21 +51,11 @@ class AllLowerCaseRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_MixStringSample_ReturnFalse() {
-        allLowerCaseRule = AllLowerCaseRule()
+        allLowerCaseRule = AllLowerCaseRule("")
 
         val sample = "lowerUpper"
 
         assertFalse(allLowerCaseRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value is not all lowercase"
-
-        allLowerCaseRule = AllLowerCaseRule()
-
-        assertEquals(errorMessage, allLowerCaseRule.getErrorMessage())
     }
 
     @Test
@@ -75,7 +65,7 @@ class AllLowerCaseRuleTest {
 
         allLowerCaseRule = AllLowerCaseRule(errorMessage)
 
-        assertEquals(errorMessage, allLowerCaseRule.getErrorMessage())
+        assertEquals(errorMessage, allLowerCaseRule.errorString)
     }
 
     @Test
@@ -85,6 +75,6 @@ class AllLowerCaseRuleTest {
 
         allLowerCaseRule = AllLowerCaseRule(errorRes)
 
-        assertEquals(errorRes, allLowerCaseRule.getErrorRes())
+        assertEquals(errorRes, allLowerCaseRule.errorRes)
     }
 }

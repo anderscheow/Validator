@@ -1,44 +1,52 @@
 package io.github.anderscheow.validator.conditions
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.rules.BaseRule
-import io.github.anderscheow.validator.util.ErrorMessage
-import io.github.anderscheow.validator.util.Validate
-import java.util.*
+import io.github.anderscheow.validator.interfaces.ErrorImpl
+import io.github.anderscheow.validator.interfaces.Validate
+import io.github.anderscheow.validator.rules.Rule
+import io.github.anderscheow.validator.rules.RulesBuilder
 
-abstract class Condition : Validate, ErrorMessage {
+abstract class Condition : ErrorImpl, Validate {
 
-    @StringRes
-    private var errorRes: Int = -1
-    private var errorString: String = "Invalid input"
+    val rules: List<Rule>
 
-    val baseRules: MutableList<BaseRule> = ArrayList()
-
-    constructor()
-
-    constructor(@StringRes errorRes: Int) {
-        this.errorRes = errorRes
+    constructor(rules: List<Rule>, @StringRes errorRes: Int) : super(errorRes) {
+        this.rules = rules
     }
 
-    constructor(errorString: String) {
-        this.errorString = errorString
+    constructor(rules: List<Rule>, errorString: String) : super(errorString) {
+        this.rules = rules
     }
 
-    override fun getErrorRes(): Int {
-        return errorRes
+    constructor(rule: Rule, @StringRes errorRes: Int) : super(errorRes) {
+        this.rules = listOf(rule)
     }
 
-    override fun getErrorMessage(): String {
-        return errorString
+    constructor(rule: Rule, errorString: String) : super(errorString) {
+        this.rules = listOf(rule)
+    }
+}
+
+class ConditionsBuilder {
+    val conditionList = arrayListOf<Condition>()
+
+    operator fun Condition.unaryPlus() {
+        conditionList.add(this)
+    }
+}
+
+open class ConditionBuilder {
+    val ruleList = arrayListOf<Rule>()
+
+    fun rules(init: RulesBuilder.() -> Unit) {
+        ruleList.addAll(RulesBuilder().apply(init).ruleList)
     }
 
-    fun add(baseRule: BaseRule): Condition {
-        baseRules.add(baseRule)
-        return this
+    operator fun Rule.unaryPlus() {
+        ruleList.add(this)
     }
 
-    fun addAll(baseRules: List<BaseRule>): Condition {
-        this.baseRules.addAll(baseRules)
-        return this
+    operator fun List<Rule>.unaryPlus() {
+        ruleList.addAll(this)
     }
 }

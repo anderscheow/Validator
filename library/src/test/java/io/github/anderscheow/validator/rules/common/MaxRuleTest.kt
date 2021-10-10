@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class MaxRuleTest {
 
@@ -24,7 +23,7 @@ class MaxRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        maxRule = MaxRule(MAX_LENGTH)
+        maxRule = MaxRule(MAX_LENGTH, "")
 
         maxRule.validate(null)
     }
@@ -32,7 +31,7 @@ class MaxRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleEqualMax_ReturnTrue() {
-        maxRule = MaxRule(MAX_LENGTH)
+        maxRule = MaxRule(MAX_LENGTH, "")
 
         val sample = "test"
 
@@ -42,7 +41,7 @@ class MaxRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleLessThanMax_ReturnTrue() {
-        maxRule = MaxRule(MAX_LENGTH)
+        maxRule = MaxRule(MAX_LENGTH, "")
 
         val sample = "tes"
 
@@ -52,21 +51,11 @@ class MaxRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleMoreThanMax_ReturnTrue() {
-        maxRule = MaxRule(MAX_LENGTH)
+        maxRule = MaxRule(MAX_LENGTH, "")
 
         val sample = "testing"
 
         assertFalse(maxRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Length must not exceed %d characters", MAX_LENGTH)
-
-        maxRule = MaxRule(MAX_LENGTH)
-
-        assertEquals(errorMessage, maxRule.getErrorMessage())
     }
 
     @Test
@@ -76,7 +65,7 @@ class MaxRuleTest {
 
         maxRule = MaxRule(MAX_LENGTH, errorMessage)
 
-        assertEquals(errorMessage, maxRule.getErrorMessage())
+        assertEquals(errorMessage, maxRule.errorString)
     }
 
     @Test
@@ -86,11 +75,10 @@ class MaxRuleTest {
 
         maxRule = MaxRule(MAX_LENGTH, errorRes)
 
-        assertEquals(errorRes, maxRule.getErrorRes())
+        assertEquals(errorRes, maxRule.errorRes)
     }
 
     companion object {
-
         private const val MAX_LENGTH = 4
     }
 }

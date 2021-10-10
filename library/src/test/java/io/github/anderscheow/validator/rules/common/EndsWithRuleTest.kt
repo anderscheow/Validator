@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class EndsWithRuleTest {
 
@@ -24,7 +23,7 @@ class EndsWithRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        endsWithRule = EndsWithRule(KEYWORD)
+        endsWithRule = EndsWithRule(KEYWORD, "")
 
         endsWithRule.validate(null)
     }
@@ -32,7 +31,7 @@ class EndsWithRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_WithIgnoreCase_ReturnTrue() {
-        endsWithRule = EndsWithRule(KEYWORD, true)
+        endsWithRule = EndsWithRule(KEYWORD, "", true)
 
         val sample = "ends_with_TEST"
 
@@ -42,7 +41,7 @@ class EndsWithRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_WithoutIgnoreCase_ReturnTrue() {
-        endsWithRule = EndsWithRule(KEYWORD)
+        endsWithRule = EndsWithRule(KEYWORD, "")
 
         val sample = "ends_with_test"
 
@@ -52,21 +51,11 @@ class EndsWithRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_WithoutIgnoreCase_ReturnFalse() {
-        endsWithRule = EndsWithRule(KEYWORD)
+        endsWithRule = EndsWithRule(KEYWORD, "")
 
         val sample = "ends_with_TEST"
 
         assertFalse(endsWithRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Value does not end with '%s'", KEYWORD)
-
-        endsWithRule = EndsWithRule(KEYWORD)
-
-        assertEquals(errorMessage, endsWithRule.getErrorMessage())
     }
 
     @Test
@@ -76,7 +65,7 @@ class EndsWithRuleTest {
 
         endsWithRule = EndsWithRule(KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, endsWithRule.getErrorMessage())
+        assertEquals(errorMessage, endsWithRule.errorString)
     }
 
     @Test
@@ -86,11 +75,10 @@ class EndsWithRuleTest {
 
         endsWithRule = EndsWithRule(KEYWORD, errorRes)
 
-        assertEquals(errorRes, endsWithRule.getErrorRes())
+        assertEquals(errorRes, endsWithRule.errorRes)
     }
 
     companion object {
-
         private const val KEYWORD = "test"
     }
 }

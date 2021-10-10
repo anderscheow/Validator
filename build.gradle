@@ -3,16 +3,12 @@
 buildscript {
     repositories {
         google()
-        jcenter()
         mavenCentral()
     }
     dependencies {
         apply from: 'dependencies.gradle'
         classpath buildPlugins.gradle
         classpath buildPlugins.kotlin
-        classpath buildPlugins.dcendents
-        classpath buildPlugins.dokka
-        classpath buildPlugins.jacoco
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -21,7 +17,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
     }
 }
 

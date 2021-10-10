@@ -1,21 +1,24 @@
 package io.github.anderscheow.validator.conditions.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.Condition
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.conditions.ConditionBuilder
+import io.github.anderscheow.validator.conditions.ConditionsBuilder
+import io.github.anderscheow.validator.rules.Rule
 
 class And : Condition {
 
-    constructor() : super("Does not match 'And' condition")
+    constructor(rules: List<Rule>, @StringRes errorRes: Int) : super(rules, errorRes)
 
-    constructor(@StringRes errorRes: Int) : super(errorRes)
+    constructor(rules: List<Rule>, errorMessage: String) : super(rules, errorMessage)
 
-    constructor(errorMessage: String) : super(errorMessage)
+    constructor(rule: Rule, @StringRes errorRes: Int) : super(listOf(rule), errorRes)
+
+    constructor(rule: Rule, errorMessage: String) : super(listOf(rule), errorMessage)
 
     override fun validate(value: String?): Boolean {
-        for (baseRule in baseRules) {
-            if (!baseRule.validate(value)) {
+        for (baseRule in rules) {
+            if (baseRule.validate(value).not()) {
                 return false
             }
         }
@@ -23,17 +26,23 @@ class And : Condition {
     }
 }
 
-fun Validation.matchAllRules(baseRules: Array<BaseRule>): Validation {
-    conditions.add(And().addAll(baseRules.toList()))
-    return this
+class AndBuilder : ConditionBuilder() {
 }
 
-fun Validation.matchAllRules(baseRules: Array<BaseRule>, @StringRes errorRes: Int): Validation {
-    conditions.add(And(errorRes).addAll(baseRules.toList()))
-    return this
+fun ConditionsBuilder.and(
+    @StringRes errorRes: Int,
+    init: AndBuilder.() -> Unit
+): And {
+    val and = AndBuilder()
+    and.init()
+    return And(and.ruleList, errorRes)
 }
 
-fun Validation.matchAllRules(baseRules: Array<BaseRule>, errorMessage: String): Validation {
-    conditions.add(And(errorMessage).addAll(baseRules.toList()))
-    return this
+fun ConditionsBuilder.and(
+    errorMessage: String,
+    init: AndBuilder.() -> Unit
+): And {
+    val and = AndBuilder()
+    and.init()
+    return And(and.ruleList, errorMessage)
 }

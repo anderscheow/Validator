@@ -25,7 +25,7 @@ class FutureRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        futureRule = FutureRule(VALID_DATE_FORMAT)
+        futureRule = FutureRule(VALID_DATE_FORMAT, "")
 
         futureRule.validate(null)
     }
@@ -33,7 +33,7 @@ class FutureRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidDateFormatAndValidValue_ReturnTrue() {
-        futureRule = FutureRule(VALID_DATE_FORMAT)
+        futureRule = FutureRule(VALID_DATE_FORMAT, "")
 
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -47,7 +47,7 @@ class FutureRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidDateFormatAndInvalidValue_ReturnFalse() {
-        futureRule = FutureRule(VALID_DATE_FORMAT)
+        futureRule = FutureRule(VALID_DATE_FORMAT, "")
 
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -61,7 +61,7 @@ class FutureRuleTest {
     @Test(expected = IllegalArgumentException::class)
     @Throws(Exception::class)
     fun validate_InvalidDateFormatAndValidValue_ThrowIllegalArgumentException() {
-        futureRule = FutureRule(SimpleDateFormat("abc/dd/ee"))
+        futureRule = FutureRule(SimpleDateFormat("abc/dd/ee"), "")
 
         val sample = "5/12/2017"
 
@@ -71,21 +71,11 @@ class FutureRuleTest {
     @Test(expected = IllegalArgumentException::class)
     @Throws(Exception::class)
     fun validate_InvalidDateFormatAndInvalidValue_ThrowIllegalArgumentException() {
-        futureRule = FutureRule(SimpleDateFormat("abc/dd/ee"))
+        futureRule = FutureRule(SimpleDateFormat("abc/dd/ee"), "")
 
         val sample = "100/100/2017"
 
         futureRule.validate(sample)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Does not match future rule"
-
-        futureRule = FutureRule(VALID_DATE_FORMAT)
-
-        assertEquals(errorMessage, futureRule.getErrorMessage())
     }
 
     @Test
@@ -95,7 +85,7 @@ class FutureRuleTest {
 
         futureRule = FutureRule(VALID_DATE_FORMAT, errorMessage)
 
-        assertEquals(errorMessage, futureRule.getErrorMessage())
+        assertEquals(errorMessage, futureRule.errorString)
     }
 
     @Test
@@ -105,11 +95,10 @@ class FutureRuleTest {
 
         futureRule = FutureRule(VALID_DATE_FORMAT, errorRes)
 
-        assertEquals(errorRes, futureRule.getErrorRes())
+        assertEquals(errorRes, futureRule.errorRes)
     }
 
     companion object {
-
         private val VALID_DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy")
     }
 }

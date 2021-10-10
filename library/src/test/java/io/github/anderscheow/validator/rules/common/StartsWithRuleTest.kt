@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class StartsWithRuleTest {
 
@@ -24,7 +23,7 @@ class StartsWithRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        startsWithRule = StartsWithRule(KEYWORD)
+        startsWithRule = StartsWithRule(KEYWORD, "")
 
         startsWithRule.validate(null)
     }
@@ -32,7 +31,7 @@ class StartsWithRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_WithIgnoreCase_ReturnTrue() {
-        startsWithRule = StartsWithRule(KEYWORD, true)
+        startsWithRule = StartsWithRule(KEYWORD, "", true)
 
         val sample = "TEST_starts_with"
 
@@ -42,7 +41,7 @@ class StartsWithRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_WithoutIgnoreCase_ReturnTrue() {
-        startsWithRule = StartsWithRule(KEYWORD)
+        startsWithRule = StartsWithRule(KEYWORD, "")
 
         val sample = "test_starts_with"
 
@@ -52,21 +51,11 @@ class StartsWithRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_WithoutIgnoreCase_ReturnFalse() {
-        startsWithRule = StartsWithRule(KEYWORD)
+        startsWithRule = StartsWithRule(KEYWORD, "")
 
         val sample = "TEST_starts_with"
 
         assertFalse(startsWithRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Value does not start with '%s'", KEYWORD)
-
-        startsWithRule = StartsWithRule(KEYWORD)
-
-        assertEquals(errorMessage, startsWithRule.getErrorMessage())
     }
 
     @Test
@@ -76,7 +65,7 @@ class StartsWithRuleTest {
 
         startsWithRule = StartsWithRule(KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, startsWithRule.getErrorMessage())
+        assertEquals(errorMessage, startsWithRule.errorString)
     }
 
     @Test
@@ -86,11 +75,10 @@ class StartsWithRuleTest {
 
         startsWithRule = StartsWithRule(KEYWORD, errorRes)
 
-        assertEquals(errorRes, startsWithRule.getErrorRes())
+        assertEquals(errorRes, startsWithRule.errorRes)
     }
 
     companion object {
-
         private const val KEYWORD = "test"
     }
 }

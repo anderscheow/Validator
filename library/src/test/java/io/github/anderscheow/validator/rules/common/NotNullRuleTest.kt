@@ -23,7 +23,7 @@ class NotNullRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidSample_ReturnTrue() {
-        notNullRule = NotNullRule()
+        notNullRule = NotNullRule("")
 
         val sample = "test"
 
@@ -33,19 +33,9 @@ class NotNullRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_InvalidSample_ReturnFalse() {
-        notNullRule = NotNullRule()
+        notNullRule = NotNullRule("")
 
         assertFalse(notNullRule.validate(null))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value must not be null"
-
-        notNullRule = NotNullRule()
-
-        assertEquals(errorMessage, notNullRule.getErrorMessage())
     }
 
     @Test
@@ -55,7 +45,7 @@ class NotNullRuleTest {
 
         notNullRule = NotNullRule(errorMessage)
 
-        assertEquals(errorMessage, notNullRule.getErrorMessage())
+        assertEquals(errorMessage, notNullRule.errorString)
     }
 
     @Test
@@ -65,6 +55,6 @@ class NotNullRuleTest {
 
         notNullRule = NotNullRule(errorRes)
 
-        assertEquals(errorRes, notNullRule.getErrorRes())
+        assertEquals(errorRes, notNullRule.errorRes)
     }
 }

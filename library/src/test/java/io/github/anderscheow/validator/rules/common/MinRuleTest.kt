@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class MinRuleTest {
 
@@ -24,7 +23,7 @@ class MinRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        minRule = MinRule(MIN_LENGTH)
+        minRule = MinRule(MIN_LENGTH, "")
 
         minRule.validate(null)
     }
@@ -32,7 +31,7 @@ class MinRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleEqualMin_ReturnTrue() {
-        minRule = MinRule(MIN_LENGTH)
+        minRule = MinRule(MIN_LENGTH, "")
 
         val sample = "tests"
 
@@ -42,7 +41,7 @@ class MinRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleMoreThanMin_ReturnTrue() {
-        minRule = MinRule(MIN_LENGTH)
+        minRule = MinRule(MIN_LENGTH, "")
 
         val sample = "testing"
 
@@ -52,21 +51,11 @@ class MinRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleLessThanMin_ReturnTrue() {
-        minRule = MinRule(MIN_LENGTH)
+        minRule = MinRule(MIN_LENGTH, "")
 
         val sample = "test"
 
         assertFalse(minRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Length must exceed at least %d characters", MIN_LENGTH)
-
-        minRule = MinRule(MIN_LENGTH)
-
-        assertEquals(errorMessage, minRule.getErrorMessage())
     }
 
     @Test
@@ -76,7 +65,7 @@ class MinRuleTest {
 
         minRule = MinRule(MIN_LENGTH, errorMessage)
 
-        assertEquals(errorMessage, minRule.getErrorMessage())
+        assertEquals(errorMessage, minRule.errorString)
     }
 
     @Test
@@ -86,11 +75,10 @@ class MinRuleTest {
 
         minRule = MinRule(MIN_LENGTH, errorRes)
 
-        assertEquals(errorRes, minRule.getErrorRes())
+        assertEquals(errorRes, minRule.errorRes)
     }
 
     companion object {
-
         private const val MIN_LENGTH = 5
     }
 }

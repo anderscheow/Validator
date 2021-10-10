@@ -1,20 +1,23 @@
 package io.github.anderscheow.validator.conditions.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.conditions.Condition
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.conditions.ConditionBuilder
+import io.github.anderscheow.validator.conditions.ConditionsBuilder
+import io.github.anderscheow.validator.rules.Rule
 
 class Or : Condition {
 
-    constructor() : super("Does not match 'Or' condition")
+    constructor(rules: List<Rule>, @StringRes errorRes: Int) : super(rules, errorRes)
 
-    constructor(@StringRes errorRes: Int) : super(errorRes)
+    constructor(rules: List<Rule>, errorMessage: String) : super(rules, errorMessage)
 
-    constructor(errorMessage: String) : super(errorMessage)
+    constructor(rule: Rule, @StringRes errorRes: Int) : super(listOf(rule), errorRes)
+
+    constructor(rule: Rule, errorMessage: String) : super(listOf(rule), errorMessage)
 
     override fun validate(value: String?): Boolean {
-        for (baseRule in baseRules) {
+        for (baseRule in rules) {
             if (baseRule.validate(value)) {
                 return true
             }
@@ -23,17 +26,23 @@ class Or : Condition {
     }
 }
 
-fun Validation.matchAtLeastOneRule(baseRules: Array<BaseRule>): Validation {
-    conditions.add(Or().addAll(baseRules.toList()))
-    return this
+class OrBuilder : ConditionBuilder() {
 }
 
-fun Validation.matchAtLeastOneRule(baseRules: Array<BaseRule>, @StringRes errorRes: Int): Validation {
-    conditions.add(Or(errorRes).addAll(baseRules.toList()))
-    return this
+fun ConditionsBuilder.or(
+    @StringRes errorRes: Int,
+    init: OrBuilder.() -> Unit
+): Or {
+    val or = OrBuilder()
+    or.init()
+    return Or(or.ruleList, errorRes)
 }
 
-fun Validation.matchAtLeastOneRule(baseRules: Array<BaseRule>, errorMessage: String): Validation {
-    conditions.add(Or(errorMessage).addAll(baseRules.toList()))
-    return this
+fun ConditionsBuilder.or(
+    errorMessage: String,
+    init: OrBuilder.() -> Unit
+): Or {
+    val or = OrBuilder()
+    or.init()
+    return Or(or.ruleList, errorMessage)
 }

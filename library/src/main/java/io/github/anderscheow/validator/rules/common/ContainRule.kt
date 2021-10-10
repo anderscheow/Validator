@@ -1,21 +1,13 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
-import io.github.anderscheow.validator.rules.BaseRule
-import java.util.*
+import io.github.anderscheow.validator.rules.Rule
 
-class ContainRule : BaseRule {
+class ContainRule : Rule {
 
     private var keyword: String
 
     private var ignoreCase = false
-
-    constructor(keyword: String, ignoreCase: Boolean = false) :
-            super(String.format(Locale.getDefault(), "Value does not contain '%s'", keyword)) {
-        this.keyword = keyword
-        this.ignoreCase = ignoreCase
-    }
 
     constructor(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false) :
             super(errorRes) {
@@ -38,17 +30,14 @@ class ContainRule : BaseRule {
     }
 }
 
-fun Validation.contain(keyword: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, ignoreCase))
-    return this
-}
+fun contain(
+    keyword: String,
+    @StringRes errorRes: Int,
+    ignoreCase: Boolean = false
+): ContainRule = ContainRule(keyword, errorRes, ignoreCase)
 
-fun Validation.contain(keyword: String, @StringRes errorRes: Int, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, errorRes, ignoreCase))
-    return this
-}
-
-fun Validation.contain(keyword: String, errorMessage: String, ignoreCase: Boolean = false): Validation {
-    baseRules.add(ContainRule(keyword, errorMessage, ignoreCase))
-    return this
-}
+fun contain(
+    keyword: String,
+    errorMessage: String,
+    ignoreCase: Boolean = false
+): ContainRule = ContainRule(keyword, errorMessage, ignoreCase)

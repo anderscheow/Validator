@@ -23,7 +23,7 @@ class NotBlankRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        notBlankRule = NotBlankRule()
+        notBlankRule = NotBlankRule("")
 
         notBlankRule.validate(null)
     }
@@ -31,7 +31,7 @@ class NotBlankRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
-        notBlankRule = NotBlankRule()
+        notBlankRule = NotBlankRule("")
 
         val sample = "not blank"
 
@@ -41,7 +41,7 @@ class NotBlankRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnFalse() {
-        notBlankRule = NotBlankRule()
+        notBlankRule = NotBlankRule("")
 
         val sample = ""
 
@@ -51,21 +51,11 @@ class NotBlankRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SpaceSample_ReturnFalse() {
-        notBlankRule = NotBlankRule()
+        notBlankRule = NotBlankRule("")
 
         val sample = " "
 
         assertFalse(notBlankRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value must not be empty"
-
-        notBlankRule = NotBlankRule()
-
-        assertEquals(errorMessage, notBlankRule.getErrorMessage())
     }
 
     @Test
@@ -75,7 +65,7 @@ class NotBlankRuleTest {
 
         notBlankRule = NotBlankRule(errorMessage)
 
-        assertEquals(errorMessage, notBlankRule.getErrorMessage())
+        assertEquals(errorMessage, notBlankRule.errorString)
     }
 
     @Test
@@ -85,6 +75,6 @@ class NotBlankRuleTest {
 
         notBlankRule = NotBlankRule(errorRes)
 
-        assertEquals(errorRes, notBlankRule.getErrorRes())
+        assertEquals(errorRes, notBlankRule.errorRes)
     }
 }

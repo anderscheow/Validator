@@ -1,13 +1,9 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
+import io.github.anderscheow.validator.rules.Rule
 
-import io.github.anderscheow.validator.rules.BaseRule
-
-class NotEmptyRule : BaseRule {
-
-    constructor() : super("Value must not be empty")
+class NotEmptyRule : Rule {
 
     constructor(@StringRes errorRes: Int) : super(errorRes)
 
@@ -22,17 +18,6 @@ class NotEmptyRule : BaseRule {
     }
 }
 
-fun Validation.notEmpty(): Validation {
-    baseRules.add(NotEmptyRule())
-    return this
-}
+fun notEmpty(@StringRes errorRes: Int): NotEmptyRule = NotEmptyRule(errorRes)
 
-fun Validation.notEmpty(@StringRes errorRes: Int): Validation {
-    baseRules.add(NotEmptyRule(errorRes))
-    return this
-}
-
-fun Validation.notEmpty(errorMessage: String): Validation {
-    baseRules.add(NotEmptyRule(errorMessage))
-    return this
-}
+fun notEmpty(errorMessage: String): NotEmptyRule = NotEmptyRule(errorMessage)

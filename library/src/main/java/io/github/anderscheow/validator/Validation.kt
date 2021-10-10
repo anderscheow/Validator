@@ -5,30 +5,19 @@ package io.github.anderscheow.validator
 import android.content.Context
 import com.google.android.material.textfield.TextInputLayout
 import io.github.anderscheow.validator.conditions.Condition
-import io.github.anderscheow.validator.rules.BaseRule
-import io.github.anderscheow.validator.util.ErrorMessage
+import io.github.anderscheow.validator.conditions.ConditionsBuilder
+import io.github.anderscheow.validator.interfaces.ErrorImpl
+import io.github.anderscheow.validator.rules.Rule
+import io.github.anderscheow.validator.rules.RulesBuilder
 import java.util.*
 
-class Validation {
+class Validation(val textInputLayout: TextInputLayout) {
 
-    var textInputLayout: TextInputLayout? = null
-        private set
-    var textInput: String? = null
-        private set
+    val rules = arrayListOf<Rule>()
+    val conditions = arrayListOf<Condition>()
 
-    val baseRules: MutableList<BaseRule> = ArrayList()
-    val conditions: MutableList<Condition> = ArrayList()
-
-    constructor(textInputLayout: TextInputLayout) {
-        this.textInputLayout = textInputLayout
-    }
-
-    constructor(textInput: String) {
-        this.textInput = textInput
-    }
-
-    fun add(baseRule: BaseRule): Validation {
-        baseRules.add(baseRule)
+    fun add(rule: Rule): Validation {
+        rules.add(rule)
         return this
     }
 
@@ -37,21 +26,32 @@ class Validation {
         return this
     }
 
-    fun setError(context: Context, errorMessage: ErrorMessage, errors: ArrayList<String>) {
-        if (errorMessage.isErrorAvailable) {
-            textInputLayout?.isErrorEnabled = true
+    fun setError(context: Context, errorImpl: ErrorImpl, errors: ArrayList<String>) {
+        val error = errorImpl.getErrorMessage(context)
+        textInputLayout.isErrorEnabled = true
+        errors.add(error)
+        textInputLayout.error = error
+    }
+}
 
-            if (errorMessage.isErrorResAvailable) {
-                val error = context.getString(errorMessage.getErrorRes())
-                errors.add(error)
-                textInputLayout?.error = error
-            } else if (errorMessage.isErrorMessageAvailable) {
-                val error = errorMessage.getErrorMessage()
-                errors.add(error)
-                textInputLayout?.error = error
-            }
-        } else {
-            throw IllegalStateException("Please either use errorRes or errorMessage as your error output")
-        }
+class ValidationBuilder {
+    val ruleList = arrayListOf<Rule>()
+    val conditionList = arrayListOf<Condition>()
+
+    fun rules(init: RulesBuilder.() -> Unit) {
+        ruleList.addAll(RulesBuilder().apply(init).ruleList)
+    }
+
+    fun conditions(init: ConditionsBuilder.() -> Unit) {
+        conditionList.addAll(ConditionsBuilder().apply(init).conditionList)
+    }
+}
+
+fun validation(textInputLayout: TextInputLayout, init: ValidationBuilder.() -> Unit): Validation {
+    val validation = ValidationBuilder()
+    validation.init()
+    return Validation(textInputLayout).apply {
+        this.rules.addAll(validation.ruleList)
+        this.conditions.addAll(validation.conditionList)
     }
 }

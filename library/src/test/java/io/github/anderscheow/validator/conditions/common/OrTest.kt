@@ -27,10 +27,14 @@ class OrTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchThreeConditionsOutOfThree_ReturnTrue() {
-        or = Or()
-                .add(MinRule(5)) // match
-                .add(MaxRule(10)) // match
-                .add(DigitsRule()) // match
+        or = Or(
+            listOf(
+                MinRule(5, ""), // match
+                MaxRule(10, ""), // match
+                DigitsRule("") // match
+            ),
+            ""
+        )
 
         val sample = "1234567"
 
@@ -40,14 +44,20 @@ class OrTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchTwoConditionsOutOfThree_ReturnTrue() {
-        or = Or()
-                .add(MinRule(5)) // A
-                .add(MaxRule(10)) // B
-                .add(DigitsRule()) // C
+        or = Or(
+            listOf(
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
+        )
 
-        val samples = arrayOf("abcde", // Match A,B
-                "12345678901", // Match A,C
-                "123")// Match B,C
+        val samples = arrayOf(
+            "abcde", // Match A,B
+            "12345678901", // Match A,C
+            "123"
+        )// Match B,C
 
         for (sample in samples) {
             assertTrue("This sample failed: $sample", or.validate(sample))
@@ -57,14 +67,20 @@ class OrTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchOneConditionOutOfThree_ReturnTrue() {
-        or = Or()
-                .add(MinRule(5)) // A
-                .add(MaxRule(10)) // B
-                .add(DigitsRule()) // C
+        or = Or(
+            listOf(
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
+        )
 
-        val samples = arrayOf("abc 12", // Match A
-                "test-123", // Match B
-                "123456789012345")// Match C
+        val samples = arrayOf(
+            "abc 12", // Match A
+            "test-123", // Match B
+            "123456789012345"
+        )// Match C
 
         for (sample in samples) {
             assertTrue("This sample failed: $sample", or.validate(sample))
@@ -74,9 +90,13 @@ class OrTest {
     @Test
     @Throws(Exception::class)
     fun validate_MatchZeroConditionOutOfThree_ReturnFalse() {
-        or = Or()
-                .add(MaxRule(10)) // A
-                .add(DigitsRule()) // B
+        or = Or(
+            listOf(
+                MaxRule(10, ""), // A
+                DigitsRule("") // B
+            ),
+            ""
+        )
 
         val samples = arrayOf("testing 123, how are you")
 
@@ -90,19 +110,9 @@ class OrTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Does not match 'Or' condition"
 
-        or = Or()
+        or = Or(MaxRule(10, ""), errorMessage)
 
-        assertEquals(errorMessage, or.getErrorMessage())
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_CustomErrorMessage() {
-        val errorMessage = "This is a custom error message"
-
-        or = Or(errorMessage)
-
-        assertEquals(errorMessage, or.getErrorMessage())
+        assertEquals(errorMessage, or.errorString)
     }
 
     @Test
@@ -110,8 +120,8 @@ class OrTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        or = Or(errorRes)
+        or = Or(MaxRule(10, ""), errorRes)
 
-        assertEquals(errorRes, or.getErrorRes())
+        assertEquals(errorRes, or.errorRes)
     }
 }

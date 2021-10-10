@@ -2,15 +2,13 @@ package io.github.anderscheow.validator
 
 import android.content.Context
 import io.github.anderscheow.validator.constant.Mode
-import io.github.anderscheow.validator.util.ErrorMessage
+import io.github.anderscheow.validator.interfaces.ErrorImpl
 
 class Validator private constructor(private val context: Context) {
 
     private var mode = Mode.CONTINUOUS
-
     private var listener: OnValidateListener? = null
-
-    private var validations = ArrayList<Validation>()
+    private var validations = mutableListOf<Validation>()
 
     interface OnValidateListener {
         @Throws(IndexOutOfBoundsException::class)
@@ -46,9 +44,9 @@ class Validator private constructor(private val context: Context) {
 
         // Iterate each validation
         for (validation in validations) {
-            val editText = validation.textInputLayout?.editText
+            val editText = validation.textInputLayout.editText
 
-            val value = (editText?.text ?: validation.textInput)?.toString()
+            val value = editText?.text?.toString()
             if (value != null) {
                 val isCurrentValueValid = validate(value, validation, errors)
 
@@ -80,13 +78,17 @@ class Validator private constructor(private val context: Context) {
 
     private fun clearAllErrors() {
         for (validation in validations) {
-            validation.textInputLayout?.error = null
-            validation.textInputLayout?.isErrorEnabled = false
+            validation.textInputLayout.error = null
+            validation.textInputLayout.isErrorEnabled = false
         }
     }
 
     // Iterate each type of rules
-    private fun validate(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
+    private fun validate(
+        value: String,
+        validation: Validation,
+        errors: ArrayList<String>
+    ): Boolean {
         var isCurrentValueValid = validateBaseRules(value, validation, errors)
         if (isCurrentValueValid) {
             isCurrentValueValid = validateConditions(value, validation, errors)
@@ -95,9 +97,13 @@ class Validator private constructor(private val context: Context) {
         return isCurrentValueValid
     }
 
-    private fun validateBaseRules(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
-        for (baseRule in validation.baseRules) {
-            if (!baseRule.validate(value)) {
+    private fun validateBaseRules(
+        value: String,
+        validation: Validation,
+        errors: ArrayList<String>
+    ): Boolean {
+        for (baseRule in validation.rules) {
+            if (baseRule.validate(value).not()) {
                 showErrorMessage(validation, baseRule, errors)
 
                 return false
@@ -107,9 +113,13 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun validateConditions(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
+    private fun validateConditions(
+        value: String,
+        validation: Validation,
+        errors: ArrayList<String>
+    ): Boolean {
         for (condition in validation.conditions) {
-            if (!condition.validate(value)) {
+            if (condition.validate(value).not()) {
                 showErrorMessage(validation, condition, errors)
 
                 return false
@@ -119,14 +129,37 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun showErrorMessage(validation: Validation, errorMessage: ErrorMessage, errors: ArrayList<String>) {
+    private fun showErrorMessage(
+        validation: Validation,
+        errorMessage: ErrorImpl,
+        errors: ArrayList<String>
+    ) {
         validation.setError(context, errorMessage, errors)
     }
 
     companion object {
-
         fun with(context: Context): Validator {
             return Validator(context)
         }
+    }
+}
+
+class ValidatorBuilder {
+    var mode = Mode.CONTINUOUS
+    lateinit var listener: Validator.OnValidateListener
+    lateinit var validations: Array<Validation>
+
+    fun validate(vararg validations: Validation) {
+        this.validations = arrayOf(*validations)
+    }
+}
+
+fun validator(context: Context, init: ValidatorBuilder.() -> Unit): Validator {
+    val validator = ValidatorBuilder()
+    validator.init()
+    return Validator.with(context).apply {
+        this.setMode(validator.mode)
+        this.setListener(validator.listener)
+        this.validate(*validator.validations)
     }
 }

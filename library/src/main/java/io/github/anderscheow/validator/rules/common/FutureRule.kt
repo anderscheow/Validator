@@ -1,20 +1,14 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import java.text.DateFormat
 import java.text.ParseException
 import java.util.*
 
-class FutureRule : BaseRule {
+class FutureRule : Rule {
 
     private var dateFormat: DateFormat
-
-    constructor(dateFormat: DateFormat) :
-            super("Does not match future rule") {
-        this.dateFormat = dateFormat
-    }
 
     constructor(dateFormat: DateFormat, @StringRes errorRes: Int) :
             super(errorRes) {
@@ -42,17 +36,8 @@ class FutureRule : BaseRule {
     }
 }
 
-fun Validation.future(dateFormat: DateFormat): Validation {
-    baseRules.add(FutureRule(dateFormat))
-    return this
-}
+fun future(dateFormat: DateFormat, @StringRes errorRes: Int): FutureRule =
+    FutureRule(dateFormat, errorRes)
 
-fun Validation.future(dateFormat: DateFormat, @StringRes errorRes: Int): Validation {
-    baseRules.add(FutureRule(dateFormat, errorRes))
-    return this
-}
-
-fun Validation.future(dateFormat: DateFormat, errorMessage: String): Validation {
-    baseRules.add(FutureRule(dateFormat, errorMessage))
-    return this
-}
+fun future(dateFormat: DateFormat, errorMessage: String): FutureRule =
+    FutureRule(dateFormat, errorMessage)

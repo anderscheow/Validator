@@ -1,20 +1,13 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
-import io.github.anderscheow.validator.rules.BaseRule
+import io.github.anderscheow.validator.rules.Rule
 import java.util.*
 
-class LengthRule : BaseRule {
+class LengthRule : Rule {
 
-    private var minLength: Int = 0
-    private var maxLength: Int = 0
-
-    constructor(minLength: Int, maxLength: Int) :
-            super(String.format(Locale.getDefault(), "Length must be between %d and %d", minLength, maxLength)) {
-        this.minLength = minLength
-        this.maxLength = maxLength
-    }
+    private var minLength: Int
+    private var maxLength: Int
 
     constructor(minLength: Int, maxLength: Int, @StringRes errorRes: Int) :
             super(errorRes) {
@@ -54,23 +47,19 @@ class LengthRule : BaseRule {
 
     private fun assertMinMax(min: Int, max: Int) {
         if (min > max) {
-            val message = String.format(Locale.getDefault(), "'minLength' (%d) " + "should be smaller than 'maxLength' (%d)", min, max)
+            val message = String.format(
+                Locale.getDefault(),
+                "'minLength' (%d) " + "should be smaller than 'maxLength' (%d)",
+                min,
+                max
+            )
             throw IllegalStateException(message)
         }
     }
 }
 
-fun Validation.withinRange(minLength: Int, maxLength: Int): Validation {
-    baseRules.add(LengthRule(minLength, maxLength))
-    return this
-}
+fun withinRange(minLength: Int, maxLength: Int, @StringRes errorRes: Int): LengthRule =
+    LengthRule(minLength, maxLength, errorRes)
 
-fun Validation.withinRange(minLength: Int, maxLength: Int, @StringRes errorRes: Int): Validation {
-    baseRules.add(LengthRule(minLength, maxLength, errorRes))
-    return this
-}
-
-fun Validation.withinRange(minLength: Int, maxLength: Int, errorMessage: String): Validation {
-    baseRules.add(LengthRule(minLength, maxLength, errorMessage))
-    return this
-}
+fun withinRange(minLength: Int, maxLength: Int, errorMessage: String): LengthRule =
+    LengthRule(minLength, maxLength, errorMessage)

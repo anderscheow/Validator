@@ -25,7 +25,7 @@ class PastRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        pastRule = PastRule(VALID_DATE_FORMAT)
+        pastRule = PastRule(VALID_DATE_FORMAT, "")
 
         pastRule.validate(null)
     }
@@ -33,7 +33,7 @@ class PastRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidDateFormatAndValidValue_ReturnTrue() {
-        pastRule = PastRule(VALID_DATE_FORMAT)
+        pastRule = PastRule(VALID_DATE_FORMAT, "")
 
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -47,7 +47,7 @@ class PastRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidDateFormatAndInvalidValue_ReturnFalse() {
-        pastRule = PastRule(VALID_DATE_FORMAT)
+        pastRule = PastRule(VALID_DATE_FORMAT, "")
 
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -61,7 +61,7 @@ class PastRuleTest {
     @Test(expected = IllegalArgumentException::class)
     @Throws(Exception::class)
     fun validate_InvalidDateFormatAndValidValue_ThrowIllegalArgumentException() {
-        pastRule = PastRule(SimpleDateFormat("abc/dd/ee"))
+        pastRule = PastRule(SimpleDateFormat("abc/dd/ee"), "")
 
         val sample = "5/12/2017"
 
@@ -71,23 +71,12 @@ class PastRuleTest {
     @Test(expected = IllegalArgumentException::class)
     @Throws(Exception::class)
     fun validate_InvalidDateFormatAndInvalidValue_ThrowIllegalArgumentException() {
-        pastRule = PastRule(SimpleDateFormat("abc/dd/ee"))
+        pastRule = PastRule(SimpleDateFormat("abc/dd/ee"), "")
 
         val sample = "100/100/2017"
 
         pastRule.validate(sample)
     }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Does not match past rule"
-
-        pastRule = PastRule(VALID_DATE_FORMAT)
-
-        assertEquals(errorMessage, pastRule.getErrorMessage())
-    }
-
     @Test
     @Throws(Exception::class)
     fun errorMessage_CustomErrorMessage() {
@@ -95,7 +84,7 @@ class PastRuleTest {
 
         pastRule = PastRule(VALID_DATE_FORMAT, errorMessage)
 
-        assertEquals(errorMessage, pastRule.getErrorMessage())
+        assertEquals(errorMessage, pastRule.errorString)
     }
 
     @Test
@@ -105,11 +94,10 @@ class PastRuleTest {
 
         pastRule = PastRule(VALID_DATE_FORMAT, errorRes)
 
-        assertEquals(errorRes, pastRule.getErrorRes())
+        assertEquals(errorRes, pastRule.errorRes)
     }
 
     companion object {
-
         private val VALID_DATE_FORMAT = SimpleDateFormat("dd/MM/yyyy")
     }
 }

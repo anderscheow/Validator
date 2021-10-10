@@ -1,13 +1,9 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
+import io.github.anderscheow.validator.rules.Rule
 
-import io.github.anderscheow.validator.rules.BaseRule
-
-class NotNullRule : BaseRule {
-
-    constructor() : super("Value must not be null")
+class NotNullRule : Rule {
 
     constructor(@StringRes errorRes: Int) : super(errorRes)
 
@@ -18,17 +14,6 @@ class NotNullRule : BaseRule {
     }
 }
 
-fun Validation.notNull(): Validation {
-    baseRules.add(NotNullRule())
-    return this
-}
+fun notNull(@StringRes errorRes: Int): NotNullRule = NotNullRule(errorRes)
 
-fun Validation.notNull(@StringRes errorRes: Int): Validation {
-    baseRules.add(NotNullRule(errorRes))
-    return this
-}
-
-fun Validation.notNull(errorMessage: String): Validation {
-    baseRules.add(NotNullRule(errorMessage))
-    return this
-}
+fun notNull(errorMessage: String): NotNullRule = NotNullRule(errorMessage)

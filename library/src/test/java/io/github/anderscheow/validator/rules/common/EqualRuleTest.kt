@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class EqualRuleTest {
 
@@ -24,7 +23,7 @@ class EqualRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        equalRule = EqualRule(STRING_KEYWORD)
+        equalRule = EqualRule(STRING_KEYWORD, "")
 
         equalRule.validate(null)
     }
@@ -32,7 +31,7 @@ class EqualRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
-        equalRule = EqualRule(STRING_KEYWORD)
+        equalRule = EqualRule(STRING_KEYWORD, "")
 
         val sample = "test"
 
@@ -42,21 +41,11 @@ class EqualRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnFalse() {
-        equalRule = EqualRule(STRING_KEYWORD)
+        equalRule = EqualRule(STRING_KEYWORD, "")
 
         val sample = "TEST"
 
         assertFalse(equalRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Value does not equal to '%s'", STRING_KEYWORD)
-
-        equalRule = EqualRule(STRING_KEYWORD)
-
-        assertEquals(errorMessage, equalRule.getErrorMessage())
     }
 
     @Test
@@ -66,7 +55,7 @@ class EqualRuleTest {
 
         equalRule = EqualRule(STRING_KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, equalRule.getErrorMessage())
+        assertEquals(errorMessage, equalRule.errorString)
     }
 
     @Test
@@ -76,13 +65,10 @@ class EqualRuleTest {
 
         equalRule = EqualRule(STRING_KEYWORD, errorRes)
 
-        assertEquals(errorRes, equalRule.getErrorRes())
+        assertEquals(errorRes, equalRule.errorRes)
     }
 
     companion object {
-
         private const val STRING_KEYWORD = "test"
-        private const val INT_KEYWORD = 456
-        private const val BOOL_KEYWORD = false
     }
 }

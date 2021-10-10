@@ -6,17 +6,17 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
-import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.Validator
-import io.github.anderscheow.validator.conditions.common.And
-import io.github.anderscheow.validator.conditions.common.Or
-import io.github.anderscheow.validator.conditions.common.matchAtLeastOneRule
+import io.github.anderscheow.validator.conditions.common.and
+import io.github.anderscheow.validator.conditions.common.or
 import io.github.anderscheow.validator.constant.Mode
-import io.github.anderscheow.validator.rules.BaseRule
-import io.github.anderscheow.validator.rules.common.MaxRule
-import io.github.anderscheow.validator.rules.common.MinRule
-import io.github.anderscheow.validator.rules.regex.EmailRule
+import io.github.anderscheow.validator.rules.common.contain
+import io.github.anderscheow.validator.rules.common.endsWith
+import io.github.anderscheow.validator.rules.common.minimumLength
+import io.github.anderscheow.validator.rules.common.notEmpty
 import io.github.anderscheow.validator.rules.regex.email
+import io.github.anderscheow.validator.validation
+import io.github.anderscheow.validator.validator
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,48 +28,45 @@ class MainActivity : AppCompatActivity() {
         val passwordInput = findViewById<TextInputLayout>(R.id.layout_password)
         val submitButton = findViewById<Button>(R.id.button_submit)
 
-        val usernameValidation = Validation(usernameInput)
-                .email()
-                .matchAtLeastOneRule(arrayOf(MinRule(5), MaxRule(10)))
+        val usernameValidation = validation(usernameInput) {
+            conditions {
+                +and(errorMessage = "Does not match 'And' condition") {
+                    +email(errorMessage = "")
+                    +endsWith(keyword = ".com", errorMessage = "")
+                }
+                +or(errorMessage = "Does not match 'Or' condition") {
+                    +minimumLength(minLength = 8, errorMessage = "")
+                    +contain(keyword = "hello", errorMessage = "")
+                }
+            }
+        }
 
-        val usernameWithConditionValidation = Validation(usernameInput)
-                .add(And().add(EmailRule()))
-                .add(Or().add(MinRule(5)).add(MaxRule(10)))
-
-        val passwordValidation = Validation(passwordInput)
-                .add(object : BaseRule() {
-                    override fun validate(value: String?): Boolean {
-                        return (value as String).isNotEmpty()
-                    }
-                })
-                .add(object : BaseRule() {
-                    override fun validate(value: String?): Boolean {
-                        return (value as String).length >= 8
-                    }
-
-                    override fun getErrorRes(): Int {
-                        return R.string.error_password_too_short
-                    }
-
-                    override fun getErrorMessage(): String {
-                        return "Invalid input, please try again"
-                    }
-                })
+        val passwordValidation = validation(passwordInput) {
+            rules {
+                +notEmpty(errorMessage = "Input is empty")
+                +minimumLength(minLength = 8, errorMessage = "Must have at least 8 characters")
+            }
+        }
 
         submitButton.setOnClickListener {
-            Validator.with(applicationContext)
-                    .setMode(Mode.SINGLE)
-                    .setListener(object : Validator.OnValidateListener {
-                        override fun onValidateSuccess(values: List<String>) {
-                            Log.d("MainActivity", values.toTypedArray().contentToString())
-                            Toast.makeText(applicationContext, "Validate successfully", Toast.LENGTH_LONG).show()
-                        }
+            validator(applicationContext) {
+                mode = Mode.SINGLE
+                listener = object : Validator.OnValidateListener {
+                    override fun onValidateSuccess(values: List<String>) {
+                        Log.d("MainActivity", values.toTypedArray().contentToString())
+                        Toast.makeText(
+                            applicationContext,
+                            "Validate successfully",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
-                        override fun onValidateFailed(errors: List<String>) {
-                            Log.e("MainActivity", errors.toTypedArray().contentToString())
-                        }
-                    })
-                    .validate(usernameValidation, passwordValidation)
+                    override fun onValidateFailed(errors: List<String>) {
+                        Log.e("MainActivity", errors.toTypedArray().contentToString())
+                    }
+                }
+                validate(usernameValidation, passwordValidation)
+            }
         }
     }
 }

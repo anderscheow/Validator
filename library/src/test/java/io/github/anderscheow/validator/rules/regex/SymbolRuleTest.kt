@@ -23,7 +23,7 @@ class SymbolRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        symbolRule = SymbolRule()
+        symbolRule = SymbolRule("")
 
         symbolRule.validate(null)
     }
@@ -31,7 +31,7 @@ class SymbolRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithDigitsOnly_ReturnTrue() {
-        symbolRule = SymbolRule()
+        symbolRule = SymbolRule("")
 
         val sample = "123"
 
@@ -41,7 +41,7 @@ class SymbolRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphanumeric_ReturnFalse() {
-        symbolRule = SymbolRule()
+        symbolRule = SymbolRule("")
 
         val sample = "abc123"
 
@@ -51,7 +51,7 @@ class SymbolRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabetOnly_ReturnFalse() {
-        symbolRule = SymbolRule()
+        symbolRule = SymbolRule("")
 
         val sample = "abc"
 
@@ -61,7 +61,7 @@ class SymbolRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithDigitsAndSymbols_ReturnFalse() {
-        symbolRule = SymbolRule()
+        symbolRule = SymbolRule("")
 
         val sample = "100,000,000"
 
@@ -71,21 +71,11 @@ class SymbolRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithSymbolsOnly_ReturnTrue() {
-        symbolRule = SymbolRule()
+        symbolRule = SymbolRule("")
 
         val sample = "!@#$%^"
 
         assertTrue(symbolRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value does not match symbol regex"
-
-        symbolRule = SymbolRule()
-
-        assertEquals(errorMessage, symbolRule.getErrorMessage())
     }
 
     @Test
@@ -95,7 +85,7 @@ class SymbolRuleTest {
 
         symbolRule = SymbolRule(errorMessage)
 
-        assertEquals(errorMessage, symbolRule.getErrorMessage())
+        assertEquals(errorMessage, symbolRule.errorString)
     }
 
     @Test
@@ -105,6 +95,6 @@ class SymbolRuleTest {
 
         symbolRule = SymbolRule(errorRes)
 
-        assertEquals(errorRes, symbolRule.getErrorRes())
+        assertEquals(errorRes, symbolRule.errorRes)
     }
 }

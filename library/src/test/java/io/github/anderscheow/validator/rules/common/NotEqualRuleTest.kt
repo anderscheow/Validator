@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class NotEqualRuleTest {
 
@@ -24,7 +23,7 @@ class NotEqualRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        notEqualRule = NotEqualRule(INT_KEYWORD)
+        notEqualRule = NotEqualRule(INT_KEYWORD, "")
 
         notEqualRule.validate(null)
     }
@@ -32,7 +31,7 @@ class NotEqualRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
-        notEqualRule = NotEqualRule(STRING_KEYWORD)
+        notEqualRule = NotEqualRule(STRING_KEYWORD, "")
 
         val sample = "TEST"
 
@@ -42,21 +41,11 @@ class NotEqualRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnFalse() {
-        notEqualRule = NotEqualRule(STRING_KEYWORD)
+        notEqualRule = NotEqualRule(STRING_KEYWORD, "")
 
         val sample = "test"
 
         assertFalse(notEqualRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Value equal to '%s'", STRING_KEYWORD)
-
-        notEqualRule = NotEqualRule(STRING_KEYWORD)
-
-        assertEquals(errorMessage, notEqualRule.getErrorMessage())
     }
 
     @Test
@@ -66,7 +55,7 @@ class NotEqualRuleTest {
 
         notEqualRule = NotEqualRule(STRING_KEYWORD, errorMessage)
 
-        assertEquals(errorMessage, notEqualRule.getErrorMessage())
+        assertEquals(errorMessage, notEqualRule.errorString)
     }
 
     @Test
@@ -76,13 +65,11 @@ class NotEqualRuleTest {
 
         notEqualRule = NotEqualRule(STRING_KEYWORD, errorRes)
 
-        assertEquals(errorRes, notEqualRule.getErrorRes())
+        assertEquals(errorRes, notEqualRule.errorRes)
     }
 
     companion object {
-
         private const val STRING_KEYWORD = "test"
         private const val INT_KEYWORD = 456
-        private const val BOOL_KEYWORD = false
     }
 }

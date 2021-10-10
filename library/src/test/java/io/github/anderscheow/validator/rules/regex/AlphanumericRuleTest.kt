@@ -23,7 +23,7 @@ class AlphanumericRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         alphanumericRule.validate(null)
     }
@@ -31,7 +31,7 @@ class AlphanumericRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphanumeric_ReturnTrue() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         val sample = "test123"
 
@@ -41,7 +41,7 @@ class AlphanumericRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphanumericAndSpace_ReturnFalse() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         val sample = "test 123"
 
@@ -51,7 +51,7 @@ class AlphanumericRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphanumericAndSymbols_ReturnFalse() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         val sample = "test 100,000,000"
 
@@ -61,7 +61,7 @@ class AlphanumericRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabetOnly_ReturnTrue() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         val sample = "test"
 
@@ -71,7 +71,7 @@ class AlphanumericRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithDigitsOnly_ReturnTrue() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         val sample = "123"
 
@@ -81,21 +81,11 @@ class AlphanumericRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithSymbolsOnly_ReturnFalse() {
-        alphanumericRule = AlphanumericRule()
+        alphanumericRule = AlphanumericRule("")
 
         val sample = ",./"
 
         assertFalse(alphanumericRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value does not match alphanumeric regex"
-
-        alphanumericRule = AlphanumericRule()
-
-        assertEquals(errorMessage, alphanumericRule.getErrorMessage())
     }
 
     @Test
@@ -105,7 +95,7 @@ class AlphanumericRuleTest {
 
         alphanumericRule = AlphanumericRule(errorMessage)
 
-        assertEquals(errorMessage, alphanumericRule.getErrorMessage())
+        assertEquals(errorMessage, alphanumericRule.errorString)
     }
 
     @Test
@@ -115,6 +105,6 @@ class AlphanumericRuleTest {
 
         alphanumericRule = AlphanumericRule(errorRes)
 
-        assertEquals(errorRes, alphanumericRule.getErrorRes())
+        assertEquals(errorRes, alphanumericRule.errorRes)
     }
 }
