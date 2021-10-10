@@ -5,7 +5,6 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class LengthRuleTest {
 
@@ -24,7 +23,7 @@ class LengthRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
+        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH, "")
 
         lengthRule.validate(null)
     }
@@ -32,7 +31,7 @@ class LengthRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleWithinMinMax_ReturnTrue() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
+        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH, "")
 
         val sample = "7 chars"
 
@@ -42,7 +41,7 @@ class LengthRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSampleLessThanMin_ReturnFalse() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
+        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH, "")
 
         val sample = "char"
 
@@ -52,7 +51,7 @@ class LengthRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleMoreThanMax_ReturnFalse() {
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
+        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH, "")
 
         val sample = "more than 10 chars"
 
@@ -62,7 +61,7 @@ class LengthRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_MinLengthEqualToIntegerMinValue_ReturnFalse() {
-        lengthRule = LengthRule(Int.MIN_VALUE, MAX_LENGTH)
+        lengthRule = LengthRule(Int.MIN_VALUE, MAX_LENGTH, "")
 
         val sample = "testing"
 
@@ -72,7 +71,7 @@ class LengthRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_MinLengthEqualToIntegerMaxValue_ReturnFalse() {
-        lengthRule = LengthRule(MIN_LENGTH, Int.MAX_VALUE)
+        lengthRule = LengthRule(MIN_LENGTH, Int.MAX_VALUE, "")
 
         val sample = "testing"
 
@@ -82,21 +81,11 @@ class LengthRuleTest {
     @Test(expected = IllegalStateException::class)
     @Throws(Exception::class)
     fun validate_SampleSwitchMinMax_ThrowIllegalStateException() {
-        lengthRule = LengthRule(MAX_LENGTH, MIN_LENGTH)
+        lengthRule = LengthRule(MAX_LENGTH, MIN_LENGTH, "")
 
         val sample = "more than 10 chars"
 
         lengthRule.validate(sample)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = String.format(Locale.getDefault(), "Length must be between %d and %d", MIN_LENGTH, MAX_LENGTH)
-
-        lengthRule = LengthRule(MIN_LENGTH, MAX_LENGTH)
-
-        assertEquals(errorMessage, lengthRule.errorString)
     }
 
     @Test
@@ -120,7 +109,6 @@ class LengthRuleTest {
     }
 
     companion object {
-
         private const val MIN_LENGTH = 5
         private const val MAX_LENGTH = 10
     }

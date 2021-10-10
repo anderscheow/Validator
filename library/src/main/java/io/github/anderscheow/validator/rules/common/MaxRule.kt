@@ -1,18 +1,11 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.Rule
-import java.util.*
 
 class MaxRule : Rule {
 
-    private var maxLength: Int = 0
-
-    constructor(maxLength: Int) :
-            super(String.format(Locale.getDefault(), "Length must not exceed %d characters", maxLength)) {
-        this.maxLength = maxLength
-    }
+    private var maxLength: Int
 
     constructor(maxLength: Int, @StringRes errorRes: Int) :
             super(errorRes) {
@@ -33,17 +26,6 @@ class MaxRule : Rule {
     }
 }
 
-fun Validation.maximumLength(maxLength: Int): Validation {
-    rules.add(MaxRule(maxLength))
-    return this
-}
+fun maximumLength(maxLength: Int, @StringRes errorRes: Int): MaxRule = MaxRule(maxLength, errorRes)
 
-fun Validation.maximumLength(maxLength: Int, @StringRes errorRes: Int): Validation {
-    rules.add(MaxRule(maxLength, errorRes))
-    return this
-}
-
-fun Validation.maximumLength(maxLength: Int, errorMessage: String): Validation {
-    rules.add(MaxRule(maxLength, errorMessage))
-    return this
-}
+fun maximumLength(maxLength: Int, errorMessage: String): MaxRule = MaxRule(maxLength, errorMessage)

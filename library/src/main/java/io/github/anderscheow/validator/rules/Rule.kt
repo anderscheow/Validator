@@ -6,8 +6,6 @@ import io.github.anderscheow.validator.interfaces.Validate
 
 abstract class Rule : ErrorImpl, Validate {
 
-    constructor()
-
     constructor(@StringRes errorRes: Int) : super(errorRes)
 
     constructor(errorString: String) : super(errorString)

@@ -20,8 +20,6 @@ abstract class ErrorImpl {
     val isErrorMessageAvailable: Boolean
         get() = errorString.isNotBlank()
 
-    constructor()
-
     constructor(errorRes: Int) {
         this.errorRes = errorRes
     }

@@ -1,18 +1,11 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
 import io.github.anderscheow.validator.rules.Rule
-import java.util.*
 
 class MinRule : Rule {
 
-    private var minLength: Int = 0
-
-    constructor(minLength: Int) :
-            super(String.format(Locale.getDefault(), "Length must exceed at least %d characters", minLength)) {
-        this.minLength = minLength
-    }
+    private var minLength: Int
 
     constructor(minLength: Int, @StringRes errorRes: Int) :
             super(errorRes) {
@@ -33,17 +26,6 @@ class MinRule : Rule {
     }
 }
 
-fun Validation.minimumLength(minLength: Int): Validation {
-    rules.add(MinRule(minLength))
-    return this
-}
+fun minimumLength(minLength: Int, @StringRes errorRes: Int): MinRule = MinRule(minLength, errorRes)
 
-fun Validation.minimumLength(minLength: Int, @StringRes errorRes: Int): Validation {
-    rules.add(MinRule(minLength, errorRes))
-    return this
-}
-
-fun Validation.minimumLength(minLength: Int, errorMessage: String): Validation {
-    rules.add(MinRule(minLength, errorMessage))
-    return this
-}
+fun minimumLength(minLength: Int, errorMessage: String): MinRule = MinRule(minLength, errorMessage)

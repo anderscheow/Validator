@@ -23,7 +23,7 @@ class DigitsRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        digitsRule = DigitsRule()
+        digitsRule = DigitsRule("")
 
         digitsRule.validate(null)
     }
@@ -31,7 +31,7 @@ class DigitsRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithDigitsOnly_ReturnTrue() {
-        digitsRule = DigitsRule()
+        digitsRule = DigitsRule("")
 
         val sample = "123"
 
@@ -41,7 +41,7 @@ class DigitsRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphanumeric_ReturnFalse() {
-        digitsRule = DigitsRule()
+        digitsRule = DigitsRule("")
 
         val sample = "abc123"
 
@@ -51,7 +51,7 @@ class DigitsRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabetOnly_ReturnFalse() {
-        digitsRule = DigitsRule()
+        digitsRule = DigitsRule("")
 
         val sample = "abc"
 
@@ -61,21 +61,11 @@ class DigitsRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithDigitsAndSymbols_ReturnFalse() {
-        digitsRule = DigitsRule()
+        digitsRule = DigitsRule("")
 
         val sample = "100,000,000"
 
         assertFalse(digitsRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value does not match digits regex"
-
-        digitsRule = DigitsRule()
-
-        assertEquals(errorMessage, digitsRule.errorString)
     }
 
     @Test

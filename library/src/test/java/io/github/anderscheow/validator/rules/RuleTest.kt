@@ -22,23 +22,6 @@ class RuleTest {
 
     @Test
     @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Invalid input"
-
-        rule = object : Rule() {
-            override fun validate(value: String?): Boolean {
-                return false
-            }
-        }
-
-        assertEquals(errorMessage, rule.errorString)
-        assertTrue(rule.isErrorAvailable)
-        assertTrue(rule.isErrorMessageAvailable)
-        assertFalse(rule.isErrorResAvailable)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun errorMessage_CustomErrorMessage() {
         val errorMessage = "This is a custom error message"
 

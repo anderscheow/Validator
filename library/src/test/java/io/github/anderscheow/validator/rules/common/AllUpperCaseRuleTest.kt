@@ -23,7 +23,7 @@ class AllUpperCaseRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        allUpperCaseRule = AllUpperCaseRule()
+        allUpperCaseRule = AllUpperCaseRule("")
 
         allUpperCaseRule.validate(null)
     }
@@ -31,7 +31,7 @@ class AllUpperCaseRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnTrue() {
-        allUpperCaseRule = AllUpperCaseRule()
+        allUpperCaseRule = AllUpperCaseRule("")
 
         val sample = "UPPERCASE"
 
@@ -41,7 +41,7 @@ class AllUpperCaseRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_StringSample_ReturnFalse() {
-        allUpperCaseRule = AllUpperCaseRule()
+        allUpperCaseRule = AllUpperCaseRule("")
 
         val sample = "lowercase"
 
@@ -51,21 +51,11 @@ class AllUpperCaseRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_MixStringSample_ReturnFalse() {
-        allUpperCaseRule = AllUpperCaseRule()
+        allUpperCaseRule = AllUpperCaseRule("")
 
         val sample = "lowerUpper"
 
         assertFalse(allUpperCaseRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value is not all uppercase"
-
-        allUpperCaseRule = AllUpperCaseRule()
-
-        assertEquals(errorMessage, allUpperCaseRule.errorString)
     }
 
     @Test

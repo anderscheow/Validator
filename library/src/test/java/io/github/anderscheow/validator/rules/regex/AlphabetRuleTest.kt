@@ -23,7 +23,7 @@ class AlphabetRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         alphabetRule.validate(null)
     }
@@ -31,7 +31,7 @@ class AlphabetRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabet_ReturnTrue() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         val sample = "test"
 
@@ -41,7 +41,7 @@ class AlphabetRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabetAndNumbers_ReturnFalse() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         val sample = "test 1000"
 
@@ -51,7 +51,7 @@ class AlphabetRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabetAndSpace_ReturnFalse() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         val sample = "test test"
 
@@ -61,7 +61,7 @@ class AlphabetRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithAlphabetAndSymbols_ReturnFalse() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         val sample = "test test.test"
 
@@ -71,7 +71,7 @@ class AlphabetRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithDigitsOnly_ReturnFalse() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         val sample = "123"
 
@@ -81,21 +81,11 @@ class AlphabetRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_SampleWithSymbolsOnly_ReturnFalse() {
-        alphabetRule = AlphabetRule()
+        alphabetRule = AlphabetRule("")
 
         val sample = ",./"
 
         assertFalse(alphabetRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Value does not match alphabet regex"
-
-        alphabetRule = AlphabetRule()
-
-        assertEquals(errorMessage, alphabetRule.errorString)
     }
 
     @Test

@@ -29,10 +29,11 @@ class AndTest {
     fun validate_MatchThreeConditionsOutOfThree_ReturnTrue() {
         and = And(
             listOf(
-                MinRule(5), // Match
-                MaxRule(10), // Match
-                DigitsRule() // Match
-            )
+                MinRule(5, ""), // Match
+                MaxRule(10, ""), // Match
+                DigitsRule("") // Match
+            ),
+            ""
         )// match
 
         val sample = "1234567"
@@ -45,10 +46,11 @@ class AndTest {
     fun validate_MatchTwoConditionsOutOfThree_ReturnFalse() {
         and = And(
             listOf(
-                MinRule(5), // A
-                MaxRule(10), // B
-                DigitsRule() // C
-            )
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
         )
 
         val samples = arrayOf(
@@ -67,10 +69,11 @@ class AndTest {
     fun validate_MatchOneConditionOutOfThree_ReturnFalse() {
         and = And(
             listOf(
-                MinRule(5), // A
-                MaxRule(10), // B
-                DigitsRule() // C
-            )
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
         )
 
         val samples = arrayOf(
@@ -89,10 +92,11 @@ class AndTest {
     fun validate_MatchZeroConditionOutOfThree_ReturnFalse() {
         and = And(
             listOf(
-                MinRule(5), // A
-                MaxRule(10), // B
-                DigitsRule() // C
-            )
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
         )
 
         val samples = arrayOf("testing 123, how are you")
@@ -107,17 +111,7 @@ class AndTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Does not match 'And' condition"
 
-        and = And(MinRule(5))
-
-        assertEquals(errorMessage, and.errorString)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_CustomErrorMessage() {
-        val errorMessage = "This is a custom error message"
-
-        and = And(MinRule(5), errorMessage)
+        and = And(MinRule(5, ""), errorMessage)
 
         assertEquals(errorMessage, and.errorString)
     }
@@ -127,7 +121,7 @@ class AndTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        and = And(MinRule(5), errorRes)
+        and = And(MinRule(5, ""), errorRes)
 
         assertEquals(errorRes, and.errorRes)
     }

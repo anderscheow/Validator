@@ -1,17 +1,11 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
-
 import io.github.anderscheow.validator.rules.Rule
 
 open class RegexRule : Rule {
 
     private var regex: String
-
-    constructor(regex: String) : super("Does not match regex rule") {
-        this.regex = regex
-    }
 
     constructor(regex: String, @StringRes errorRes: Int) : super(errorRes) {
         this.regex = regex
@@ -30,17 +24,6 @@ open class RegexRule : Rule {
     }
 }
 
-fun Validation.regex(regex: String): Validation {
-    rules.add(RegexRule(regex))
-    return this
-}
+fun regex(regex: String, @StringRes errorRes: Int): RegexRule = RegexRule(regex, errorRes)
 
-fun Validation.regex(regex: String, @StringRes errorRes: Int): Validation {
-    rules.add(RegexRule(regex, errorRes))
-    return this
-}
-
-fun Validation.regex(regex: String, errorMessage: String): Validation {
-    rules.add(RegexRule(regex, errorMessage))
-    return this
-}
+fun regex(regex: String, errorMessage: String): RegexRule = RegexRule(regex, errorMessage)

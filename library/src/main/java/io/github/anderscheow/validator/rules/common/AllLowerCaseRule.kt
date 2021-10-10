@@ -1,19 +1,12 @@
 package io.github.anderscheow.validator.rules.common
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
-
 import io.github.anderscheow.validator.rules.Rule
 import java.util.*
 
 class AllLowerCaseRule : Rule {
 
     private var locale: Locale
-
-    constructor(locale: Locale = Locale.getDefault())
-            : super("Value is not all lowercase") {
-        this.locale = locale
-    }
 
     constructor(@StringRes errorRes: Int, locale: Locale = Locale.getDefault())
             : super(errorRes) {
@@ -34,17 +27,12 @@ class AllLowerCaseRule : Rule {
     }
 }
 
-fun Validation.allLowercase(locale: Locale = Locale.getDefault()): Validation {
-    rules.add(AllLowerCaseRule(locale))
-    return this
-}
+fun allLowercase(
+    @StringRes errorRes: Int,
+    locale: Locale = Locale.getDefault()
+): AllLowerCaseRule = AllLowerCaseRule(errorRes, locale)
 
-fun Validation.allLowercase(@StringRes errorRes: Int, locale: Locale = Locale.getDefault()): Validation {
-    rules.add(AllLowerCaseRule(errorRes, locale))
-    return this
-}
-
-fun Validation.allLowercase(errorMessage: String, locale: Locale = Locale.getDefault()): Validation {
-    rules.add(AllLowerCaseRule(errorMessage, locale))
-    return this
-}
+fun allLowercase(
+    errorMessage: String,
+    locale: Locale = Locale.getDefault()
+): AllLowerCaseRule = AllLowerCaseRule(errorMessage, locale)

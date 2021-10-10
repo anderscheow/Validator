@@ -23,7 +23,7 @@ class RegexRuleTest {
     @Test(expected = NullPointerException::class)
     @Throws(Exception::class)
     fun validate_EmptySample_ThrowNullPointerException() {
-        regexRule = object : RegexRule(REGEX) {
+        regexRule = object : RegexRule(REGEX, "") {
         }
 
         regexRule.validate(null)
@@ -32,7 +32,7 @@ class RegexRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_ValidSample_ReturnTrue() {
-        regexRule = object : RegexRule(REGEX) {
+        regexRule = object : RegexRule(REGEX, "") {
         }
 
         val sample = "123"
@@ -43,23 +43,12 @@ class RegexRuleTest {
     @Test
     @Throws(Exception::class)
     fun validate_InvalidSample_ReturnFalse() {
-        regexRule = object : RegexRule(REGEX) {
+        regexRule = object : RegexRule(REGEX, "") {
         }
 
         val sample = "TEST"
 
         assertFalse(regexRule.validate(sample))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_DefaultErrorMessage() {
-        val errorMessage = "Does not match regex rule"
-
-        regexRule = object : RegexRule(REGEX) {
-        }
-
-        assertEquals(errorMessage, regexRule.errorString)
     }
 
     @Test
@@ -85,7 +74,6 @@ class RegexRuleTest {
     }
 
     companion object {
-
         private const val REGEX = "\\d+"
     }
 }

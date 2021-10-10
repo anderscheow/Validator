@@ -86,7 +86,11 @@ class Validator private constructor(private val context: Context) {
     }
 
     // Iterate each type of rules
-    private fun validate(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
+    private fun validate(
+        value: String,
+        validation: Validation,
+        errors: ArrayList<String>
+    ): Boolean {
         var isCurrentValueValid = validateBaseRules(value, validation, errors)
         if (isCurrentValueValid) {
             isCurrentValueValid = validateConditions(value, validation, errors)
@@ -95,7 +99,11 @@ class Validator private constructor(private val context: Context) {
         return isCurrentValueValid
     }
 
-    private fun validateBaseRules(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
+    private fun validateBaseRules(
+        value: String,
+        validation: Validation,
+        errors: ArrayList<String>
+    ): Boolean {
         for (baseRule in validation.rules) {
             if (baseRule.validate(value).not()) {
                 showErrorMessage(validation, baseRule, errors)
@@ -107,7 +115,11 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun validateConditions(value: String, validation: Validation, errors: ArrayList<String>): Boolean {
+    private fun validateConditions(
+        value: String,
+        validation: Validation,
+        errors: ArrayList<String>
+    ): Boolean {
         for (condition in validation.conditions) {
             if (condition.validate(value).not()) {
                 showErrorMessage(validation, condition, errors)
@@ -119,7 +131,11 @@ class Validator private constructor(private val context: Context) {
         return true
     }
 
-    private fun showErrorMessage(validation: Validation, errorMessage: ErrorImpl, errors: ArrayList<String>) {
+    private fun showErrorMessage(
+        validation: Validation,
+        errorMessage: ErrorImpl,
+        errors: ArrayList<String>
+    ) {
         validation.setError(context, errorMessage, errors)
     }
 

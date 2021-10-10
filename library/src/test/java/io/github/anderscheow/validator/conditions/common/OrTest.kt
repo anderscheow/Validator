@@ -29,10 +29,11 @@ class OrTest {
     fun validate_MatchThreeConditionsOutOfThree_ReturnTrue() {
         or = Or(
             listOf(
-                MinRule(5), // match
-                MaxRule(10), // match
-                DigitsRule() // match
-            )
+                MinRule(5, ""), // match
+                MaxRule(10, ""), // match
+                DigitsRule("") // match
+            ),
+            ""
         )
 
         val sample = "1234567"
@@ -45,10 +46,11 @@ class OrTest {
     fun validate_MatchTwoConditionsOutOfThree_ReturnTrue() {
         or = Or(
             listOf(
-                MinRule(5), // A
-                MaxRule(10), // B
-                DigitsRule() // C
-            )
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
         )
 
         val samples = arrayOf(
@@ -67,10 +69,11 @@ class OrTest {
     fun validate_MatchOneConditionOutOfThree_ReturnTrue() {
         or = Or(
             listOf(
-                MinRule(5), // A
-                MaxRule(10), // B
-                DigitsRule() // C
-            )
+                MinRule(5, ""), // A
+                MaxRule(10, ""), // B
+                DigitsRule("") // C
+            ),
+            ""
         )
 
         val samples = arrayOf(
@@ -89,9 +92,10 @@ class OrTest {
     fun validate_MatchZeroConditionOutOfThree_ReturnFalse() {
         or = Or(
             listOf(
-                MaxRule(10), // A
-                DigitsRule() // B
-            )
+                MaxRule(10, ""), // A
+                DigitsRule("") // B
+            ),
+            ""
         )
 
         val samples = arrayOf("testing 123, how are you")
@@ -106,17 +110,7 @@ class OrTest {
     fun errorMessage_DefaultErrorMessage() {
         val errorMessage = "Does not match 'Or' condition"
 
-        or = Or(MaxRule(10))
-
-        assertEquals(errorMessage, or.errorString)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun errorMessage_CustomErrorMessage() {
-        val errorMessage = "This is a custom error message"
-
-        or = Or(MaxRule(10), errorMessage)
+        or = Or(MaxRule(10, ""), errorMessage)
 
         assertEquals(errorMessage, or.errorString)
     }
@@ -126,7 +120,7 @@ class OrTest {
     fun errorMessage_CustomErrorRes() {
         @StringRes val errorRes = 0
 
-        or = Or(MaxRule(10), errorRes)
+        or = Or(MaxRule(10, ""), errorRes)
 
         assertEquals(errorRes, or.errorRes)
     }

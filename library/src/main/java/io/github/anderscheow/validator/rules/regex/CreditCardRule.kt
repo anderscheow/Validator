@@ -1,8 +1,6 @@
 package io.github.anderscheow.validator.rules.regex
 
 import androidx.annotation.StringRes
-import io.github.anderscheow.validator.Validation
-
 import io.github.anderscheow.validator.rules.common.RegexRule
 
 class CreditCardRule : RegexRule {
@@ -21,24 +19,21 @@ class CreditCardRule : RegexRule {
         }
     }
 
-    constructor(regex: CreditCardRegex) : super(regex.toString(), "Value does not match any credit card regex")
+    constructor(regex: CreditCardRegex, @StringRes errorRes: Int) : super(
+        regex.toString(),
+        errorRes
+    )
 
-    constructor(regex: CreditCardRegex, @StringRes errorRes: Int) : super(regex.toString(), errorRes)
-
-    constructor(regex: CreditCardRegex, errorMessage: String) : super(regex.toString(), errorMessage)
+    constructor(regex: CreditCardRegex, errorMessage: String) : super(
+        regex.toString(),
+        errorMessage
+    )
 }
 
-fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex): Validation {
-    rules.add(CreditCardRule(regex))
-    return this
-}
+fun withCreditCard(
+    regex: CreditCardRule.CreditCardRegex,
+    @StringRes errorRes: Int
+): CreditCardRule = CreditCardRule(regex, errorRes)
 
-fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex, @StringRes errorRes: Int): Validation {
-    rules.add(CreditCardRule(regex, errorRes))
-    return this
-}
-
-fun Validation.withCreditCard(regex: CreditCardRule.CreditCardRegex, errorMessage: String): Validation {
-    rules.add(CreditCardRule(regex, errorMessage))
-    return this
-}
+fun withCreditCard(regex: CreditCardRule.CreditCardRegex, errorMessage: String): CreditCardRule =
+    CreditCardRule(regex, errorMessage)
