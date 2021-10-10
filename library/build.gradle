@@ -31,7 +31,7 @@ afterEvaluate {
                 from components.release
                 groupId = "io.github.anderscheow"
                 artifactId = "validator"
-                version = "3.0.2"
+                version = "3.0.3"
             }
         }
     }

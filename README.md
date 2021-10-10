@@ -5,7 +5,7 @@
 ## Download
 ```groovy
 dependencies {
-  implementation 'com.github.anderscheow:validator:3.0.0'
+  implementation 'com.github.anderscheow:validator:3.0.3'
 }
 ```
 
