@@ -24,6 +24,15 @@ dependencies {
     }
 }
 
-repositories {
-    mavenCentral()
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = "io.github.anderscheow"
+                artifactId = "validator"
+                version = "3.0.2"
+            }
+        }
+    }
 }
